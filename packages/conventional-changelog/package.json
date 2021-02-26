@@ -1,6 +1,6 @@
 {
   "name": "@acme-ui/conventional-changelog",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.0",
   "description": "Customized presets for conventional-changelog",
   "author": "Yufu FE Team",
   "homepage": "https://github.com/yufuid/acme-ui#readme",
