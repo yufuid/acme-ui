@@ -22,8 +22,11 @@ const externalPkg = ['react', 'react-dom', 'lodash'];
 BABEL_ENV !== 'umd' && externalPkg.push('@babel/runtime');
 const external = id => externalPkg.some(e => id.indexOf(e) === 0);
 const componentDir = 'src/components';
-const cModuleNames = fs.readdirSync(path.resolve(componentDir));
-const componentEntryFiles = cModuleNames.map((name) => /^[A-Z]\w*/.test(name) ? `${componentDir}/${name}/index.tsx` : undefined).filter(n => !!n);
+let componentEntryFiles = [];
+try {
+  const cModuleNames = fs.readdirSync(path.resolve(componentDir));  
+  componentEntryFiles = cModuleNames.map((name) => /^[A-Z]\w*/.test(name) ? `${componentDir}/${name}/index.tsx` : undefined).filter(n => !!n);
+} catch (error) {}
 
 // 通用配置
 const commonPlugins = [
