@@ -1,0 +1,22 @@
+name: PR-precheck
+on: [pull_request_target]
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Check permission if changed files is sensitive
+        uses: zjutszl/repo-permission-check@v0.1.0
+        id: permission_check
+        with:
+          files: |
+            \.ya?ml$
+          permission: "write"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: superbrothers/close-pull-request@v3
+        if: steps.permission_check.outputs.pass != 'true'
+        with:
+          # Optional. Post a issue comment just before closing a pull request.
+          comment: "We do not accept PR which would changes our workflows. "
+
