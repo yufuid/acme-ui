@@ -41,6 +41,7 @@ const commonPlugins = [
   }),
   // 全局变量替换
   replace({
+    preventAssignment: true, // https://github.com/rollup/plugins/tree/master/packages/replace
     exclude: 'node_modules/**',
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
     'process.env.BABEL_ENV': JSON.stringify(BABEL_ENV || 'umd'),
