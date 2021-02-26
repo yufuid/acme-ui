@@ -25,9 +25,9 @@
   },
   "scripts": {
     "build": "yarn lint-staged:style src/ && yarn build:esm && yarn build:cjs && yarn build:umd",
-    "build:esm": "rimraf dist/es && cross-env-shell NODE_ENV=production BABEL_ENV=esm \"rollup -c && yarn build:style && yarn build:typed --outDir dist/es\"",
-    "build:cjs": "rimraf dist/cjs && cross-env-shell NODE_ENV=production BABEL_ENV=cjs \"rollup -c && yarn build:style && yarn build:typed --outDir dist/cjs\"",
-    "build:umd": "rimraf dist/umd && cross-env-shell NODE_ENV=production BABEL_ENV=umd rollup -c",
+    "build:esm": "node scripts/build.js esm",
+    "build:cjs": "node scripts/build.js cjs",
+    "build:umd": "node scripts/build.js umd",
     "build:typed": "tsc --emitDeclarationOnly -p ./tsconfig.typed.json",
     "build:style": "gulp",
     "lint-staged": "lint-staged",
