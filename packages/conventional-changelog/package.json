@@ -1,0 +1,36 @@
+{
+  "name": "@acme-ui/conventional-changelog",
+  "version": "0.0.0",
+  "description": "Customized presets for conventional-changelog",
+  "author": "mjzhang1993 <mingjiazhang@yufuid.com>",
+  "homepage": "https://github.com/yufuid/acme-ui#readme",
+  "license": "MIT",
+  "main": "index.js",
+  "directories": {
+    "templates": "templates"
+  },
+  "files": [
+    "conventional-changelog.js",
+    "conventional-recommended-bump.js",
+    "index.js",
+    "parser-opts.js",
+    "writer-opts.js",
+    "templates"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yufuid/acme-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yufuid/acme-ui/issues"
+  },
+  "dependencies": {
+    "compare-func": "^2.0.0",
+    "lodash": "^4.17.20",
+    "q": "^1.5.1"
+  }
+}

@@ -1,0 +1,20 @@
+{{> header}}
+
+{{~#each commitGroups}}
+{{#if title}}
+
+> ### _{{title}}_
+{{/if}}
+{{~#each typeGroups}}
+{{~#if typeSection}}
+
+#### `{{typeSection}}`
+
+{{/if}}
+{{#each commits}}
+{{> commit root=@root}}
+{{/each}}
+{{/each}}
+{{/each}}
+{{> footer}}
+
