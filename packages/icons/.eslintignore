@@ -1,0 +1,15 @@
+node-modules/**/*
+dist/**/*
+.eslintrc.js
+lint-staged.config.js
+.babelrc.js
+rollup.config.js
+scripts/**/*
+jest.config.js
+jest/**/*
+*.css
+*.less
+*.svg
+*.png
+*.jpg
+*.jpeg

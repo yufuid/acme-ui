@@ -1,0 +1,8 @@
+*{{#if subScope}} ***[{{subScope}}]***
+{{~/if}} {{#if subject}}
+  {{~subject}}
+{{~else}}
+  {{~header}}
+{{~/if}}
+
+{{~> references root=@root}}
