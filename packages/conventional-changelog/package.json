@@ -2,7 +2,7 @@
   "name": "@acme-ui/conventional-changelog",
   "version": "0.0.0",
   "description": "Customized presets for conventional-changelog",
-  "author": "mjzhang1993 <mingjiazhang@yufuid.com>",
+  "author": "Yufu FE Team",
   "homepage": "https://github.com/yufuid/acme-ui#readme",
   "license": "MIT",
   "main": "index.js",
