@@ -1,6 +1,7 @@
 {
   "name": "@acme-ui/cz-changelog",
   "version": "0.0.1-alpha.0",
+  "private": true,
   "description": "Commititizen adapters for the Lerna project",
   "author": "Yufu FE Team",
   "homepage": "https://github.com/yufuid/acme-ui#readme",
@@ -24,16 +25,16 @@
     "url": "https://github.com/yufuid/acme-ui/issues"
   },
   "dependencies": {
-    "@semantic-release/commit-analyzer": "7.0.0",
     "chalk": "^4.1.0",
     "cosmiconfig": "^7.0.0",
     "inquirer-autocomplete-prompt": "^1.3.0",
-    "semantic-release": "16.0.4",
     "shelljs": "^0.8.4",
     "word-wrap": "^1.2.3"
   },
   "peerDependencies": {
-    "lerna": ">=3.0.0"
+    "lerna": ">=3.0.0",
+    "semantic-release": "16.0.4",
+    "@semantic-release/commit-analyzer": "7.0.0"
   },
   "devDependencies": {
     "inquirer": "^7.3.3"
