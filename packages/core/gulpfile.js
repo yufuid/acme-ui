@@ -15,8 +15,11 @@ const dirMap = {esm: 'es'};
 const BABEL_ENV = process.env.BABEL_ENV || 'cjs';
 const componentDir = './src/components';
 const outputDir = `./dist/${dirMap[BABEL_ENV] || BABEL_ENV}`;
-const cModuleNames = fs.readdirSync(path.resolve(componentDir));
-const componentDirs = cModuleNames.filter((name) => /^[A-Z]\w*/.test(name));
+let componentDirs = [];
+try {
+  const cModuleNames = fs.readdirSync(path.resolve(componentDir));
+  componentDirs = cModuleNames.filter((name) => /^[A-Z]\w*/.test(name));
+} catch (error) {}
 const postcssPlugins = [autoprefixer({ env: BABEL_ENV }), url({ url: 'inline' })];
 
 // 批量编译 CSS Less 到目标文件夹

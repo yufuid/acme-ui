@@ -20,8 +20,11 @@ const externalPkg = ['react', 'react-dom', 'lodash'];
 BABEL_ENV !== 'umd' && externalPkg.push('@babel/runtime');
 const external = id => externalPkg.some(e => id.indexOf(e) === 0);
 const iconsDir = 'src/icons';
-const cModuleNames = fs.readdirSync(path.resolve(iconsDir));
-const componentEntryFiles = cModuleNames.map((name) => /^[A-Z]\w*/.test(name) ? `${iconsDir}/${name}` : undefined).filter(n => !!n);
+let componentEntryFiles = [];
+try {
+  const cModuleNames = fs.readdirSync(path.resolve(iconsDir));  
+  componentEntryFiles = cModuleNames.map((name) => /^[A-Z]\w*/.test(name) ? `${iconsDir}/${name}` : undefined).filter(n => !!n);
+} catch (error) {}
 
 const commonPlugins = [
   image(),
