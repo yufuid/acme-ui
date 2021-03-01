@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.0.1-alpha.4](https://github.com/yufuid/acme-ui/compare/v0.0.1-alpha.3...v0.0.1-alpha.4) _(2021-03-01)_
+
+> ### _@acme-ui/cz-changelog_
+
+#### `🐛 Bug Fixes`
+
+* reset the default typeChoices ([#10](https://github.com/yufuid/acme-ui/issues/10)) ([bc9b5d1](https://github.com/yufuid/acme-ui/commit/bc9b5d12705a9ecad263a827b501a70549d828eb))
+
+
+
 ### [0.0.1-alpha.3](https://github.com/yufuid/acme-ui/compare/v0.0.1-alpha.2...v0.0.1-alpha.3) _(2021-03-01)_
 
 **Note:** Version bump only for package acme-ui
