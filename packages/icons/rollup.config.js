@@ -77,7 +77,6 @@ export default () => {
     case 'esm':
       return {
         input: [entryFile, ...componentEntryFiles],
-        preserveModules: true, // rollup-plugin-styles 还是需要使用
         output: { ...esOutput, dir: 'dist/es', format: 'es' },
         external,
         plugins: [postcss(postcssConfig), ...commonPlugins],
@@ -85,7 +84,6 @@ export default () => {
     case 'cjs':
       return {
         input: [entryFile, ...componentEntryFiles],
-        preserveModules: true, // rollup-plugin-styles 还是需要使用
         output: { ...esOutput, dir: 'dist/cjs', format: 'cjs' },
         external,
         plugins: [postcss(postcssConfig), ...commonPlugins],
