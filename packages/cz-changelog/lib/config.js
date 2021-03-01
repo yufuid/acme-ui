@@ -1,7 +1,7 @@
 const typeChoices = [
   {value: 'feat',     name: 'feat:     ✨ A new feature (note: this will indicate a release)'},
   {value: 'fix',      name: 'fix:      🐛 A bug fix (note: this will indicate a release)'},
-  {value: 'docs',     name: 'docs:     📖 Only after "Docs Package" has been changed'},
+  {value: 'docs',     name: 'docs:     📖 Documentation only changes'},
   {value: 'refactor', name: 'refactor: 🔨 A code change that neither fixes a bug nor adds a feature'},
   {value: 'test',     name: 'test:     🚨 Adding missing tests or correcting existing tests'},
   {value: 'chore',    name: 'chore:    🔧 Other changes that don\'t modify src or test files'},

@@ -107,6 +107,7 @@ function getWriterOpts (config) {
     },
     // 数据再传递给 handlebars 模板渲染前，最后一次处理机会
     finalizeContext(context, writerOpts, filteredCommits, keyCommit, originalCommits) {
+      // TODO: 子级 package 的 changelog 要特殊处理
       const {typeSequence} = config;
       const isSubPackage = !_.get(context, 'packageData.workspaces');
       
