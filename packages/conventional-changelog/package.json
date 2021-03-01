@@ -16,11 +16,13 @@
     "index.js",
     "parser-opts.js",
     "writer-opts.js",
+    "tools.js",
+    "add-bang-notes.js",
+    "add-link-compare.js",
     "templates"
   ],
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "registry": "https://registry.npmjs.org/"
   },
   "repository": {
     "type": "git",
