@@ -73,9 +73,10 @@ jobs:
       - name: build
         run: yarn lerna:build
       - name: publish
-        run: yarn lerna:publish --yes --no-verify-access --create-release github ${{ github.event.inputs.parameter_for_publish }} ${{ github.event.inputs.version }}
+        run: yarn lerna:publish --yes --legacy-auth ${NPM_SECRET} --create-release github ${{ github.event.inputs.parameter_for_publish }} ${{ github.event.inputs.version }}
 
         env:
           GITHUB_TOKEN: ${{ secrets.FE_GH_TOKEN }}
           GH_TOKEN: ${{ secrets.FE_GH_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_SECRET: ${{ secrets.NPM_SECRET }}
