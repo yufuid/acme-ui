@@ -37,11 +37,7 @@ module.exports = function (config) {
 function getWriterOpts (config) {
   config.lernaPackage = new Project().isIndependent();
   const typesMap = config.types.reduce((map, c) => ({...map, [c.type]: c}), {});
-  const scopeSequenceMap = Array.isArray(config.scopeSequence) 
-    ? config.scopeSequence.reduce((map, s) => {
-      return _.isString(s) ? {...map, [s.replace(/^@(\w|-)+\//, '')]: s} : map;
-    }, {})
-    : {};
+  const scopeSequenceMap = computeScopeSequenceMap(config);
 
   return {
     // 给每一次 commit 做前期转换
@@ -107,62 +103,71 @@ function getWriterOpts (config) {
     },
     // 数据再传递给 handlebars 模板渲染前，最后一次处理机会
     finalizeContext(context, writerOpts, filteredCommits, keyCommit, originalCommits) {
-      // TODO: 子级 package 的 changelog 要特殊处理
+      // type commitGroups = Array<{
+      //   title: string,
+      //   typeGroups: Array<{
+      //     typeSection: string,
+      //     type: string,
+      //     subScopeGroups: Array<{
+      //       subScope: string,
+      //       commits: Array<Object>
+      //     }>
+      //   }>
+      // }>
       const {typeSequence} = config;
       const isSubPackage = !_.get(context, 'packageData.workspaces');
       
-      // TODO: scopeGroup.title 如何处理 npm scope 的命名（@acme-ui/core） 需要提出一个公共的方法
+      // sub package 仅显示自己的 commit, 不区分 scope , 这里需要预处理一下将所有 scopeGroup 合并
       if (isSubPackage) {
-        const subPkgName = (_.get(context, 'packageData.name') || '').replace(/^@(\w|-)+\//, '');
-        const subPkgCommitGroups = {
-          [subPkgName]: {title: '', commits: []}, // title = '' 可以不显示 scope
-          others: {title: '👽 Other Effect', commits: []}
-        };
+        const subPkgCommitGroups = {title: '', commits: []}; // title = '' 可以不显示 scope
         context.commitGroups.forEach(scopeGroup => {
           if (!Array.isArray(scopeGroup.commits)) return;
-          
-          subPkgCommitGroups[scopeGroup.title === subPkgName ? subPkgName : 'others'].commits.push(...scopeGroup.commits);
+          subPkgCommitGroups.commits.push(...scopeGroup.commits);
         });
 
-        context.commitGroups = [subPkgCommitGroups[subPkgName]];
-        if (subPkgCommitGroups.others.commits.length > 0) {
-          context.commitGroups.push(subPkgCommitGroups.others);
-        }
+        context.commitGroups = [subPkgCommitGroups];
       }
 
       let nextCommitGroups = [];
-      let otherCommitGroups = {};
       context.commitGroups.map((scopeGroup) => {
         const commits = scopeGroup.commits;
         const preTypeGroup = sequenceArray(commits, typeSequence, (commit) => commit.type);
-        const isDisplayScope = isSubPackage || scopeSequenceMap[scopeGroup.title];
+        const currentScopeConfig = scopeSequenceMap[scopeGroup.title];
+        const isDisplayScope = isSubPackage || currentScopeConfig;
         let typeGroups = []
         
+        // mixin 的 scope 不再有 type 区分
+        if (!isSubPackage && currentScopeConfig && currentScopeConfig.mixin) {
+          const subScopeGroups = formatSubScope(config, _.flatten(preTypeGroup));
+          nextCommitGroups.push({
+            title: currentScopeConfig.title, 
+            typeGroups: [{type: '', typeSection: '', subScopeGroups}]
+          });
+          return;
+        }
+
         preTypeGroup.forEach(typeCommits => {
-          const type = _.get(typeCommits, '[0].type') || '';
-          const entry = typesMap[type] || {};
-          const sortedCommits = typeCommits.sort(functionify(config.commitsSort));
-          const typeSection =  _.get(entry, 'section') || '';
           if (isDisplayScope) {
-            typeGroups.push({ type, typeSection, commits: sortedCommits });
-          } else {
-            otherCommitGroups[type] = {type, typeSection, commits: (_.get(otherCommitGroups, `${type}.commits`) || []).concat(sortedCommits)}
+            const type = _.get(typeCommits, '[0].type') || '';
+            const entry = typesMap[type] || {};
+            const subScopeGroups = formatSubScope(config, typeCommits);
+            const typeSection =  _.get(entry, 'section') || '';
+            typeGroups.push({ type, typeSection, subScopeGroups });
           }
         })
         
         if (isSubPackage) {
           nextCommitGroups.push({title: scopeGroup.title, typeGroups});
-        } else if (scopeSequenceMap[scopeGroup.title]) {
-          nextCommitGroups.push({title: scopeSequenceMap[scopeGroup.title], typeGroups})
+        } else if (currentScopeConfig) {
+          nextCommitGroups.push({title: currentScopeConfig.title, typeGroups})
         }
       });
       
-      const others = Object.values(otherCommitGroups);
-
-      context.commitGroups = others.length > 0 ? nextCommitGroups.concat([{
-        title: '👽 Other Effect',
-        typeGroups: _.flatten(sequenceArray(others, typeSequence, g => g.type))
-      }]) : nextCommitGroups;
+      /**
+       * NOTICE: 顶层 changelog 不显示 scopeSequence 以外的 scope 所包含的 commit
+       * 子级 package 会显示全部相关的 commit
+       * */ 
+      context.commitGroups = nextCommitGroups;
       
       /**
        * 由于 finalizeContext 这个配置会将  conventional-changelog-core 内置的 finalizeContext 覆盖掉，
@@ -181,14 +186,47 @@ function getWriterOpts (config) {
     groupBy: 'scope',
     commitGroupsSort(a, b) {
       // title 即为 groupBy 的值
-      const {scopeSequence} = config;
       
-      let idxA = scopeSequence.indexOf(scopeSequenceMap[a.title] || a.title)
-      let idxB = scopeSequence.indexOf(scopeSequenceMap[b.title] || b.title)
+      const idxA = scopeSequenceMap[a.title] ? scopeSequenceMap[a.title].idx : -1;
+      const idxB = scopeSequenceMap[b.title] ? scopeSequenceMap[b.title].idx : -1;
       return idxA >= idxB ? 1 : -1;
     },
     commitsSort: config.commitsSort,
     noteGroupsSort: 'title',
     notesSort: compareFunc
   }
+}
+
+function computeScopeSequenceMap (config) {
+  const scopeSequenceMap = {};
+  if (Array.isArray(config.scopeSequence)) {
+    config.scopeSequence.forEach((c, idx) => {
+      const s = _.get(c, 'scope') || '';
+      if (_.isString(s)) {
+        scopeSequenceMap[s.replace(/^@(\w|-)+\//, '')] = {
+          title: _.get(c, 'alias') || s,
+          mixin: _.get(c, 'mixin') || false,
+          idx
+        };
+      }
+    });
+  }
+  return scopeSequenceMap;
+}
+
+function formatSubScope (config, commits) {
+  const sortedCommits = commits.sort(functionify(config.commitsSort));
+  const subScopeCommits = [];
+  const recorder = {};
+  sortedCommits.forEach(commit => {
+    const subScope = commit.subScope || '';
+    const idx = recorder[subScope]
+    if (_.isNumber(idx) && idx >= 0) {
+      subScopeCommits[idx].commits.push(commit);
+    } else {
+      const len = subScopeCommits.push({subScope, commits: [commit]});
+      recorder[subScope] = len - 1;
+    }
+  });
+  return subScopeCommits;
 }

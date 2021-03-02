@@ -22,11 +22,9 @@
       "changelogPreset": {
         "name": "@acme-ui/conventional-changelog",
         "scopeSequence": [
-          "@acme-ui/core",
-          "@acme-ui/icons",
-          "@acme-ui/documents",
-          "@acme-ui/cz-changelog",
-          "@acme-ui/conventional-changelog"
+          { "scope": "@acme-ui/core" },
+          { "scope": "@acme-ui/icons" },
+          { "scope": "@acme-ui/documents", "alias": "📖 Documentation", "mixin": true }
         ]
       }
     }
