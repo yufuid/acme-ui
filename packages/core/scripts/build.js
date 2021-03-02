@@ -32,6 +32,8 @@ switch (babelEnv) {
 }
 
 const child_process = require('child_process');
-child_process.exec(script, function (err, stdout, stderr) {
-  if (err) throw err;
-});
+try {
+  child_process.execSync(script, { stdio: 'inherit', encoding: 'utf-8' });
+} catch (error) {
+  console.log(error);
+}
