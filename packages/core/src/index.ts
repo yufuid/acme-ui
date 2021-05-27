@@ -1,5 +1,4 @@
 /**
  * 入口文件
  * */
-
-export default {};
+export { default as Pagination } from './components/Pagination';

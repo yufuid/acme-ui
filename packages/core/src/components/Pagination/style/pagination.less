@@ -1,0 +1,209 @@
+@import "../../../styles/General";
+
+@paginationPrefix: .@{acmePrefix}-pagination;
+
+@color-primary: #3333FF;
+@color-secondary: rgba(51, 51, 255, .5);
+@color-light-primary: rgba(51, 51, 255, .05);
+@color-gray: #999999;
+@color-black: #000000;
+// 字高
+@font-size-text: 14px;
+@font-size-text-small: 12px;
+@font-size-text-large: 16px;
+
+@radius-base: 4px;
+
+@distance-base: 4px;
+@distance-tiny: @distance-base * 2; // 8
+@distance-small: @distance-base * 6; // 24
+@distance-large: @distance-base * 8; // 32
+
+@shadow-primary: 0 2px 4px 0 rgba(54,40,255,0.08);
+
+@left-arrow-transform: translate(5.2929px, 4.6569px) rotate(135deg) translate(-15.2929px, -15.6569px);
+@right-arrow-transform: translate(2.2929px, 4.6569px) rotate(-45deg) translate(-15.2929px, -15.6569px);
+
+@{paginationPrefix} {
+  font-size: @font-size-text;
+  color: @color-black;
+  ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  @{paginationPrefix}-content {
+    margin: 0 @distance-small;
+    padding: 0;
+    clear: both;
+  }
+  @{paginationPrefix}-item {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: @distance-tiny;
+    &:hover {
+      @{paginationPrefix}-dot-group {
+        opacity: 0;
+      }
+      @{paginationPrefix}-doubleArrow {
+        opacity: 1;
+      }
+    }
+  }
+  /** default */
+  @{paginationPrefix}-item-default {
+    text-align: center;
+    width: @distance-large;
+    height: @distance-large;
+    color: @color-primary;
+    line-height: @distance-large;
+    border: 1px solid @color-primary;
+    box-shadow: @shadow-primary;
+    border-radius: @radius-base;
+    cursor: pointer;
+    transition: all ease-in-out .1s;
+    &:hover {
+      background-color: @color-light-primary;
+      color: @color-primary;
+      box-shadow: @shadow-primary;
+    }
+  }
+  @{paginationPrefix}-default-total {
+    margin-right: @distance-small;
+  }
+  @{paginationPrefix}-item-default-active {
+    color: @white;
+    background-color: @color-primary;
+    &:hover {
+      background-color: @color-primary;
+      color: @white;
+    }
+  }
+  @{paginationPrefix}-item-default-disabled {
+    border-color: @color-secondary;
+    cursor: not-allowed;
+  }
+  @{paginationPrefix}-item-default-more {
+    position: relative;
+    box-shadow: none;
+    border: none;
+    &:hover {
+      background: @white;
+      box-shadow: none;
+    }
+  }
+  @{paginationPrefix}-default-dot {
+    display: inline-block;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 2px;
+    background: @color-primary;
+  }
+  /** mini */
+  @{paginationPrefix}-item-mini {
+    text-align: center;
+    width: @distance-small;
+    height: @distance-small;
+    color: @color-black;
+    line-height: @distance-small;
+    border-radius: @radius-base;
+    cursor: pointer;
+    &:hover {
+      color: @color-primary;
+        @{paginationPrefix}-mini-arrow {
+          fill: @color-primary;
+        }
+    }
+  }
+  @{paginationPrefix}-item-mini-active {
+    color: @color-primary;
+    background-color: @color-light-primary;
+  }
+  @{paginationPrefix}-item-mini-more {
+    position: relative;
+  }
+  @{paginationPrefix}-item-mini-disabled {
+    border-color: @color-gray;
+    cursor: not-allowed;
+  }
+  @{paginationPrefix}-mini-dot {
+    display: inline-block;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 2px;
+    background: @color-black;
+  }
+  /** simple */
+  @{paginationPrefix}-simple-container {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  @{paginationPrefix}-simple-text {
+    display: inline-block;
+    margin: 0 @distance-base;
+  }
+  @{paginationPrefix}-simple-active {
+    color: @color-primary;
+  }
+}
+
+@{paginationPrefix}-dot-group {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  opacity: 1;
+  transition: opacity ease-in-out .5s;
+}
+
+@{paginationPrefix}-doubleArrow {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity ease-in-out .5s;
+
+  @{paginationPrefix}-left-doubleArrow {
+    transform: rotate(180deg);
+  }
+}
+
+@{paginationPrefix}-default-arrow {
+  fill: @color-primary;
+}
+
+@{paginationPrefix}-default-left-button {
+  transform: @left-arrow-transform;
+}
+
+@{paginationPrefix}-default-right-button {
+  transform: @right-arrow-transform;
+}
+
+@{paginationPrefix}-default-arrow-disabled {
+  fill: @color-secondary;
+}
+
+@{paginationPrefix}-mini-arrow {
+  fill: @color-black;
+}
+
+@{paginationPrefix}-mini-left-button {
+  transform: @left-arrow-transform;
+}
+@{paginationPrefix}-mini-right-button {
+  transform: @right-arrow-transform;
+}
+
+@{paginationPrefix}-mini-arrow-disabled {
+  fill: @color-gray;
+}
+
+@{paginationPrefix}-jumpInput {
+  width: @distance-large;
+  height: @distance-small;
+}

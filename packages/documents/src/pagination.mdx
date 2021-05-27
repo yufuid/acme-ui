@@ -1,0 +1,93 @@
+---
+name: Pagination
+---
+
+import { Playground, Props } from "docz";
+import { Pagination } from "@acme-ui/core";
+
+# Pagination 分页器组件
+
+## props
+<Props of={Pagination} />
+
+## 组件展示
+### 默认类型
+<Playground>
+    {
+        () => {
+            const [page, setPage] = React.useState(1);
+            const [pageSize, setPageSize] = React.useState(10);
+            const total = 100;
+            return (
+                <div>
+                    <Pagination
+                        pageSize={pageSize}
+                        total={total}
+                        current={page}
+                        onPageSizeChange={(value) => {setPageSize(value)}}
+                        onChange={(page) => {setPage(page)}} />
+                </div>
+            )
+        }
+    }
+</Playground>
+
+### 其余部分
+<Playground>
+    {
+        () => {
+            const [page, setPage] = React.useState(1);
+            const [pageSize, setPageSize] = React.useState(10);
+            const total = 100;
+            return (
+                <div>
+                    <Pagination
+                        pageSize={pageSize}
+                        total={total}
+                        current={page}
+                        showTotal
+                        showPageSize
+                        showJump
+                        onPageSizeChange={(value) => {setPageSize(value)}}
+                        onChange={(page) => {setPage(page)}} />
+                </div>
+            )
+        }
+    }
+</Playground>
+
+### mini 版本
+<Playground>
+    {
+        () => {
+            const [page, setPage] = React.useState(1);
+            const [pageSize, setPageSize] = React.useState(10);
+            const total = 100;
+            return (
+                <div>
+                    <Pagination
+                        pageSize={pageSize}
+                        total={total}
+                        current={page} type='mini'
+                        onPageSizeChange={(value) => {setPageSize(value)}}
+                        onChange={(page) => {setPage(page)}} />
+                </div>
+            )
+        }
+    }
+</Playground>
+
+### simple 版本
+<Playground>
+    {
+        () => {
+            const [page, setPage] = React.useState(1);
+            const total = 100;
+            return (
+                <div>
+                    <Pagination total={total} current={page} type='simple' onChange={(page) => {setPage(page)}} />
+                </div>
+            )
+        }
+    }
+</Playground>

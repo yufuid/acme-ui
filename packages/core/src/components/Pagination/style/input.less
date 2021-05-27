@@ -1,0 +1,26 @@
+@import "../../../styles/General";
+
+@inputPrefix: .@{acmePrefix}-pagination-input;
+@color-primary: #3333FF;
+@color-secondary: rgba(51, 51, 255, .5);
+@color-light-primary: rgba(51, 51, 255, .05);
+@color-gray: #999999;
+@color-black: #000000;
+
+@radius-base: 4px;
+
+@distance-base: 4px;
+
+@shadow-primary: 0px 0px 2px 1px rgba(54,40,255,0.3);
+
+@{inputPrefix} {
+  border-radius: @radius-base;
+  border: 1px solid @color-gray;
+  outline: none;
+  margin: 0 @distance-base;
+
+  &:focus {
+    border: 1px solid @color-secondary;
+    box-shadow: @shadow-primary;
+  }
+}
