@@ -1,0 +1,60 @@
+# This workflow will publish docs to GitHub Pages
+
+name: Publish Docs(手动发布文档)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Restore dependencies 🔄
+        uses: actions/cache@v2
+        id: yarn_cache
+        with:
+          path: "**/node_modules"
+          key: modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            modules-${{ hashFiles('**/yarn.lock') }}
+            modules-
+
+      - name: Install dependencies if cache missed 🧰
+        if: steps.yarn_cache.outputs.cache-hit != 'true'
+        run: yarn install --use-workspaces
+
+  publish:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [setup]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Restore dependencies 🔄
+        uses: actions/cache@v2
+        id: yarn_cache
+        with:
+          path: "**/node_modules"
+          key: modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            modules-${{ hashFiles('**/yarn.lock') }}
+            modules-
+
+      - name: Build 🔧
+        run: |
+          cd packages/documents
+          yarn docz:build --dest ../../docs
+
+      - name: Deploy 🚀
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          destination_dir: docs
+          publish_branch: gh-pages
+          keep_files: true
+          full_commit_message: Publish docs manually by ${{ github.actor }}
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
