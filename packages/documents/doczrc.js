@@ -1,4 +1,5 @@
 export default {
+  base: "/acme-ui",
   /**
    * 规定哪些文件会被当做文档文件，string | string[]
    */
