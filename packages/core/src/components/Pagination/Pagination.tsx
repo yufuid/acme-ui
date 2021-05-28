@@ -71,9 +71,8 @@ export interface PaginationProps {
   showTotal: boolean;
   /**
    * 当前页
-   * @default 1
    * */
-  current: number;
+  current?: number;
   /**
    * 默认的当前页
    * @default 1
@@ -81,9 +80,8 @@ export interface PaginationProps {
   defaultCurrent: number;
   /**
    * 每页的条数
-   * @default 10
    * */
-  pageSize: number;
+  pageSize?: number;
   /**
    * 默认的每页的条数
    * @default 10
@@ -100,7 +98,7 @@ export interface PaginationProps {
    * 是否展示 pageSize 选择器
    * @default false
    * */
-  showPageSize?: boolean;
+  showPageSize: boolean;
   /** 切换 pageSize */
   onPageSizeChange?: (pageSize: number) => void;
   /**
@@ -112,83 +110,134 @@ export interface PaginationProps {
   className?: string;
 }
 
-interface IPaginationProps extends PaginationProps {
-  forwardedRef: any;
-}
-
 interface PaginationState {
   totalPage: number;
   jumpPage: string;
+  defaultPage: number;
+  defaultSize: number;
 }
 
-class Pagination extends React.PureComponent<IPaginationProps, PaginationState> {
+class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
   static defaultProps = {
     type: 'default',
     total: 0,
-    pageSize: 10,
     pageSizeOptions: [10, 20, 50, 100],
-    current: 1,
+    defaultCurrent: 1,
+    defaultPageSize: 10,
     showPageSize: false,
     showTotal: false,
     showJump: false,
   };
 
-  constructor(props: IPaginationProps) {
+  constructor(props: PaginationProps) {
     super(props);
-    const { total, pageSize } = props;
+    const { total, pageSize, defaultCurrent, current, defaultPageSize } = props;
+    const totalPage = Math.ceil(total / (pageSize || defaultPageSize));
     this.state = {
-      totalPage: Math.ceil(total / pageSize),
+      totalPage,
       jumpPage: '',
+      defaultPage: current || defaultCurrent,
+      defaultSize: pageSize || defaultPageSize,
     };
   }
 
-  componentDidUpdate(prevProps: PaginationProps) {
-    const { total, pageSize } = this.props;
-    if (total !== get(prevProps, 'total') || pageSize !== get(prevProps, 'pageSize')) {
-      this.updateTotalPage();
+  componentDidMount() {
+    const { current, onChange, pageSize, onPageSizeChange } = this.props;
+    if (current && !onChange) {
+      console.warn(
+        `The component is currently a controlled component. Current should be modified using onChange props`,
+      );
+    }
+    if (pageSize && !onPageSizeChange) {
+      console.warn(
+        `The component is currently a controlled component. pageSize should be modified using onPageSizeChange props`,
+      );
     }
   }
 
-  private decreasePage = () => {
+  componentDidUpdate(prevProps: PaginationProps) {
+    const { total, current, pageSize } = this.props;
+    if (total !== get(prevProps, 'total')) {
+      this.updateTotalPage();
+    }
+    if (current !== get(prevProps, 'current')) {
+      this.updateDefaultPage();
+    }
+    if (pageSize !== get(prevProps, 'pageSize')) {
+      this.updateDefaultSize();
+    }
+  }
+
+  private updateDefaultSize = () => {
+    const { pageSize } = this.props;
+    const size = Number(pageSize);
+    if (pageSize && isNumber(size)) {
+      this.setState(
+        {
+          defaultSize: size,
+        },
+        this.updateTotalPage,
+      );
+    } else {
+      console.error(pageSize, `pageSize value is not number ${isNumber(pageSize)}`);
+    }
+  };
+
+  private updateDefaultPage = () => {
     const { current } = this.props;
-    if (current === 1) return;
-    const page = current - 1;
+    const page = Number(current);
+    if (current && isNumber(page)) {
+      this.setState({
+        defaultPage: page,
+      });
+    } else {
+      console.error(current, `current value is not number`);
+    }
+  };
+
+  private updateTotalPage = () => {
+    console.log('pagination total page');
+    const { total } = this.props;
+    const { defaultPage, defaultSize } = this.state;
+    const totalPage = Math.ceil(total / defaultSize);
+    const newCurrent = defaultPage > totalPage ? totalPage : defaultPage;
+    this.setState({
+      totalPage,
+    });
+    this.pageChange(newCurrent);
+  };
+
+  private decreasePage = () => {
+    const { defaultPage } = this.state;
+    if (defaultPage === 1) return;
+    const page = defaultPage - 1;
     this.pageChange(page);
   };
 
   private increasePage = () => {
-    const { current } = this.props;
+    const { defaultPage } = this.state;
     const { totalPage } = this.state;
-    if (current === totalPage) return;
-    const page = current + 1;
+    if (defaultPage === totalPage) return;
+    const page = defaultPage + 1;
     this.pageChange(page);
   };
 
-  private updateTotalPage = () => {
-    const { total, pageSize, current, onChange } = this.props;
-    const totalPage = Math.ceil(total / pageSize);
-    const newCurrent = current > totalPage ? totalPage : current;
-    this.setState({
-      totalPage,
-    });
-    if (isFunction(onChange)) {
-      onChange(newCurrent);
-    }
-  };
-
   private pageChange = (page: number) => {
-    const { onChange } = this.props;
+    const { onChange, current } = this.props;
+    if (!current) {
+      this.setState({
+        defaultPage: page,
+      });
+    }
     if (isFunction(onChange)) {
       onChange(page);
     }
   };
 
   private jumpPage = (type: string) => {
-    const { onChange, current } = this.props;
-    const page = type === PageItemType.LEFTMORE ? current - 3 : current + 3;
-    if (isFunction(onChange)) {
-      onChange(page);
-    }
+    const { defaultPage } = this.state;
+    const page = type === PageItemType.LEFTMORE ? defaultPage - 3 : defaultPage + 3;
+    this.pageChange(page);
   };
 
   private jumpInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -199,11 +248,10 @@ class Pagination extends React.PureComponent<IPaginationProps, PaginationState> 
   };
 
   private quickJumpPage = () => {
-    const { onChange } = this.props;
     const { totalPage, jumpPage } = this.state;
     const value = Number(jumpPage);
-    if (isFunction(onChange) && isNumber(value) && value > 0 && value <= totalPage) {
-      onChange(value);
+    if (isNumber(value) && value > 0 && value <= totalPage) {
+      this.pageChange(value);
     }
     this.setState({
       jumpPage: '',
@@ -218,7 +266,16 @@ class Pagination extends React.PureComponent<IPaginationProps, PaginationState> 
   };
 
   private pageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>, value: any) => {
-    const { onPageSizeChange } = this.props;
+    const { onPageSizeChange, pageSize } = this.props;
+    const size: number = value;
+    if (!pageSize) {
+      this.setState(
+        {
+          defaultSize: size,
+        },
+        this.updateTotalPage,
+      );
+    }
     if (isFunction(onPageSizeChange)) {
       onPageSizeChange(value);
     }
@@ -235,14 +292,15 @@ class Pagination extends React.PureComponent<IPaginationProps, PaginationState> 
   };
 
   private renderSizeOptions = (): React.ReactNode => {
-    const { pageSizeOptions, pageSize } = this.props;
+    const { pageSizeOptions } = this.props;
+    const { defaultSize } = this.state;
     const selectOptions = pageSizeOptions.map((item: number) => ({
       label: `${item}条/页`,
       value: item,
     }));
     return (
       <li className={classes.pageItem}>
-        <Select value={pageSize} options={selectOptions} onChange={this.pageSizeChange} />
+        <Select value={defaultSize} options={selectOptions} onChange={this.pageSizeChange} />
       </li>
     );
   };
@@ -266,27 +324,53 @@ class Pagination extends React.PureComponent<IPaginationProps, PaginationState> 
     );
   };
 
-  private renderContent = (type: 'mini' | 'default'): React.ReactNode => {
-    const { current } = this.props;
-    const { totalPage } = this.state;
+  private renderLeftArrow = (type: 'mini' | 'default'): React.ReactNode => {
+    const { defaultPage } = this.state;
     const contentClasses = classes[type];
-    const paginationItems = getPages(totalPage, current, PAGE_ITEM_SIZE);
+    return (
+      <div
+        className={`${contentClasses.item} ${defaultPage === 1 ? contentClasses.disabled : ''}`}
+        onClick={() => {
+          this.decreasePage();
+        }}
+      >
+        <Arrow
+          className={`${contentClasses.arrow} ${contentClasses.leftBtn} ${
+            defaultPage === 1 ? contentClasses.arrowDisabled : ''
+          }`}
+        />
+      </div>
+    );
+  };
+
+  private renderRightArrow = (type: 'mini' | 'default'): React.ReactNode => {
+    const { totalPage, defaultPage } = this.state;
+    const contentClasses = classes[type];
+    return (
+      <div
+        className={`${contentClasses.item} ${
+          defaultPage === totalPage ? contentClasses.disabled : ''
+        }`}
+        onClick={() => {
+          this.increasePage();
+        }}
+      >
+        <Arrow
+          className={`${contentClasses.arrow} ${contentClasses.rightBtn} ${
+            defaultPage === totalPage ? contentClasses.arrowDisabled : ''
+          }`}
+        />
+      </div>
+    );
+  };
+
+  private renderContent = (type: 'mini' | 'default'): React.ReactNode => {
+    const { totalPage, defaultPage } = this.state;
+    const contentClasses = classes[type];
+    const paginationItems = getPages(totalPage, defaultPage, PAGE_ITEM_SIZE);
     return (
       <>
-        <li className={classes.pageItem}>
-          <div
-            className={`${contentClasses.item} ${current === 1 ? contentClasses.disabled : ''}`}
-            onClick={() => {
-              this.decreasePage();
-            }}
-          >
-            <Arrow
-              className={`${contentClasses.arrow} ${contentClasses.leftBtn} ${
-                current === 1 ? contentClasses.arrowDisabled : ''
-              }`}
-            />
-          </div>
-        </li>
+        <li className={classes.pageItem}>{this.renderLeftArrow(type)}</li>
         {paginationItems.map((item: IPageItem, index: number) => {
           const key = `acme-page-item-${index}`;
           return (
@@ -294,7 +378,7 @@ class Pagination extends React.PureComponent<IPaginationProps, PaginationState> 
               {item.type === PageItemType.PAGE ? (
                 <div
                   className={`${contentClasses.item} ${
-                    item.val === current ? contentClasses.active : ''
+                    item.val === defaultPage ? contentClasses.active : ''
                   }`}
                   onClick={() => {
                     if (item.type === PageItemType.PAGE) this.pageChange(item.val as number);
@@ -328,22 +412,7 @@ class Pagination extends React.PureComponent<IPaginationProps, PaginationState> 
             </li>
           );
         })}
-        <li className={classes.pageItem}>
-          <div
-            className={`${contentClasses.item} ${
-              current === totalPage ? contentClasses.disabled : ''
-            }`}
-            onClick={() => {
-              this.increasePage();
-            }}
-          >
-            <Arrow
-              className={`${contentClasses.arrow} ${contentClasses.rightBtn} ${
-                current === totalPage ? contentClasses.arrowDisabled : ''
-              }`}
-            />
-          </div>
-        </li>
+        <li className={classes.pageItem}>{this.renderRightArrow(type)}</li>
       </>
     );
   };
@@ -363,43 +432,15 @@ class Pagination extends React.PureComponent<IPaginationProps, PaginationState> 
   };
 
   private renderSimple = (): React.ReactNode => {
-    const { current } = this.props;
-    const { totalPage } = this.state;
+    const { totalPage, defaultPage } = this.state;
     return (
       <div className={classes.root}>
-        <div
-          className={`${classes.pageItem} ${classes.mini.item} ${
-            current === 1 ? classes.mini.disabled : ''
-          }`}
-          onClick={() => {
-            this.decreasePage();
-          }}
-        >
-          <Arrow
-            className={`${classes.mini.leftBtn} ${
-              current === 1 ? classes.mini.arrowDisabled : classes.mini.arrow
-            }`}
-          />
-        </div>
+        <div className={classes.pageItem}>{this.renderLeftArrow('mini')}</div>
         <span className={classes.simple.container}>
-          <span className={`${classes.simple.text} ${classes.simple.active}`}>{current}</span>/
+          <span className={`${classes.simple.text} ${classes.simple.active}`}>{defaultPage}</span>/
           <span className={classes.simple.text}>{totalPage}</span>
         </span>
-        <div
-          className={`${classes.pageItem} ${classes.mini.item} ${
-            current === totalPage ? classes.mini.disabled : ''
-          }`}
-          onClick={() => {
-            this.increasePage();
-          }}
-        >
-          <Arrow
-            className={`${classes.mini.rightBtn} ${
-              current === totalPage ? classes.mini.arrowDisabled : classes.mini.arrow
-            }
-            `}
-          />
-        </div>
+        <div className={classes.pageItem}>{this.renderRightArrow('mini')}</div>
       </div>
     );
   };
@@ -423,6 +464,4 @@ class Pagination extends React.PureComponent<IPaginationProps, PaginationState> 
   }
 }
 
-export default React.forwardRef((props: PaginationProps, ref) => {
-  return <Pagination {...props} forwardedRef={ref} />;
-});
+export default Pagination;
