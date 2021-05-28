@@ -3,10 +3,9 @@ import { get, isFunction, isNumber } from 'lodash-es';
 import { getPages, IPageItem, PageItemType } from './paginationUtil';
 import Arrow from './Arrow';
 import DoubleArrow from './DoubleArrow';
-
-import './style/pagination.less';
 import Input from './Input';
 import Select from './Select';
+import './style/pagination.less';
 
 const classNamePrefix = 'acme-pagination';
 
@@ -52,13 +51,20 @@ export const classes = {
 };
 
 const PAGE_ITEM_SIZE = 7;
+enum PaginationType {
+  DEFAULT = 'default',
+  MINI = 'mini',
+  SIMPLE = 'simple',
+}
+
+type TPaginationType = `${PaginationType}`;
 
 export interface PaginationProps {
   /**
    *  分页器的类型
    * @default default
    *  */
-  type: 'default' | 'mini' | 'simple';
+  type: TPaginationType;
   /**
    * 总数
    * @default 0
@@ -196,7 +202,6 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
   };
 
   private updateTotalPage = () => {
-    console.log('pagination total page');
     const { total } = this.props;
     const { defaultPage, defaultSize } = this.state;
     const totalPage = Math.ceil(total / defaultSize);
@@ -281,7 +286,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     }
   };
 
-  private renderTotal = (type: 'mini' | 'default'): React.ReactNode => {
+  private renderTotal = (type: PaginationType.MINI | PaginationType.DEFAULT): React.ReactNode => {
     const { total } = this.props;
     const totalClassNames = classes[type];
     return (
@@ -324,7 +329,9 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     );
   };
 
-  private renderLeftArrow = (type: 'mini' | 'default'): React.ReactNode => {
+  private renderLeftArrow = (
+    type: PaginationType.MINI | PaginationType.DEFAULT,
+  ): React.ReactNode => {
     const { defaultPage } = this.state;
     const contentClasses = classes[type];
     return (
@@ -343,7 +350,9 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     );
   };
 
-  private renderRightArrow = (type: 'mini' | 'default'): React.ReactNode => {
+  private renderRightArrow = (
+    type: PaginationType.MINI | PaginationType.DEFAULT,
+  ): React.ReactNode => {
     const { totalPage, defaultPage } = this.state;
     const contentClasses = classes[type];
     return (
@@ -364,7 +373,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     );
   };
 
-  private renderContent = (type: 'mini' | 'default'): React.ReactNode => {
+  private renderContent = (type: PaginationType.MINI | PaginationType.DEFAULT): React.ReactNode => {
     const { totalPage, defaultPage } = this.state;
     const contentClasses = classes[type];
     const paginationItems = getPages(totalPage, defaultPage, PAGE_ITEM_SIZE);
@@ -417,7 +426,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     );
   };
 
-  private renderDefault = (type: 'mini' | 'default'): React.ReactNode => {
+  private renderDefault = (type: PaginationType.MINI | PaginationType.DEFAULT): React.ReactNode => {
     const { showPageSize, showTotal, showJump } = this.props;
     return (
       <div className={classes.root}>
@@ -435,12 +444,12 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     const { totalPage, defaultPage } = this.state;
     return (
       <div className={classes.root}>
-        <div className={classes.pageItem}>{this.renderLeftArrow('mini')}</div>
+        <div className={classes.pageItem}>{this.renderLeftArrow(PaginationType.MINI)}</div>
         <span className={classes.simple.container}>
           <span className={`${classes.simple.text} ${classes.simple.active}`}>{defaultPage}</span>/
           <span className={classes.simple.text}>{totalPage}</span>
         </span>
-        <div className={classes.pageItem}>{this.renderRightArrow('mini')}</div>
+        <div className={classes.pageItem}>{this.renderRightArrow(PaginationType.MINI)}</div>
       </div>
     );
   };
@@ -449,9 +458,9 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     const { type } = this.props;
     switch (type) {
       case 'default':
-        return this.renderDefault('default');
+        return this.renderDefault(PaginationType.DEFAULT);
       case 'mini':
-        return this.renderDefault('mini');
+        return this.renderDefault(PaginationType.MINI);
       case 'simple':
         return this.renderSimple();
       default:
