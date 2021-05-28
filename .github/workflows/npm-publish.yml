@@ -81,7 +81,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_SECRET: ${{ secrets.NPM_SECRET }}
 
-   docs-publish:
+  docs-publish:
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: [publish]
     runs-on: ubuntu-latest
