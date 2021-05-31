@@ -1,0 +1,163 @@
+@import '../color.less';
+
+@acme-prefix: acme;
+
+/* -------- Colors -------- */
+// 品牌色
+@color-primary: @blue-6;
+
+// 状态常用颜色
+@color-info: @blue-6;
+@color-success: @green-6;
+@color-error: @red-6;
+@color-warning: @orange-6;
+
+// 常用颜色
+@color-white: #fff;
+@color-black: #000;
+
+// 字体色
+@font-color-title: @neutral-10;
+@font-color-text: @neutral-8;
+@font-color-disabled: @neutral-7;
+@font-color-placeholder: @neutral-6;
+@font-color-link: @color-primary;
+
+// 通用背景色
+// 用于大部分组件，Button、Pagination组件请参考下方Control Colors
+@bg-color-white: @neutral-1;
+@bg-color-gray: @neutral-3;
+@bg-color-light-gray: @neutral-2;
+@bg-color-selected: @color-primary;
+@bg-color-hover: #f5f5ff;
+
+// 通用边框色
+// 用于大部分组件，Button、Pagination组件请参考下方Control Colors
+@border-color-primary: @neutral-5;
+@border-color-secondary: @neutral-6;
+@border-color-highlight: @color-primary;
+@border-color-danger: @red-6;
+@border-color-focus-outer: #ff9a00;
+
+// 分割线
+@divider-color-primary: @neutral-5;
+@divider-color-secondary: @neutral-6;
+
+/* ------------------------ */
+
+/* -------- Control Colors -------- */
+// Tips：目前用于Button、Pagination组件
+
+// 1、背景色
+@con-bg-primary: @blue-6;
+@con-bg-primary-hover: @blue-5;
+@con-bg-primary-active: @blue-7;
+@con-bg-primary-disabled: @blue-6; // 组件内现在用整体透明度50%来区分
+@con-bg-primary-loading: @blue-6; // 组件内现在用整体透明度80%来区分
+@con-bg-primary-focus: @blue-6;
+
+@con-bg-secondary: @neutral-1;
+@con-bg-secondary-hover: @neutral-3;
+@con-bg-secondary-active: @neutral-4;
+@con-bg-secondary-disabled: @neutral-1; // 组件内现在用整体透明度50%来区分
+@con-bg-secondary-loading: @neutral-1; // 组件内现在用整体透明度80%来区分
+@con-bg-secondary-focus: @neutral-1;
+
+@con-bg-danger: @red-6;
+@con-bg-danger-hover: @red-5;
+@con-bg-danger-active: @red-7;
+@con-bg-danger-disabled: @red-6; // 组件内现在用整体透明度50%来区分
+@con-bg-danger-loading: @red-6; // 组件内现在用整体透明度80%来区分
+@con-bg-danger-focus: @red-6;
+
+// 2、边框色
+@con-border-primary: @border-color-highlight;
+@con-border-primary-hover: @border-color-highlight;
+@con-border-primary-active: @border-color-highlight;
+@con-border-primary-disabled: @border-color-highlight; // 组件内现在用整体透明度50%来区分
+@con-border-primary-loading: @border-color-highlight; // 组件内现在用整体透明度80%来区分
+@con-border-primary-focus: @border-color-highlight;
+@con-border-primary-focus-outer: @border-color-focus-outer;
+
+@con-border-secondary: @border-color-highlight;
+@con-border-secondary-hover: @border-color-highlight;
+@con-border-secondary-active: @border-color-highlight;
+@con-border-secondary-disabled: @border-color-highlight; // 组件内现在用整体透明度50%来区分
+@con-border-secondary-loading: @border-color-highlight; // 组件内现在用整体透明度80%来区分
+@con-border-secondary-focus: @border-color-highlight;
+@con-border-secondary-focus-outer: @border-color-focus-outer;
+
+@con-border-danger: @border-color-danger;
+@con-border-danger-hover: @border-color-danger;
+@con-border-danger-active: @border-color-danger;
+@con-border-danger-disabled: @border-color-danger; // 组件内现在用整体透明度50%来区分
+@con-border-danger-loading: @border-color-danger; // 组件内现在用整体透明度80%来区分
+@con-border-danger-focus: @border-color-danger;
+@con-border-danger-focus-outer: @border-color-focus-outer;
+
+/* ----------------------------------- */
+
+/* -------- 不常用的 Colors -------- */
+// Tips：主要为了对应设计稿中的色阶
+
+// 标准色 - 对应设计稿中 S1-S10
+@color-primary-1: @blue-1;
+@color-primary-2: @blue-2;
+@color-primary-3: @blue-3;
+@color-primary-4: @blue-4;
+@color-primary-5: @blue-5;
+@color-primary-6: @color-primary;
+@color-primary-7: @blue-7;
+@color-primary-8: @blue-8;
+@color-primary-9: @blue-9;
+@color-primary-10: @blue-10;
+
+// 提示色 - 对应设计稿中 S1-S10
+@color-info-1: @blue-1;
+@color-info-2: @blue-2;
+@color-info-3: @blue-3;
+@color-info-4: @blue-4;
+@color-info-5: @blue-5;
+@color-info-6: @color-info;
+@color-info-7: @blue-7;
+@color-info-8: @blue-8;
+@color-info-9: @blue-9;
+@color-info-10: @blue-10;
+
+// 成功状态色 - 对应设计稿中 C1-C10
+@color-success-1: @green-1;
+@color-success-2: @green-2;
+@color-success-3: @green-3;
+@color-success-4: @green-4;
+@color-success-5: @green-5;
+@color-success-6: @color-success;
+@color-success-7: @green-7;
+@color-success-8: @green-8;
+@color-success-9: @green-9;
+@color-success-10: @green-10;
+
+// 失败、危险状态色 - 对应设计稿中 D1-D10
+@color-error-1: @red-1;
+@color-error-2: @red-2;
+@color-error-3: @red-3;
+@color-error-4: @red-4;
+@color-error-5: @red-5;
+@color-error-6: @color-error;
+@color-error-7: @red-7;
+@color-error-8: @red-8;
+@color-error-9: @red-9;
+@color-error-10: @red-10;
+
+// 警示状态色 - 对应设计稿中 W1-W10
+@color-warning-1: @orange-1;
+@color-warning-2: @orange-2;
+@color-warning-3: @orange-3;
+@color-warning-4: @orange-4;
+@color-warning-5: @orange-5;
+@color-warning-6: @color-warning;
+@color-warning-7: @orange-7;
+@color-warning-8: @orange-8;
+@color-warning-9: @orange-9;
+@color-warning-10: @orange-10;
+
+/* ------------------------ */
