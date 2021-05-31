@@ -2,7 +2,7 @@ node-modules/**/*
 dist/**/*
 .eslintrc.js
 lint-staged.config.js
-.babelrc.js
+babel.config.js
 rollup.config.js
 gulpfile.js
 jest.config.js
