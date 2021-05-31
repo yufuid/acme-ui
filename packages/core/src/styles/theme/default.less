@@ -37,7 +37,6 @@
 @border-color-secondary: @neutral-6;
 @border-color-highlight: @color-primary;
 @border-color-danger: @red-6;
-@border-color-disabled: #9999ff; // TODO: 这个只有在蓝框的disabled下是对的
 @border-color-focus-outer: #ff9a00;
 
 // 分割线
@@ -75,21 +74,24 @@
 @con-border-primary: @border-color-highlight;
 @con-border-primary-hover: @border-color-highlight;
 @con-border-primary-active: @border-color-highlight;
-@con-border-primary-disabled: @border-color-highlight;
+@con-border-primary-disabled: @border-color-highlight; // 组件内现在用整体透明度50%来区分
+@con-border-primary-loading: @border-color-highlight; // 组件内现在用整体透明度80%来区分
 @con-border-primary-focus: @border-color-highlight;
 @con-border-primary-focus-outer: @border-color-focus-outer;
 
 @con-border-secondary: @border-color-highlight;
 @con-border-secondary-hover: @border-color-highlight;
 @con-border-secondary-active: @border-color-highlight;
-@con-border-secondary-disabled: @border-color-highlight;
+@con-border-secondary-disabled: @border-color-highlight; // 组件内现在用整体透明度50%来区分
+@con-border-secondary-loading: @border-color-highlight; // 组件内现在用整体透明度80%来区分
 @con-border-secondary-focus: @border-color-highlight;
 @con-border-secondary-focus-outer: @border-color-focus-outer;
 
 @con-border-danger: @border-color-danger;
 @con-border-danger-hover: @border-color-danger;
 @con-border-danger-active: @border-color-danger;
-@con-border-danger-disabled: @border-color-danger;
+@con-border-danger-disabled: @border-color-danger; // 组件内现在用整体透明度50%来区分
+@con-border-danger-loading: @border-color-danger; // 组件内现在用整体透明度80%来区分
 @con-border-danger-focus: @border-color-danger;
 @con-border-danger-focus-outer: @border-color-focus-outer;
 
