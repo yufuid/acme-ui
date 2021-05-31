@@ -1,3 +1,5 @@
+const esModules = ['lodash-es'].join('|');
+
 module.exports = {
   /**
    * roots: Array<string>
@@ -19,7 +21,7 @@ module.exports = {
     '^.+\\.css$': '<rootDir>/jest/cssTransform.js',
     '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|less|json)$)': '<rootDir>/jest/fileTransform.js',
   },
-  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$'],
+  transformIgnorePatterns: [`node_modules/(?!(${esModules}))`],
   moduleFileExtensions: ['ts', 'tsx', 'less', 'js', 'json', 'jsx', 'node', 'css'],
   moduleNameMapper: {
     '^tests/(.*)$': '<rootDir>/tests/$1',
