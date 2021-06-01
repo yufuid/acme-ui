@@ -9,7 +9,7 @@ describe('✨️ Pagination correctly', () => {
   mountTestSuite(<Pagination type="mini" />);
   mountTestSuite(<Pagination type="simple" />);
 
-  test('render Pagination total is 0', () => {
+  test('render total is 0', () => {
     const { container } = render(<Pagination />);
     const lis = container.querySelectorAll('li');
     expect(lis.length).toEqual(2);
