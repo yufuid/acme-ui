@@ -214,7 +214,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
 
   private decreasePage = () => {
     const { defaultPage } = this.state;
-    if (defaultPage === 1) return;
+    if (defaultPage <= 1) return;
     const page = defaultPage - 1;
     this.pageChange(page);
   };
@@ -222,7 +222,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
   private increasePage = () => {
     const { defaultPage } = this.state;
     const { totalPage } = this.state;
-    if (defaultPage === totalPage) return;
+    if (defaultPage >= totalPage) return;
     const page = defaultPage + 1;
     this.pageChange(page);
   };
@@ -239,7 +239,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     }
   };
 
-  private jumpPage = (type: string) => {
+  private stepPage = (type: string) => {
     const { defaultPage } = this.state;
     const page = type === PageItemType.LEFTMORE ? defaultPage - 3 : defaultPage + 3;
     this.pageChange(page);
@@ -336,14 +336,14 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     const contentClasses = classes[type];
     return (
       <div
-        className={`${contentClasses.item} ${defaultPage === 1 ? contentClasses.disabled : ''}`}
+        className={`${contentClasses.item} ${defaultPage <= 1 ? contentClasses.disabled : ''}`}
         onClick={() => {
           this.decreasePage();
         }}
       >
         <Arrow
           className={`${contentClasses.arrow} ${contentClasses.leftBtn} ${
-            defaultPage === 1 ? contentClasses.arrowDisabled : ''
+            defaultPage <= 1 ? contentClasses.arrowDisabled : ''
           }`}
         />
       </div>
@@ -358,7 +358,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     return (
       <div
         className={`${contentClasses.item} ${
-          defaultPage === totalPage ? contentClasses.disabled : ''
+          defaultPage >= totalPage ? contentClasses.disabled : ''
         }`}
         onClick={() => {
           this.increasePage();
@@ -366,7 +366,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
       >
         <Arrow
           className={`${contentClasses.arrow} ${contentClasses.rightBtn} ${
-            defaultPage === totalPage ? contentClasses.arrowDisabled : ''
+            defaultPage >= totalPage ? contentClasses.arrowDisabled : ''
           }`}
         />
       </div>
@@ -405,7 +405,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
                   <div
                     className={classes.doubleArrow}
                     onClick={() => {
-                      this.jumpPage(item.type);
+                      this.stepPage(item.type);
                     }}
                   >
                     <DoubleArrow
