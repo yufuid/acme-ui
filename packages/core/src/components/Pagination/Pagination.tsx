@@ -147,7 +147,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     };
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     const { current, onChange, pageSize, onPageSizeChange } = this.props;
     if (current && !onChange) {
       console.warn(
@@ -161,7 +161,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     }
   }
 
-  componentDidUpdate(prevProps: PaginationProps) {
+  componentDidUpdate(prevProps: PaginationProps): void {
     const { total, current, pageSize } = this.props;
     if (total !== get(prevProps, 'total')) {
       this.updateTotalPage();
@@ -270,7 +270,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     }
   };
 
-  private pageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>, value: any) => {
+  private pageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>, value: number) => {
     const { onPageSizeChange, pageSize } = this.props;
     const size: number = value;
     if (!pageSize) {
