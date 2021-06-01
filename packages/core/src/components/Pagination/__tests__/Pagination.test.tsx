@@ -9,17 +9,17 @@ describe('✨️ Pagination correctly', () => {
   mountTestSuite(<Pagination type="mini" />);
   mountTestSuite(<Pagination type="simple" />);
 
-  test('should render Pagination total is 0', () => {
+  test('render Pagination total is 0', () => {
     const { container } = render(<Pagination />);
     const lis = container.querySelectorAll('li');
     expect(lis.length).toEqual(2);
     expect(lis[0].querySelector('div')).toHaveClass(classes.default.disabled);
-    expect(lis[0].querySelector('polygon')).toHaveClass(classes.default.arrowDisabled);
+    expect(lis[0].querySelector('svg')).toHaveClass(classes.default.arrowDisabled);
     expect(lis[1].querySelector('div')).toHaveClass(classes.default.disabled);
-    expect(lis[1].querySelector('polygon')).toHaveClass(classes.default.arrowDisabled);
+    expect(lis[1].querySelector('svg')).toHaveClass(classes.default.arrowDisabled);
     expect(container.firstChild).toHaveClass(classes.root);
   });
-  test('should render type = default and total = 50 and pageSize = 10 Pagination', () => {
+  test('render type = default and total = 50 and pageSize = 10 Pagination', () => {
     const { container } = render(<Pagination total={50} defaultPageSize={10} />);
     const lis = container.querySelectorAll('li');
     expect(container.firstChild).toHaveClass(classes.root);
@@ -32,6 +32,20 @@ describe('✨️ Pagination correctly', () => {
     expect(get(lis[4].querySelector('div'), 'textContent')).toEqual('4');
     expect(get(lis[5].querySelector('div'), 'textContent')).toEqual('5');
     expect(lis[lis.length - 1].querySelector('div')).not.toHaveClass(classes.default.disabled);
+  });
+  test('render more item ', () => {
+    const { container } = render(<Pagination total={200} />);
+    const moreButton = container.getElementsByClassName(classes.doubleArrow);
+    const lis = container.querySelectorAll('li');
+    expect(moreButton).not.toBeNull();
+    expect(moreButton.length).toEqual(1);
+    fireEvent.click(moreButton[0]);
+    expect(lis[4].querySelector('div')).toHaveClass(classes.default.active);
+    fireEvent.click(moreButton[0]);
+    const moreBtn = container.getElementsByClassName(classes.doubleArrow);
+    expect(moreBtn.length).toEqual(2);
+    expect(get(lis[4].querySelector('div'), 'textContent')).toEqual('7');
+    expect(lis[4].querySelector('div')).toHaveClass(classes.default.active);
   });
   test('next button click and item click', () => {
     const { container } = render(<Pagination total={50} defaultPageSize={10} />);
@@ -49,9 +63,16 @@ describe('✨️ Pagination correctly', () => {
     }
   });
   test('render show pageSize Select', () => {
-    const { container } = render(<Pagination total={50} defaultPageSize={10} showPageSize />);
-    const lis = container.querySelectorAll('li');
-    expect(lis[lis.length - 1].querySelector('select')).not.toBeEmptyDOMElement();
+    const { container } = render(<Pagination total={50} showPageSize />);
+    const selects = container.getElementsByTagName('select');
+    expect(selects.length).toEqual(1);
+    const select = selects[0];
+    expect(select).not.toBeEmptyDOMElement();
+    fireEvent.change(select, {
+      target: { value: '50' },
+    });
+    const items = container.querySelectorAll('li');
+    expect(items.length).toEqual(4);
   });
   test('render show total and totalPage is correct', () => {
     const { container } = render(<Pagination total={50} defaultPageSize={10} showTotal />);
@@ -77,7 +98,7 @@ describe('✨️ Pagination correctly', () => {
     }
   });
   test('render mini Pagination', () => {
-    const { container } = render(<Pagination total={50} type='mini' />);
+    const { container } = render(<Pagination total={50} type="mini" />);
     const items = container.querySelectorAll('li');
     expect(items.length).toEqual(7);
     const itemContent = items[1].querySelector('div');

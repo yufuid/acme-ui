@@ -19,11 +19,6 @@
 
 @shadow-primary: 0 2px 4px 0 rgba(54, 40, 255, 0.08);
 
-@left-arrow-transform: translate(5.2929px, 4.6569px) rotate(135deg)
-  translate(-15.2929px, -15.6569px);
-@right-arrow-transform: translate(2.2929px, 4.6569px) rotate(-45deg)
-  translate(-15.2929px, -15.6569px);
-
 @{paginationPrefix} {
   font-size: @font-size-text;
   color: @color-black;
@@ -165,6 +160,7 @@
 
 @{paginationPrefix}-doubleArrow {
   position: absolute;
+  fill: @color-primary;
   left: 0;
   z-index: 2;
   width: 100%;
@@ -181,11 +177,7 @@
 }
 
 @{paginationPrefix}-default-left-button {
-  transform: @left-arrow-transform;
-}
-
-@{paginationPrefix}-default-right-button {
-  transform: @right-arrow-transform;
+  transform: rotate(180deg);
 }
 
 @{paginationPrefix}-default-arrow-disabled {
@@ -197,10 +189,7 @@
 }
 
 @{paginationPrefix}-mini-left-button {
-  transform: @left-arrow-transform;
-}
-@{paginationPrefix}-mini-right-button {
-  transform: @right-arrow-transform;
+  transform: rotate(180deg);
 }
 
 @{paginationPrefix}-mini-arrow-disabled {
