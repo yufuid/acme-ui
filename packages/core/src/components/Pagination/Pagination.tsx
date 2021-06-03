@@ -1,6 +1,6 @@
 import React from 'react';
 import { get, isFunction, isNumber } from 'lodash-es';
-import { classNames, getPages, IPageItem, PageItemType } from './util/Pagination';
+import { getPages, IPageItem, PageItemType } from './util/Pagination';
 import Arrow from './Arrow';
 import DoubleArrow from './DoubleArrow';
 import Input from './Input';
@@ -44,9 +44,15 @@ export const classes = {
     total: `${classNamePrefix}-mini-total`,
   },
   simple: {
+    item: `${classNamePrefix}-item-simple`,
+    active: `${classNamePrefix}-item-simple-active`,
+    disabled: `${classNamePrefix}-item-simple-disabled`,
     container: `${classNamePrefix}-simple-container`,
     text: `${classNamePrefix}-simple-text`,
-    active: `${classNamePrefix}-simple-active`,
+    arrow: `${classNamePrefix}-simple-arrow`,
+    leftBtn: `${classNamePrefix}-simple-left-button`,
+    rightBtn: `${classNamePrefix}-simple-right-button`,
+    arrowDisabled: `${classNamePrefix}-simple-arrow-disabled`,
   },
 };
 
@@ -330,45 +336,41 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     );
   };
 
-  private renderLeftArrow = (
-    type: PaginationType.MINI | PaginationType.DEFAULT,
-  ): React.ReactNode => {
+  private renderLeftArrow = (type: PaginationType): React.ReactNode => {
     const { currPage } = this.state;
     const contentClasses = classes[type];
     return (
       <div
-        className={`${contentClasses.item} ${currPage <= 1 ? contentClasses.disabled : ''}`}
-        onClick={this.decreasePage}
+        className={`${contentClasses.item} ${currPage === 1 ? contentClasses.disabled : ''}`}
+        onClick={() => {
+          this.decreasePage();
+        }}
       >
         <Arrow
-          className={classNames({
-            [`${contentClasses.arrow}`]: true,
-            [`${contentClasses.leftBtn}`]: true,
-            [`${contentClasses.arrowDisabled}`]: currPage <= 1,
-          })}
+          className={`${contentClasses.arrow} ${contentClasses.leftBtn} ${
+            currPage === 1 ? contentClasses.arrowDisabled : ''
+          }`}
         />
       </div>
     );
   };
 
-  private renderRightArrow = (
-    type: PaginationType.MINI | PaginationType.DEFAULT,
-  ): React.ReactNode => {
+  private renderRightArrow = (type: PaginationType): React.ReactNode => {
     const { totalPage, currPage } = this.state;
     const contentClasses = classes[type];
     return (
       <div
         className={`${contentClasses.item} ${
-            currPage >= totalPage ? contentClasses.disabled : ''
+          currPage === totalPage ? contentClasses.disabled : ''
         }`}
-        onClick={this.increasePage}
+        onClick={() => {
+          this.increasePage();
+        }}
       >
         <Arrow
-          className={classNames({
-            [`${contentClasses.arrow}`]: true,
-            [`${contentClasses.rightBtn}`]: true,
-            [`${contentClasses.arrowDisabled}`]: currPage >= totalPage,
-          })}
+          className={`${contentClasses.arrow} ${contentClasses.rightBtn} ${
+            currPage === totalPage ? contentClasses.arrowDisabled : ''
+          }`}
         />
       </div>
     );
@@ -387,11 +389,12 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
             <li className={classes.pageItem} key={key}>
               {item.type === PageItemType.PAGE ? (
                 <div
-                  className={classNames({
-                    [`${contentClasses.item}`]: true,
-                    [`${contentClasses.active}`]: item.val === currPage,
-                  })}
-                  onClick={() => this.pageChange(item.val as number)}
+                  className={`${contentClasses.item} ${
+                    item.val === currPage ? contentClasses.active : ''
+                  }`}
+                  onClick={() => {
+                    if (item.type === PageItemType.PAGE) this.pageChange(item.val as number);
+                  }}
                 >
                   {item.val}
                 </div>
@@ -439,12 +442,12 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     const { totalPage, currPage } = this.state;
     return (
       <div className={classes.root}>
-        <div className={classes.pageItem}>{this.renderLeftArrow(PaginationType.MINI)}</div>
+        <div className={classes.pageItem}>{this.renderLeftArrow(PaginationType.SIMPLE)}</div>
         <span className={classes.simple.container}>
           <span className={`${classes.simple.text} ${classes.simple.active}`}>{currPage}</span>/
           <span className={classes.simple.text}>{totalPage}</span>
         </span>
-        <div className={classes.pageItem}>{this.renderRightArrow(PaginationType.MINI)}</div>
+        <div className={classes.pageItem}>{this.renderRightArrow(PaginationType.SIMPLE)}</div>
       </div>
     );
   };

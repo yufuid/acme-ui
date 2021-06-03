@@ -1,6 +1,5 @@
-import { get, isFunction, isString } from 'lodash-es';
+import { get, isFunction } from 'lodash-es';
 import React, { ForwardedRef } from 'react';
-import { classNames } from './util/Pagination';
 import './style/input.less';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -22,10 +21,7 @@ const Input: React.FC<InputProps> = React.forwardRef(
       }
     };
 
-    const mergeClassNames = classNames({
-      [`${classNamePrefix}`]: true,
-      [`${className}`]: className ? isString(className) : false,
-    });
+    const mergeClassNames = `${classNamePrefix} ${className}`;
 
     return <input {...resetProps} className={mergeClassNames} ref={ref} onChange={onChange} />;
   },

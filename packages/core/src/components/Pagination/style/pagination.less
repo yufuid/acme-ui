@@ -80,7 +80,7 @@
     border-color: @color-secondary;
     cursor: not-allowed;
     &:hover {
-      background-color: unset;
+      background-color: @color-white;
     }
   }
   .@{paginationPrefix}-item-default-more {
@@ -103,6 +103,7 @@
   }
 
   /** mini */
+  .@{paginationPrefix}-item-simple,
   .@{paginationPrefix}-item-mini {
     width: @distance-small;
     height: @distance-small;
@@ -113,6 +114,7 @@
     cursor: pointer;
     &:hover {
       color: @color-primary;
+      .@{paginationPrefix}-simple-arrow,
       .@{paginationPrefix}-mini-arrow {
         fill: @color-primary;
       }
@@ -125,11 +127,13 @@
   .@{paginationPrefix}-item-mini-more {
     position: relative;
   }
+  .@{paginationPrefix}-item-simple-disabled,
   .@{paginationPrefix}-item-mini-disabled {
     border-color: @color-gray;
     cursor: not-allowed;
     &:hover {
       color: @color-gray;
+      .@{paginationPrefix}-simple-arrow,
       .@{paginationPrefix}-mini-arrow {
         fill: @color-gray;
       }
@@ -193,14 +197,17 @@
   fill: @color-secondary;
 }
 
+.@{paginationPrefix}-simple-arrow,
 .@{paginationPrefix}-mini-arrow {
   fill: @color-black;
 }
 
+.@{paginationPrefix}-simple-left-button,
 .@{paginationPrefix}-mini-left-button {
   transform: rotate(180deg);
 }
 
+.@{paginationPrefix}-simple-arrow-disabled,
 .@{paginationPrefix}-mini-arrow-disabled {
   fill: @color-gray;
 }

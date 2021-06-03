@@ -39,8 +39,3 @@ export const getPages = (total: number, current: number, length: number): IPageI
   }
   return pages;
 };
-
-export const classNames = (classes: Record<string, boolean>): string => {
-  const res = Object.keys(classes).filter((c) => classes[c]);
-  return res.join(' ');
-};
