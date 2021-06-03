@@ -45,7 +45,7 @@ export const classes = {
   },
   simple: {
     item: `${classNamePrefix}-item-simple`,
-    active: `${classNamePrefix}-item-simple-active`,
+    active: `${classNamePrefix}-simple-active`,
     disabled: `${classNamePrefix}-item-simple-disabled`,
     container: `${classNamePrefix}-simple-container`,
     text: `${classNamePrefix}-simple-text`,
@@ -342,9 +342,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     return (
       <div
         className={`${contentClasses.item} ${currPage === 1 ? contentClasses.disabled : ''}`}
-        onClick={() => {
-          this.decreasePage();
-        }}
+        onClick={this.decreasePage}
       >
         <Arrow
           className={`${contentClasses.arrow} ${contentClasses.leftBtn} ${
@@ -363,9 +361,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
         className={`${contentClasses.item} ${
           currPage === totalPage ? contentClasses.disabled : ''
         }`}
-        onClick={() => {
-          this.increasePage();
-        }}
+        onClick={this.increasePage}
       >
         <Arrow
           className={`${contentClasses.arrow} ${contentClasses.rightBtn} ${
