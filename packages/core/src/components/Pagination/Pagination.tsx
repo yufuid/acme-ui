@@ -388,9 +388,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
                   className={`${contentClasses.item} ${
                     item.val === currPage ? contentClasses.active : ''
                   }`}
-                  onClick={() => {
-                    if (item.type === PageItemType.PAGE) this.pageChange(item.val as number);
-                  }}
+                  onClick={() => this.pageChange(item.val as number)}
                 >
                   {item.val}
                 </div>
