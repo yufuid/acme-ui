@@ -338,9 +338,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     return (
       <div
         className={`${contentClasses.item} ${currPage <= 1 ? contentClasses.disabled : ''}`}
-        onClick={() => {
-          this.decreasePage();
-        }}
+        onClick={this.decreasePage}
       >
         <Arrow
           className={classNames({
@@ -363,9 +361,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
         className={`${contentClasses.item} ${
             currPage >= totalPage ? contentClasses.disabled : ''
         }`}
-        onClick={() => {
-          this.increasePage();
-        }}
+        onClick={this.increasePage}
       >
         <Arrow
           className={classNames({
