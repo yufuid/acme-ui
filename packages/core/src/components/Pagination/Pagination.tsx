@@ -120,8 +120,8 @@ export interface PaginationProps {
 interface PaginationState {
   totalPage: number;
   jumpPage: string;
-  defaultPage: number;
-  defaultSize: number;
+  currPage: number;
+  currSize: number;
 }
 
 class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
@@ -143,8 +143,8 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     this.state = {
       totalPage,
       jumpPage: '',
-      defaultPage: current || defaultCurrent,
-      defaultSize: pageSize || defaultPageSize,
+      currPage: current || defaultCurrent,
+      currSize: pageSize || defaultPageSize,
     };
   }
 
@@ -181,7 +181,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     if (pageSize && isNumber(size)) {
       this.setState(
         {
-          defaultSize: size,
+          currSize: size,
         },
         this.updateTotalPage,
       );
@@ -195,7 +195,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     const page = Number(current);
     if (current && isNumber(page)) {
       this.setState({
-        defaultPage: page,
+        currPage: page,
       });
     } else {
       console.error(current, `current value is not number`);
@@ -204,9 +204,9 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
 
   private updateTotalPage = () => {
     const { total } = this.props;
-    const { defaultPage, defaultSize } = this.state;
-    const totalPage = Math.ceil(total / defaultSize);
-    const newCurrent = defaultPage > totalPage ? totalPage : defaultPage;
+    const { currPage, currSize } = this.state;
+    const totalPage = Math.ceil(total / currSize);
+    const newCurrent = currPage > totalPage ? totalPage : currPage;
     this.setState({
       totalPage,
     });
@@ -214,17 +214,17 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
   };
 
   private decreasePage = () => {
-    const { defaultPage } = this.state;
-    if (defaultPage <= 1) return;
-    const page = defaultPage - 1;
+    const { currPage } = this.state;
+    if (currPage <= 1) return;
+    const page = currPage - 1;
     this.pageChange(page);
   };
 
   private increasePage = () => {
-    const { defaultPage } = this.state;
+    const { currPage } = this.state;
     const { totalPage } = this.state;
-    if (defaultPage >= totalPage) return;
-    const page = defaultPage + 1;
+    if (currPage >= totalPage) return;
+    const page = currPage + 1;
     this.pageChange(page);
   };
 
@@ -232,7 +232,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     const { onChange, current } = this.props;
     if (!current) {
       this.setState({
-        defaultPage: page,
+        currPage: page,
       });
     }
     if (isFunction(onChange)) {
@@ -241,8 +241,8 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
   };
 
   private stepPage = (type: string) => {
-    const { defaultPage } = this.state;
-    const page = type === PageItemType.LEFT_MORE ? defaultPage - 3 : defaultPage + 3;
+    const { currPage } = this.state;
+    const page = type === PageItemType.LEFT_MORE ? currPage - 3 : currPage + 3;
     this.pageChange(page);
   };
 
@@ -277,7 +277,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     if (!pageSize) {
       this.setState(
         {
-          defaultSize: size,
+          currPage: size,
         },
         this.updateTotalPage,
       );
@@ -299,14 +299,14 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
 
   private renderSizeOptions = (): React.ReactNode => {
     const { pageSizeOptions } = this.props;
-    const { defaultSize } = this.state;
+    const { currSize } = this.state;
     const selectOptions = pageSizeOptions.map((item: number) => ({
       label: `${item}条/页`,
       value: item,
     }));
     return (
       <li className={classes.pageItem}>
-        <Select value={defaultSize} options={selectOptions} onChange={this.pageSizeChange} />
+        <Select value={currSize} options={selectOptions} onChange={this.pageSizeChange} />
       </li>
     );
   };
@@ -333,11 +333,11 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
   private renderLeftArrow = (
     type: PaginationType.MINI | PaginationType.DEFAULT,
   ): React.ReactNode => {
-    const { defaultPage } = this.state;
+    const { currPage } = this.state;
     const contentClasses = classes[type];
     return (
       <div
-        className={`${contentClasses.item} ${defaultPage <= 1 ? contentClasses.disabled : ''}`}
+        className={`${contentClasses.item} ${currPage <= 1 ? contentClasses.disabled : ''}`}
         onClick={() => {
           this.decreasePage();
         }}
@@ -346,7 +346,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
           className={classNames({
             [`${contentClasses.arrow}`]: true,
             [`${contentClasses.leftBtn}`]: true,
-            [`${contentClasses.arrowDisabled}`]: defaultPage <= 1,
+            [`${contentClasses.arrowDisabled}`]: currPage <= 1,
           })}
         />
       </div>
@@ -356,12 +356,12 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
   private renderRightArrow = (
     type: PaginationType.MINI | PaginationType.DEFAULT,
   ): React.ReactNode => {
-    const { totalPage, defaultPage } = this.state;
+    const { totalPage, currPage } = this.state;
     const contentClasses = classes[type];
     return (
       <div
         className={`${contentClasses.item} ${
-          defaultPage >= totalPage ? contentClasses.disabled : ''
+            currPage >= totalPage ? contentClasses.disabled : ''
         }`}
         onClick={() => {
           this.increasePage();
@@ -371,7 +371,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
           className={classNames({
             [`${contentClasses.arrow}`]: true,
             [`${contentClasses.rightBtn}`]: true,
-            [`${contentClasses.arrowDisabled}`]: defaultPage >= totalPage,
+            [`${contentClasses.arrowDisabled}`]: currPage >= totalPage,
           })}
         />
       </div>
@@ -379,9 +379,9 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
   };
 
   private renderContent = (type: PaginationType.MINI | PaginationType.DEFAULT): React.ReactNode => {
-    const { totalPage, defaultPage } = this.state;
+    const { totalPage, currPage } = this.state;
     const contentClasses = classes[type];
-    const paginationItems = getPages(totalPage, defaultPage, PAGE_ITEM_SIZE);
+    const paginationItems = getPages(totalPage, currPage, PAGE_ITEM_SIZE);
     return (
       <>
         <li className={classes.pageItem}>{this.renderLeftArrow(type)}</li>
@@ -393,7 +393,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
                 <div
                   className={classNames({
                     [`${contentClasses.item}`]: true,
-                    [`${contentClasses.active}`]: item.val === defaultPage,
+                    [`${contentClasses.active}`]: item.val === currPage,
                   })}
                   onClick={() => this.pageChange(item.val as number)}
                 >
@@ -440,12 +440,12 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
   };
 
   private renderSimple = (): React.ReactNode => {
-    const { totalPage, defaultPage } = this.state;
+    const { totalPage, currPage } = this.state;
     return (
       <div className={classes.root}>
         <div className={classes.pageItem}>{this.renderLeftArrow(PaginationType.MINI)}</div>
         <span className={classes.simple.container}>
-          <span className={`${classes.simple.text} ${classes.simple.active}`}>{defaultPage}</span>/
+          <span className={`${classes.simple.text} ${classes.simple.active}`}>{currPage}</span>/
           <span className={classes.simple.text}>{totalPage}</span>
         </span>
         <div className={classes.pageItem}>{this.renderRightArrow(PaginationType.MINI)}</div>
