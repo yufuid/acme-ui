@@ -1,0 +1,56 @@
+/**
+ * 主要包含 字体、字体大小、字重、行高等
+ */
+
+/* -------- Font Size -------- */
+@font-size-base: 14px;
+@font-size-1: @font-size-base - 2px; // 12
+@font-size-2: @font-size-base; // 14
+@font-size-3: @font-size-base + 2px; // 16
+@font-size-4: @font-size-base + 4px; // 18
+@font-size-5: @font-size-base + 6px; // 20
+@font-size-6: @font-size-base + 10px; // 24
+@font-size-7: @font-size-base + 16px; // 30
+@font-size-8: @font-size-base + 24px; // 38
+@font-size-9: @font-size-base + 32px; // 46
+@font-size-10: @font-size-base + 42px; // 56
+@font-size-11: @font-size-base + 54px; // 68
+
+/* --------------------------- */
+
+/* -------- Font Size -------- */
+@font-weight-regular: 400;
+@font-weight-medium: 500;
+@font-weight-semibold: 600;
+
+/* --------------------------- */
+
+/* -------- Font Family -------- */
+
+/**
+ * 系统字体
+ * 1. -apple-system: 在一些稍低版本 Mac OS X 和 iOS 上，它针对旧版上的 Neue Helvetica 和 Lucida Grande 字体，升级使用更为合适的 San Francisco Fonts
+ * 2. system-ui: 使用各个支持平台上的默认系统字体
+ * 3. BlinkMacSystemFont: 针对一些 Mac OS X 上的 Chrome 浏览器，使用系统默认字体
+ */
+@font-family-system: ~'-apple-system,system-ui,BlinkMacSystemFont';
+
+/**
+ * 西文字体
+ * 1. Segoe UI 对应的是 Windows 和 Windows Phone；
+ * 2. Roboto 对应的是 Google 家的 Android 和 Chrome OS'；
+ * 3. Helvetica Neue 对应的是 OS X(Mac OS 10.11以下、iOS 9.0以下)；
+ * 4. Arial 是 Windows 3.1 开始就一直随视窗系统分发的字体，作为最后的回退方案
+ */
+@font-family-EN: ~'Segoe UI,Roboto,Helvetica Neue,Arial';
+
+/**
+ * 中文字体
+ * 1. PingFang SC 即苹方，是 OS X EI Capitan(10.11) 上 的系统中文字体。值得一提的是，EI Capitan 上 Chrome 默认的中文字体渲染是 ST Heiti(华文黑体)，而非作为系统 UI 字体的苹方；
+ * 2. Microsoft YaHei 即微软雅黑，随 Windows Vista 一同发布，是 Vista 至 Windows 8 的系统字体；
+ * 3. Source Han Sans CN 即思源黑体，是大部分 Android 的系统中文字体
+ * 4. sans-serif 中文字体的最终 fallback，无衬线体，与中文字体的黑体相对应
+ */
+@font-family-ZH: ~'PingFang SC,Microsoft YaHei,Source Han Sans CN,sans-serif';
+
+/* ----------------------------- */
