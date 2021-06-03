@@ -1,47 +1,45 @@
-@import '../color.less';
-
-@acme-prefix: acme;
+@import './common.less';
 
 /* -------- Colors -------- */
-// 品牌色
-@color-primary: @blue-6;
+// ✨品牌色
+@color-primary: @blue-6; // #3333ff
 
-// 状态常用颜色
-@color-info: @blue-6;
-@color-success: @green-6;
-@color-error: @red-6;
-@color-warning: @orange-6;
+// ✨状态常用颜色
+@color-info: @blue-6; // #3333ff
+@color-success: @green-6; // #4caf51
+@color-error: @red-6; // #d3302f
+@color-warning: @orange-6; // #ed6a0c
 
-// 常用颜色
+// ✨常用颜色
 @color-white: #fff;
 @color-black: #000;
 
-// 字体色
-@font-color-title: @neutral-10;
-@font-color-text: @neutral-8;
-@font-color-disabled: @neutral-7;
-@font-color-placeholder: @neutral-6;
-@font-color-link: @color-primary;
+// ✨字体色
+@font-color-title: @neutral-10; // #000000
+@font-color-text: @neutral-8; // #666666
+@font-color-disabled: @neutral-7; // #999999
+@font-color-placeholder: @neutral-6; // #cccccc
+@font-color-link: @color-primary; // #3333ff
 
-// 通用背景色
+// ✨通用背景色
 // 用于大部分组件，Button、Pagination组件请参考下方Control Colors
-@bg-color-white: @neutral-1;
-@bg-color-gray: @neutral-3;
-@bg-color-light-gray: @neutral-2;
-@bg-color-selected: @color-primary;
+@bg-color-white: @neutral-1; // #ffffff
+@bg-color-gray: @neutral-3; // #f4f4f4
+@bg-color-light-gray: @neutral-2; // #f8f8f8
+@bg-color-selected: @color-primary; // #3333ff
 @bg-color-hover: #f5f5ff;
 
-// 通用边框色
+// ✨通用边框色
 // 用于大部分组件，Button、Pagination组件请参考下方Control Colors
-@border-color-primary: @neutral-5;
-@border-color-secondary: @neutral-6;
-@border-color-highlight: @color-primary;
-@border-color-danger: @red-6;
-@border-color-focus-outer: #ff9a00;
+@border-color-primary: @neutral-5; // #dddddd，用于input、select等组件正常态
+@border-color-secondary: @neutral-6; // #cccccc, 用于checkbox、radio等组件正常态
+@border-color-highlight: @color-primary; // #3333ff，用于选中态等
+@border-color-danger: @red-6; // #d3302f，用于错误提示等情况
+@border-color-focus-outer: #ff9a00; // 用于无障碍时，组件focus状态
 
-// 分割线
-@divider-color-primary: @neutral-5;
-@divider-color-secondary: @neutral-6;
+// ✨分割线
+@divider-color-primary: @neutral-5; // #dddddd ✨常用
+@divider-color-secondary: @neutral-6; // #cccccc
 
 /* ------------------------ */
 
