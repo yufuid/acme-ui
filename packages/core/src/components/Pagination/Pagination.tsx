@@ -50,7 +50,7 @@ export const classes = {
   },
 };
 
-// 加上左右箭头一共展示 PAGE_ITEM_SIZE 个方块
+// 数字方块和省略方块最多展示 PAGE_ITEM_SIZE 个方块
 const PAGE_ITEM_SIZE = 7;
 enum PaginationType {
   DEFAULT = 'default',
