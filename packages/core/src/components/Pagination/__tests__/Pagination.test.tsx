@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { get } from 'lodash-es';
-import { mountTestSuite } from '../../../../tests/shared';
+import { mountTestSuite } from 'tests/shared';
 import Pagination, { classes } from '../Pagination';
 
 describe('✨️ Pagination correctly', () => {

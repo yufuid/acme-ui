@@ -1,6 +1,6 @@
 import React from 'react';
 import { get, isFunction, isNumber } from 'lodash-es';
-import { getPages, IPageItem, PageItemType } from './paginationUtil';
+import { classNames, getPages, IPageItem, PageItemType } from './util/Pagination';
 import Arrow from './Arrow';
 import DoubleArrow from './DoubleArrow';
 import Input from './Input';
@@ -50,6 +50,7 @@ export const classes = {
   },
 };
 
+// 加上左右箭头一共展示 PAGE_ITEM_SIZE 个方块
 const PAGE_ITEM_SIZE = 7;
 enum PaginationType {
   DEFAULT = 'default',
@@ -241,7 +242,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
 
   private stepPage = (type: string) => {
     const { defaultPage } = this.state;
-    const page = type === PageItemType.LEFTMORE ? defaultPage - 3 : defaultPage + 3;
+    const page = type === PageItemType.LEFT_MORE ? defaultPage - 3 : defaultPage + 3;
     this.pageChange(page);
   };
 
@@ -342,9 +343,11 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
         }}
       >
         <Arrow
-          className={`${contentClasses.arrow} ${contentClasses.leftBtn} ${
-            defaultPage <= 1 ? contentClasses.arrowDisabled : ''
-          }`}
+          className={classNames({
+            [`${contentClasses.arrow}`]: true,
+            [`${contentClasses.leftBtn}`]: true,
+            [`${contentClasses.arrowDisabled}`]: defaultPage <= 1,
+          })}
         />
       </div>
     );
@@ -365,9 +368,11 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
         }}
       >
         <Arrow
-          className={`${contentClasses.arrow} ${contentClasses.rightBtn} ${
-            defaultPage >= totalPage ? contentClasses.arrowDisabled : ''
-          }`}
+          className={classNames({
+            [`${contentClasses.arrow}`]: true,
+            [`${contentClasses.rightBtn}`]: true,
+            [`${contentClasses.arrowDisabled}`]: defaultPage >= totalPage,
+          })}
         />
       </div>
     );
@@ -386,12 +391,11 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
             <li className={classes.pageItem} key={key}>
               {item.type === PageItemType.PAGE ? (
                 <div
-                  className={`${contentClasses.item} ${
-                    item.val === defaultPage ? contentClasses.active : ''
-                  }`}
-                  onClick={() => {
-                    if (item.type === PageItemType.PAGE) this.pageChange(item.val as number);
-                  }}
+                  className={classNames({
+                    [`${contentClasses.item}`]: true,
+                    [`${contentClasses.active}`]: item.val === defaultPage,
+                  })}
+                  onClick={() => this.pageChange(item.val as number)}
                 >
                   {item.val}
                 </div>
@@ -402,15 +406,10 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
                     <span className={contentClasses.dot} />
                     <span className={contentClasses.dot} />
                   </span>
-                  <div
-                    className={classes.doubleArrow}
-                    onClick={() => {
-                      this.stepPage(item.type);
-                    }}
-                  >
+                  <div className={classes.doubleArrow} onClick={() => this.stepPage(item.type)}>
                     <DoubleArrow
                       className={
-                        item.type === PageItemType.LEFTMORE
+                        item.type === PageItemType.LEFT_MORE
                           ? classes.leftDoubleArrow
                           : classes.rightDoubleArrow
                       }

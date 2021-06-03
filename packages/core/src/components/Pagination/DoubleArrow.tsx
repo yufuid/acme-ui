@@ -1,10 +1,10 @@
 import React from 'react';
 
-export interface ArrowProps {
+export interface DoubleArrowProps {
   className?: string;
 }
 
-const DoubleArrow: React.FC<ArrowProps> = (props: ArrowProps) => {
+const DoubleArrow: React.FC<DoubleArrowProps> = (props: DoubleArrowProps) => {
   const { className } = props;
   return (
     <svg width="9px" height="8px" viewBox="0 0 9 8" fill="currentColor" className={className}>

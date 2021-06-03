@@ -1,6 +1,6 @@
 @import '../../../styles/index';
 
-@paginationPrefix: ~'.@{acme-prefix}-pagination';
+@paginationPrefix: ~'@{acme-prefix}-pagination';
 
 @color-secondary: rgba(51, 51, 255, 0.5);
 @color-light-primary: rgba(51, 51, 255, 0.05);
@@ -19,7 +19,7 @@
 
 @shadow-primary: 0 2px 4px 0 rgba(54, 40, 255, 0.08);
 
-@{paginationPrefix} {
+.@{paginationPrefix} {
   font-size: @font-size-text;
   color: @color-black;
   ul,
@@ -28,27 +28,27 @@
     margin: 0;
     list-style: none;
   }
-  @{paginationPrefix}-content {
+  .@{paginationPrefix}-content {
     padding: 0;
     margin: 0 @distance-small;
     clear: both;
   }
-  @{paginationPrefix}-item {
+  .@{paginationPrefix}-item {
     display: inline-block;
     vertical-align: middle;
     margin-right: @distance-tiny;
     &:hover {
-      @{paginationPrefix}-dot-group {
+      .@{paginationPrefix}-dot-group {
         opacity: 0;
       }
-      @{paginationPrefix}-doubleArrow {
+      .@{paginationPrefix}-doubleArrow {
         opacity: 1;
       }
     }
   }
 
   /** default */
-  @{paginationPrefix}-item-default {
+  .@{paginationPrefix}-item-default {
     width: @distance-large;
     height: @distance-large;
     line-height: @distance-large;
@@ -65,10 +65,10 @@
       box-shadow: @shadow-primary;
     }
   }
-  @{paginationPrefix}-default-total {
+  .@{paginationPrefix}-default-total {
     margin-right: @distance-small;
   }
-  @{paginationPrefix}-item-default-active {
+  .@{paginationPrefix}-item-default-active {
     color: @color-white;
     background-color: @color-primary;
     &:hover {
@@ -76,11 +76,14 @@
       background-color: @color-primary;
     }
   }
-  @{paginationPrefix}-item-default-disabled {
+  .@{paginationPrefix}-item-default-disabled {
     border-color: @color-secondary;
     cursor: not-allowed;
+    &:hover {
+      background-color: unset;
+    }
   }
-  @{paginationPrefix}-item-default-more {
+  .@{paginationPrefix}-item-default-more {
     position: relative;
     box-shadow: none;
     border: none;
@@ -89,7 +92,7 @@
       box-shadow: none;
     }
   }
-  @{paginationPrefix}-default-dot {
+  .@{paginationPrefix}-default-dot {
     display: inline-block;
     width: 2px;
     height: 2px;
@@ -100,7 +103,7 @@
   }
 
   /** mini */
-  @{paginationPrefix}-item-mini {
+  .@{paginationPrefix}-item-mini {
     width: @distance-small;
     height: @distance-small;
     line-height: @distance-small;
@@ -110,23 +113,29 @@
     cursor: pointer;
     &:hover {
       color: @color-primary;
-      @{paginationPrefix}-mini-arrow {
+      .@{paginationPrefix}-mini-arrow {
         fill: @color-primary;
       }
     }
   }
-  @{paginationPrefix}-item-mini-active {
+  .@{paginationPrefix}-item-mini-active {
     color: @color-primary;
     background-color: @color-light-primary;
   }
-  @{paginationPrefix}-item-mini-more {
+  .@{paginationPrefix}-item-mini-more {
     position: relative;
   }
-  @{paginationPrefix}-item-mini-disabled {
+  .@{paginationPrefix}-item-mini-disabled {
     border-color: @color-gray;
     cursor: not-allowed;
+    &:hover {
+      color: @color-gray;
+      .@{paginationPrefix}-mini-arrow {
+        fill: @color-gray;
+      }
+    }
   }
-  @{paginationPrefix}-mini-dot {
+  .@{paginationPrefix}-mini-dot {
     display: inline-block;
     width: 2px;
     height: 2px;
@@ -137,20 +146,20 @@
   }
 
   /** simple */
-  @{paginationPrefix}-simple-container {
+  .@{paginationPrefix}-simple-container {
     display: inline-block;
     vertical-align: middle;
   }
-  @{paginationPrefix}-simple-text {
+  .@{paginationPrefix}-simple-text {
     display: inline-block;
     margin: 0 @distance-base;
   }
-  @{paginationPrefix}-simple-active {
+  .@{paginationPrefix}-simple-active {
     color: @color-primary;
   }
 }
 
-@{paginationPrefix}-dot-group {
+.@{paginationPrefix}-dot-group {
   position: absolute;
   left: 0;
   width: 100%;
@@ -158,7 +167,7 @@
   transition: opacity ease-in-out 0.5s;
 }
 
-@{paginationPrefix}-doubleArrow {
+.@{paginationPrefix}-doubleArrow {
   position: absolute;
   fill: @color-primary;
   left: 0;
@@ -167,36 +176,36 @@
   opacity: 0;
   transition: opacity ease-in-out 0.5s;
 
-  @{paginationPrefix}-left-doubleArrow {
+  .@{paginationPrefix}-left-doubleArrow {
     transform: rotate(180deg);
   }
 }
 
-@{paginationPrefix}-default-arrow {
+.@{paginationPrefix}-default-arrow {
   fill: @color-primary;
 }
 
-@{paginationPrefix}-default-left-button {
+.@{paginationPrefix}-default-left-button {
   transform: rotate(180deg);
 }
 
-@{paginationPrefix}-default-arrow-disabled {
+.@{paginationPrefix}-default-arrow-disabled {
   fill: @color-secondary;
 }
 
-@{paginationPrefix}-mini-arrow {
+.@{paginationPrefix}-mini-arrow {
   fill: @color-black;
 }
 
-@{paginationPrefix}-mini-left-button {
+.@{paginationPrefix}-mini-left-button {
   transform: rotate(180deg);
 }
 
-@{paginationPrefix}-mini-arrow-disabled {
+.@{paginationPrefix}-mini-arrow-disabled {
   fill: @color-gray;
 }
 
-@{paginationPrefix}-jumpInput {
+.@{paginationPrefix}-jumpInput {
   width: @distance-large;
   height: @distance-small;
 }
