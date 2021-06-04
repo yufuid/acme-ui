@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@acme-ui/core": "^0.0.0",
-    "@acme-ui/icons": "^0.0.0",
+    "@acme-ui/icons": "0.0.0",
     "axios": "^0.21.1",
     "react": "^17.0.1",
     "react-color": "^2.19.3",

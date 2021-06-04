@@ -1,0 +1,218 @@
+@import '../../../styles/index';
+
+@paginationPrefix: ~'@{acme-prefix}-pagination';
+
+@color-secondary: rgba(51, 51, 255, 0.5);
+@color-light-primary: rgba(51, 51, 255, 0.05);
+@color-gray: @neutral-7;
+// 字高
+@font-size-text: 14px;
+@font-size-text-small: 12px;
+@font-size-text-large: 16px;
+
+@radius-base: 4px;
+
+@distance-base: 4px;
+@distance-tiny: @distance-base * 2; // 8
+@distance-small: @distance-base * 6; // 24
+@distance-large: @distance-base * 8; // 32
+
+@shadow-primary: 0 2px 4px 0 rgba(54, 40, 255, 0.08);
+
+.@{paginationPrefix} {
+  font-size: @font-size-text;
+  color: @color-black;
+  ul,
+  li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .@{paginationPrefix}-content {
+    padding: 0;
+    margin: 0 @distance-small;
+    clear: both;
+  }
+  .@{paginationPrefix}-item {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: @distance-tiny;
+    &:hover {
+      .@{paginationPrefix}-dot-group {
+        opacity: 0;
+      }
+      .@{paginationPrefix}-doubleArrow {
+        opacity: 1;
+      }
+    }
+  }
+
+  /** default */
+  .@{paginationPrefix}-item-default {
+    width: @distance-large;
+    height: @distance-large;
+    line-height: @distance-large;
+    color: @color-primary;
+    text-align: center;
+    border: 1px solid @color-primary;
+    box-shadow: @shadow-primary;
+    border-radius: @radius-base;
+    cursor: pointer;
+    transition: all ease-in-out 0.1s;
+    &:hover {
+      color: @color-primary;
+      background-color: @color-light-primary;
+      box-shadow: @shadow-primary;
+    }
+  }
+  .@{paginationPrefix}-default-total {
+    margin-right: @distance-small;
+  }
+  .@{paginationPrefix}-item-default-active {
+    color: @color-white;
+    background-color: @color-primary;
+    &:hover {
+      color: @color-white;
+      background-color: @color-primary;
+    }
+  }
+  .@{paginationPrefix}-item-default-disabled {
+    border-color: @color-secondary;
+    cursor: not-allowed;
+    &:hover {
+      background-color: @color-white;
+    }
+  }
+  .@{paginationPrefix}-item-default-more {
+    position: relative;
+    box-shadow: none;
+    border: none;
+    &:hover {
+      background: @color-white;
+      box-shadow: none;
+    }
+  }
+  .@{paginationPrefix}-default-dot {
+    display: inline-block;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 2px;
+    background: @color-primary;
+  }
+
+  /** mini */
+  .@{paginationPrefix}-item-simple,
+  .@{paginationPrefix}-item-mini {
+    width: @distance-small;
+    height: @distance-small;
+    line-height: @distance-small;
+    color: @color-black;
+    text-align: center;
+    border-radius: @radius-base;
+    cursor: pointer;
+    &:hover {
+      color: @color-primary;
+      .@{paginationPrefix}-simple-arrow,
+      .@{paginationPrefix}-mini-arrow {
+        fill: @color-primary;
+      }
+    }
+  }
+  .@{paginationPrefix}-item-mini-active {
+    color: @color-primary;
+    background-color: @color-light-primary;
+  }
+  .@{paginationPrefix}-item-mini-more {
+    position: relative;
+  }
+  .@{paginationPrefix}-item-simple-disabled,
+  .@{paginationPrefix}-item-mini-disabled {
+    border-color: @color-gray;
+    cursor: not-allowed;
+    &:hover {
+      color: @color-gray;
+      .@{paginationPrefix}-simple-arrow,
+      .@{paginationPrefix}-mini-arrow {
+        fill: @color-gray;
+      }
+    }
+  }
+  .@{paginationPrefix}-mini-dot {
+    display: inline-block;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 2px;
+    background: @color-black;
+  }
+
+  /** simple */
+  .@{paginationPrefix}-simple-container {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .@{paginationPrefix}-simple-text {
+    display: inline-block;
+    margin: 0 @distance-base;
+  }
+  .@{paginationPrefix}-simple-active {
+    color: @color-primary;
+  }
+}
+
+.@{paginationPrefix}-dot-group {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  opacity: 1;
+  transition: opacity ease-in-out 0.5s;
+}
+
+.@{paginationPrefix}-doubleArrow {
+  position: absolute;
+  fill: @color-primary;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  opacity: 0;
+  transition: opacity ease-in-out 0.5s;
+
+  .@{paginationPrefix}-left-doubleArrow {
+    transform: rotate(180deg);
+  }
+}
+
+.@{paginationPrefix}-default-arrow {
+  fill: @color-primary;
+}
+
+.@{paginationPrefix}-default-left-button {
+  transform: rotate(180deg);
+}
+
+.@{paginationPrefix}-default-arrow-disabled {
+  fill: @color-secondary;
+}
+
+.@{paginationPrefix}-simple-arrow,
+.@{paginationPrefix}-mini-arrow {
+  fill: @color-black;
+}
+
+.@{paginationPrefix}-simple-left-button,
+.@{paginationPrefix}-mini-left-button {
+  transform: rotate(180deg);
+}
+
+.@{paginationPrefix}-simple-arrow-disabled,
+.@{paginationPrefix}-mini-arrow-disabled {
+  fill: @color-gray;
+}
+
+.@{paginationPrefix}-jumpInput {
+  width: @distance-large;
+  height: @distance-small;
+}
