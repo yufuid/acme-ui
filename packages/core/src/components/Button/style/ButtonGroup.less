@@ -1,0 +1,18 @@
+@import '../../../styles/index.less';
+@import '../style/Button.less';
+
+@acmeBtnGroupPrefix: acme-btn-group;
+
+.@{acmeBtnGroupPrefix} {
+  .@{acmeBtnPrefix} {
+    border-radius: 0;
+    border-right: 0;
+  }
+  .@{acmeBtnPrefix}:first-child {
+    border-radius: @default-border-radius 0 0 @default-border-radius;
+  }
+  .@{acmeBtnPrefix}:last-child {
+    border-radius: 0 @default-border-radius @default-border-radius 0;
+    border-right: 0.5px solid @con-bg-primary;
+  }
+}
