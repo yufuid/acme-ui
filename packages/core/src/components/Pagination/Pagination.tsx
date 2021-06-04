@@ -283,7 +283,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     if (!pageSize) {
       this.setState(
         {
-          currPage: size,
+          currSize: size,
         },
         this.updateTotalPage,
       );
@@ -341,12 +341,12 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     const contentClasses = classes[type];
     return (
       <div
-        className={`${contentClasses.item} ${currPage === 1 ? contentClasses.disabled : ''}`}
+        className={`${contentClasses.item} ${currPage <= 1 ? contentClasses.disabled : ''}`}
         onClick={this.decreasePage}
       >
         <Arrow
           className={`${contentClasses.arrow} ${contentClasses.leftBtn} ${
-            currPage === 1 ? contentClasses.arrowDisabled : ''
+            currPage <= 1 ? contentClasses.arrowDisabled : ''
           }`}
         />
       </div>
@@ -358,14 +358,12 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     const contentClasses = classes[type];
     return (
       <div
-        className={`${contentClasses.item} ${
-          currPage === totalPage ? contentClasses.disabled : ''
-        }`}
+        className={`${contentClasses.item} ${currPage >= totalPage ? contentClasses.disabled : ''}`}
         onClick={this.increasePage}
       >
         <Arrow
           className={`${contentClasses.arrow} ${contentClasses.rightBtn} ${
-            currPage === totalPage ? contentClasses.arrowDisabled : ''
+            currPage >= totalPage ? contentClasses.arrowDisabled : ''
           }`}
         />
       </div>
