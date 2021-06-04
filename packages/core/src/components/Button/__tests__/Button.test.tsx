@@ -3,7 +3,8 @@ import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { RefTestCaseType } from 'tests/shared/refTest';
 import { mountTestSuite, refTestSuite } from 'tests/shared';
-import Button, { ButtonMode, ButtonColor, ButtonSize, classes } from '../Button';
+import Button, { classes } from '../Button';
+import { ButtonMode, ButtonColor, ButtonSize } from '../types';
 
 describe('Button', () => {
   mountTestSuite(<Button>按钮</Button>);

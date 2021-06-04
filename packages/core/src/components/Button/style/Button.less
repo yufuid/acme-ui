@@ -1,18 +1,11 @@
 @import '../../../styles/index.less';
 
-@acmeBtnPrefix: acme-btn;
-
-@default-width: 104px;
+@acmeBtnPrefix: ~'@{acme-prefix}-btn';
 
 // 高度变量
 @default-height: 40px;
 @large-height: 48px;
 @small-height: 32px;
-
-@default-border-radius: 4px;
-@default-font-size: 14px;
-@large-font-size: 16px;
-@default-line-height: 22px;
 
 @transparent: transparent;
 
@@ -20,38 +13,36 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: fit-content;
   padding: 0 24px;
-  border-radius: @default-border-radius;
-  font-size: @default-font-size;
-  line-height: @default-line-height;
+  border-radius: @border-radius-normal;
   box-sizing: border-box;
   cursor: pointer;
+  .text-primary();
 }
 
-.contained-primary-hover() {
+.contained-primary-action() {
   &:hover {
     background-color: @con-bg-primary-hover;
-    border-color: @con-bg-primary-hover;
+    border-color: @con-border-primary-hover;
   }
   &:active,
   &:focus {
     background-color: @con-bg-primary-active;
-    border-color: @con-bg-primary-active;
+    border-color: @con-border-primary-active;
   }
 }
-.contained-danger-hover() {
+.contained-danger-action() {
   &:hover {
     background-color: @con-bg-danger-hover;
-    border-color: @con-bg-danger-hover;
+    border-color: @con-border-danger-hover;
   }
   &:active,
   &:focus {
     background-color: @con-bg-danger-active;
-    border-color: @con-bg-danger-active;
+    border-color: @con-border-danger-active;
   }
 }
-.other-hover() {
+.other-action() {
   &:hover {
     background-color: @con-bg-secondary-hover;
   }
@@ -63,52 +54,52 @@
 
 // 类型按钮分区
 .@{acmeBtnPrefix}-contained-primary {
-  color: @con-bg-secondary;
+  color: @color-white;
   background-color: @con-bg-primary;
-  border: 1px solid @con-bg-primary;
-  .contained-primary-hover();
+  border: 1px solid @con-border-primary;
+  .contained-primary-action();
 }
 
 .@{acmeBtnPrefix}-outlined-primary {
   color: @con-bg-primary;
   background-color: @con-bg-secondary;
-  border: 1px solid @con-bg-primary;
-  .other-hover;
+  border: 1px solid @con-border-primary;
+  .other-action();
 }
 
 .@{acmeBtnPrefix}-minimal-primary {
   // 文字按钮无大小属性, 所以无高度设置
   height: unset !important;
   padding: 0 4px;
-  color: @con-bg-primary;
+  color: @color-primary;
   background-color: @transparent;
   border: 1px solid @@transparent;
-  .other-hover();
+  .other-action();
 }
 
 // 在类型上再根据颜色区分（主色就是基础的，👇是danger类型）
 .@{acmeBtnPrefix}-contained-danger {
-  color: @con-bg-secondary;
+  color: @color-white;
   background-color: @con-bg-danger;
-  border: 1px solid @con-bg-danger;
-  .contained-danger-hover();
+  border: 1px solid @con-border-danger;
+  .contained-danger-action();
 }
 
 .@{acmeBtnPrefix}-outlined-danger {
-  color: @con-bg-danger;
+  color: @color-error;
   background-color: @con-bg-secondary;
-  border: 1px solid @con-bg-danger;
-  .other-hover();
+  border: 1px solid @con-border-danger;
+  .other-action();
 }
 
 .@{acmeBtnPrefix}-minimal-danger {
   // 文字按钮无大小属性, 所以无高度设置
   height: unset !important;
   padding: 0 4px;
-  color: @con-bg-danger;
+  color: @color-error;
   background-color: @transparent;
-  border: 1px solid @@transparent;
-  .other-hover();
+  border: 1px solid @transparent;
+  .other-action();
 }
 
 // 按钮size属性，仅仅用来控制高度和字号，可以单独抽取样式类覆盖base类。无其他副作用
@@ -118,7 +109,7 @@
 
 .@{acmeBtnPrefix}-large {
   height: @large-height;
-  font-size: @large-font-size;
+  font-size: @font-size-3;
 }
 
 .@{acmeBtnPrefix}-small {
@@ -146,21 +137,21 @@
 }
 
 .@{acmeBtnPrefix}-contained-ghost {
-  color: @con-bg-primary;
+  color: @color-primary;
   background-color: @con-bg-secondary;
-  border: 1px solid @con-bg-primary;
+  border: 1px solid @con-border-primary;
   .contained-ghost-hover();
 }
 
 .@{acmeBtnPrefix}-outlined-ghost {
-  color: @con-bg-secondary;
+  color: @color-white;
   background-color: @transparent;
   border: 1px solid @con-bg-secondary;
   .other-ghost-hov();
 }
 
 .@{acmeBtnPrefix}-minimal-ghost {
-  color: @con-bg-secondary;
+  color: @color-white;
   background-color: @transparent;
   border: 1px solid @transparent;
   .other-ghost-hov();
