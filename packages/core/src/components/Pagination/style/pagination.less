@@ -17,7 +17,7 @@
 
 .@{paginationPrefix} {
   font-size: @font-size-base;
-  color: @color-black;
+  color: @font-color-title;
   ul,
   li {
     padding: 0;
@@ -50,7 +50,7 @@
     line-height: @distance-large;
     color: @color-primary;
     text-align: center;
-    border: 1px solid @color-primary;
+    border: @border-width-normal solid @border-color-highlight;
     box-shadow: @shadow-primary;
     border-radius: @radius-base;
     cursor: pointer;
@@ -90,11 +90,11 @@
   }
   .@{paginationPrefix}-default-dot {
     display: inline-block;
-    width: 2px;
-    height: 2px;
+    width: @spacing-xs;
+    height: @spacing-xs;
     border-radius: 50%;
     vertical-align: middle;
-    margin: 0 2px;
+    margin: 0 @spacing-xs;
     background: @color-primary;
   }
 
@@ -137,11 +137,11 @@
   }
   .@{paginationPrefix}-mini-dot {
     display: inline-block;
-    width: 2px;
-    height: 2px;
+    width: @spacing-xs;
+    height: @spacing-xs;
     border-radius: 50%;
     vertical-align: middle;
-    margin: 0 2px;
+    margin: 0 @spacing-xs;
     background: @color-black;
   }
 
