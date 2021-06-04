@@ -13,7 +13,7 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 0 24px;
+  padding: 0 @spacing-lg;
   border-radius: @border-radius-normal;
   box-sizing: border-box;
   cursor: pointer;
@@ -56,24 +56,24 @@
 .@{acmeBtnPrefix}-contained-primary {
   color: @color-white;
   background-color: @con-bg-primary;
-  border: 1px solid @con-border-primary;
+  border: @border-width-normal solid @con-border-primary;
   .contained-primary-action();
 }
 
 .@{acmeBtnPrefix}-outlined-primary {
-  color: @con-bg-primary;
+  color: @color-primary;
   background-color: @con-bg-secondary;
-  border: 1px solid @con-border-primary;
+  border: @border-width-normal solid @con-border-primary;
   .other-action();
 }
 
 .@{acmeBtnPrefix}-minimal-primary {
   // 文字按钮无大小属性, 所以无高度设置
   height: unset !important;
-  padding: 0 4px;
+  padding: 0 @spacing-sm;
   color: @color-primary;
   background-color: @transparent;
-  border: 1px solid @@transparent;
+  border: @border-width-normal solid @@transparent;
   .other-action();
 }
 
@@ -81,24 +81,24 @@
 .@{acmeBtnPrefix}-contained-danger {
   color: @color-white;
   background-color: @con-bg-danger;
-  border: 1px solid @con-border-danger;
+  border: @border-width-normal solid @con-border-danger;
   .contained-danger-action();
 }
 
 .@{acmeBtnPrefix}-outlined-danger {
   color: @color-error;
   background-color: @con-bg-secondary;
-  border: 1px solid @con-border-danger;
+  border: @border-width-normal solid @con-border-danger;
   .other-action();
 }
 
 .@{acmeBtnPrefix}-minimal-danger {
   // 文字按钮无大小属性, 所以无高度设置
   height: unset !important;
-  padding: 0 4px;
+  padding: 0 @spacing-sm;
   color: @color-error;
   background-color: @transparent;
-  border: 1px solid @transparent;
+  border: @border-width-normal solid @transparent;
   .other-action();
 }
 
@@ -109,7 +109,7 @@
 
 .@{acmeBtnPrefix}-large {
   height: @large-height;
-  font-size: @font-size-3;
+  .heading-4();
 }
 
 .@{acmeBtnPrefix}-small {
@@ -119,11 +119,11 @@
 // ghost属性优先级高于color属性！所以当属性设置ghost时，danger属性不生效
 .contained-ghost-hover() {
   &:hover {
-    background-color: #f4f4f4;
+    background-color: @con-bg-secondary-hover;
   }
   &:active,
   &:focus {
-    background-color: #eee;
+    background-color: @con-bg-secondary-active;
   }
 }
 .other-ghost-hov {
@@ -139,21 +139,21 @@
 .@{acmeBtnPrefix}-contained-ghost {
   color: @color-primary;
   background-color: @con-bg-secondary;
-  border: 1px solid @con-border-primary;
+  border: @border-width-normal solid @con-border-primary;
   .contained-ghost-hover();
 }
 
 .@{acmeBtnPrefix}-outlined-ghost {
   color: @color-white;
   background-color: @transparent;
-  border: 1px solid @con-bg-secondary;
+  border: @border-width-normal solid @con-bg-secondary;
   .other-ghost-hov();
 }
 
 .@{acmeBtnPrefix}-minimal-ghost {
   color: @color-white;
   background-color: @transparent;
-  border: 1px solid @transparent;
+  border: @border-width-normal solid @transparent;
   .other-ghost-hov();
 }
 
@@ -178,9 +178,7 @@
 
 // loading svg 动画设置
 .@{acmeBtnPrefix}-loading-svg {
-  width: 16px;
-  height: 16px;
-  margin-right: 4px;
+  margin-right: @spacing-sm;
   animation: loadingRotate 1s linear infinite;
 }
 
@@ -188,11 +186,14 @@
 @keyframes loadingRotate {
   0% {
     -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   50% {
     -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
   }
   100% {
     -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
