@@ -1,0 +1,61 @@
+@import '../../../styles/index.less';
+@import '../style/Button.less';
+
+@acmeBtnGroupPrefix: ~'@{acme-prefix}-btn-group';
+
+.group-contained-primary-action() {
+  &:active,
+  &:focus {
+    background-color: @con-bg-primary;
+    border-color: @con-border-primary;
+  }
+}
+.group-contained-danger-action() {
+  &:active,
+  &:focus {
+    background-color: @con-bg-danger;
+    border-color: @con-border-danger;
+  }
+}
+.group-other-action() {
+  &:active,
+  &:focus {
+    background-color: @con-bg-secondary;
+  }
+}
+
+.@{acmeBtnGroupPrefix} {
+  .@{acmeBtnPrefix} {
+    border-radius: 0;
+    border-right: 0;
+    &:active {
+      pointer-events: none !important; // 按钮组中，屏蔽active样式
+    }
+  }
+  .@{acmeBtnPrefix}:first-child {
+    border-radius: @border-radius-normal 0 0 @border-radius-normal;
+  }
+  .@{acmeBtnPrefix}:last-child {
+    border-radius: 0 @border-radius-normal @border-radius-normal 0;
+    border-right: @border-width-normal solid @con-border-primary;
+  }
+  .@{acmeBtnPrefix}-minimal-primary:last-child,
+  .@{acmeBtnPrefix}-minimal-danger:last-child {
+    border-right: 0;
+  }
+
+  .@{acmeBtnPrefix}-contained-primary {
+    .group-contained-primary-action();
+  }
+
+  .@{acmeBtnPrefix}-contained-danger {
+    .group-contained-danger-action();
+  }
+
+  .@{acmeBtnPrefix}-outlined-primary,
+  .@{acmeBtnPrefix}-minimal-primary,
+  .@{acmeBtnPrefix}-minimal-danger,
+  .@{acmeBtnPrefix}-outlined-danger {
+    .group-other-action();
+  }
+}
