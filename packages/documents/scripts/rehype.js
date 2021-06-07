@@ -37,10 +37,9 @@ module.exports = () => (tree) => {
   const exportedScopes = flatten(exportNodes.map(getExportsVariables))
   // filter added to avoid throwing if an unexpected type is exported
   const scopes = [...importedScopes, ...exportedScopes].filter(Boolean)
-  // console.log(tree);
+
   const nodes = tree.children
     .filter((node) => node.type === 'jsx')
     .map(addComponentsProps(scopes))
-  tree.MENU = {menu: ['a', 'b']}
   return Promise.all(nodes).then(() => tree)
 }

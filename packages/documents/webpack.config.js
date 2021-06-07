@@ -4,7 +4,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintWebpackPlugin = require('eslint-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 const slug = require('remark-slug');
 const rehypePlugin = require('./scripts/rehype');
@@ -239,12 +238,6 @@ module.exports = function (env) {
           // insert: '#some-element' // 表示将生成的 link 标签插入到id=some-element 的元素后边
         }),
       ]),
-      new CopyWebpackPlugin({
-        patterns: [{
-          from: path.resolve(__dirname, './src/static/assets'),
-          to: path.join(staticDir, 'assets')
-        }]
-      }),
       ...(isReport ? [
         new BundleAnalyzerPlugin({
           analyzerMode: 'static',
