@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="212px" height="212px" viewBox="0 0 212 212" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+    <title>编组 25</title>
+    <desc>Created with Sketch.</desc>
+    <g id="组件" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组-25" transform="translate(0.000000, 89.000000)">
+            <path d="M68,6 L68,14 C68,16.209139 69.790861,18 72,18 L72,18 L96,18 L96,98 C96,100.209139 94.209139,102 92,102 L4,102 C1.790861,102 2.705415e-16,100.209139 0,98 L0,10 C-2.705415e-16,7.790861 1.790861,6 4,6 L68,6 Z" id="形状结合备份-2" fill="#FFFFFF"></path>
+            <rect id="矩形备份-14" fill="#FFFFFF" x="70" y="0" width="32" height="16" rx="2"></rect>
+            <text id=".ZIP备份" font-family="FZLTTHK--GBK1-0, FZLanTingHei-H-GBK" font-size="8" font-weight="normal" fill="#8A40FC">
+                <tspan x="77" y="11">.ZIP</tspan>
+            </text>
+            <polygon id="路径备份-3" fill="#8A40FC" transform="translate(20.000000, 26.000000) rotate(-315.000000) translate(-20.000000, -26.000000) " points="16 18 16 29.999 28 30 28 34 12 34 12 18"></polygon>
+            <polygon id="路径备份-4" fill="#8A40FC" transform="translate(76.000000, 82.000000) scale(-1, 1) rotate(-315.000000) translate(-76.000000, -82.000000) " points="72 74 72 85.999 84 86 84 90 68 90 68 74"></polygon>
+            <rect id="矩形备份-15" fill="#8A40FC" transform="translate(59.000000, 81.000000) rotate(15.000000) translate(-59.000000, -81.000000) " x="57" y="69" width="4" height="24"></rect>
+        </g>
+    </g>
+</svg>
