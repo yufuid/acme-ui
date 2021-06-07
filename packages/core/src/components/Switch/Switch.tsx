@@ -30,10 +30,6 @@ export interface SwitchProps {
    */
   className?: string;
   /**
-   * 内敛样式
-   */
-  style?: object;
-  /**
    * Switch 大小 'default' | 'small'
    * @default SwitchSize.DEFAULT
    */
