@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="212px" height="212px" viewBox="0 0 212 212" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+    <title>编组 3备份</title>
+    <desc>Created with Sketch.</desc>
+    <g id="组件" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组-3备份" transform="translate(0.000000, 127.000000)">
+            <rect id="矩形" fill="#FFFFFF" x="0" y="8" width="96" height="48" rx="24"></rect>
+            <circle id="椭圆形" fill="#00C357" cx="72" cy="32" r="22"></circle>
+            <path d="M208.014879,0 C210.2158,0 212,1.790861 212,4 L212,60 C212,62.209139 210.2158,64 208.014879,64 L116.357089,64 C114.156167,64 112.371968,62.209139 112.371968,60 L112.371744,39.229 L104.372397,32.7796237 C103.943424,32.4337563 103.875011,31.804326 104.219592,31.3737517 C104.264836,31.3172167 104.316072,31.2657892 104.372397,31.2203763 L112.371744,24.77 L112.371968,4 C112.371968,1.790861 114.156167,0 116.357089,0 L208.014879,0 Z" id="路径" fill="#FFFFFF"></path>
+            <polygon id="路径" fill="#00C357" transform="translate(145.000000, 32.000000) rotate(-315.000000) translate(-145.000000, -32.000000) " points="141 24 141 35.999 153 36 153 40 137 40 137 24"></polygon>
+            <polygon id="路径备份" fill="#00C357" transform="translate(179.000000, 32.000000) scale(-1, 1) rotate(-315.000000) translate(-179.000000, -32.000000) " points="175 24 175 35.999 187 36 187 40 171 40 171 24"></polygon>
+            <rect id="矩形备份-6" fill="#00C357" transform="translate(162.000000, 32.000000) rotate(15.000000) translate(-162.000000, -32.000000) " x="160" y="20" width="4" height="24"></rect>
+        </g>
+    </g>
+</svg>
