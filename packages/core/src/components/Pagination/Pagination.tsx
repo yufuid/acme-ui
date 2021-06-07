@@ -140,6 +140,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     showPageSize: false,
     showTotal: false,
     showJump: false,
+    className: '',
   };
 
   constructor(props: PaginationProps) {
