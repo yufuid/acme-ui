@@ -416,39 +416,50 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     );
   };
 
-  private renderDefault = (
-    type: PaginationType.MINI | PaginationType.DEFAULT,
-    otherProps: Record<string, any>,
-  ): React.ReactNode => {
+  private renderDefault = (type: PaginationType.MINI | PaginationType.DEFAULT): React.ReactNode => {
     const { showPageSize, showTotal, showJump } = this.props;
     return (
-      <div className={classes.root} {...otherProps}>
+      <>
         <ul className={classes.pageContent}>
           {showTotal ? this.renderTotal(type) : null}
           {this.renderContent(type)}
           {showPageSize ? this.renderSizeOptions() : null}
           {showJump ? this.renderJumpBtn() : null}
         </ul>
-      </div>
+      </>
     );
   };
 
-  private renderSimple = (otherProps: Record<string, any>): React.ReactNode => {
+  private renderSimple = (): React.ReactNode => {
     const { totalPage, currPage } = this.state;
     return (
-      <div className={classes.root} {...otherProps}>
+      <>
         <div className={classes.pageItem}>{this.renderLeftArrow(PaginationType.SIMPLE)}</div>
         <span className={classes.simple.container}>
           <span className={`${classes.simple.text} ${classes.simple.active}`}>{currPage}</span>/
           <span className={classes.simple.text}>{totalPage}</span>
         </span>
         <div className={classes.pageItem}>{this.renderRightArrow(PaginationType.SIMPLE)}</div>
-      </div>
+      </>
     );
   };
 
   private renderPagination = (): React.ReactNode => {
     const { type } = this.props;
+    switch (type) {
+      case 'default':
+        return this.renderDefault(PaginationType.DEFAULT);
+      case 'mini':
+        return this.renderDefault(PaginationType.MINI);
+      case 'simple':
+        return this.renderSimple();
+      default:
+        return null;
+    }
+  };
+
+  public render(): React.ReactNode {
+    const { className } = this.props;
     const otherProps = omit(this.props, [
       'className',
       'type',
@@ -464,20 +475,11 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
       'onPageSizeChange',
       'showJump',
     ]);
-    switch (type) {
-      case 'default':
-        return this.renderDefault(PaginationType.DEFAULT, otherProps);
-      case 'mini':
-        return this.renderDefault(PaginationType.MINI, otherProps);
-      case 'simple':
-        return this.renderSimple(otherProps);
-      default:
-        return null;
-    }
-  };
-
-  public render(): React.ReactNode {
-    return this.renderPagination();
+    return (
+      <div className={`${classes.root} ${className}`} {...otherProps}>
+        {this.renderPagination()}
+      </div>
+    );
   }
 }
 
