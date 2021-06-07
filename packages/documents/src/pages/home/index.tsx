@@ -11,13 +11,15 @@ import LogoSVG from '../../static/logo.svg';
 import ToSVG from './styles/to.svg';
 import sourcesCards from './contents';
 
+const video = new URL('../../static/assets/video.mp4', import.meta.url);
+
 const Home: React.FC = () => {
   return (
     <div className={HomeLess.container}>
       <div className={HomeLess.headerWrapper}>
         <div className={HomeLess.background}>
           <video autoPlay loop muted className={HomeLess.video}>
-            <source src="../../static/assets/video.mp4" type="video/mp4" />
+            <source src={video as any} type="video/mp4" />
           </video>
         </div>
         <div className={HomeLess.headerInner}>
