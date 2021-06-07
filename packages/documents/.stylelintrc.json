@@ -1,12 +1,17 @@
 {
-  "extends": ["stylelint-config-standard", "stylelint-config-prettier"],
-  "plugins": ["stylelint-prettier", "stylelint-order"],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-prettier"
+  ],
+  "plugins": [
+    "stylelint-prettier",
+		"stylelint-order"
+	],
   "rules": {
     "prettier/prettier": true,
     "max-nesting-depth": 4,
     "order/order": [
-      ["custom-properties", "declarations"],
-      {
+      ["custom-properties", "declarations"], {
         "disableFix": true
       }
     ],
@@ -82,6 +87,7 @@
     "**/*.svg",
     "**/*.jpg",
     "**/*.jpeg",
-    "dist/**/*"
+    "dist/**/*.less",
+    "dist/**/*.css"
   ]
 }

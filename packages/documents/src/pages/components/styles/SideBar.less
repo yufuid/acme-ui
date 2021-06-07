@@ -1,0 +1,36 @@
+.menus {
+  .menuItem {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 48px;
+    font-size: 14px;
+    text-decoration: none;
+    & > span {
+      transition: all ease 0.2s;
+    }
+    & > span:first-of-type {
+      margin-right: 4px;
+      color: #333;
+    }
+    & > span:last-of-type {
+      color: #999;
+    }
+    &:hover {
+      & > span:first-of-type {
+        color: #33f;
+      }
+      & > span:last-of-type {
+        color: #33f;
+      }
+    }
+    &.active {
+      & > span:first-of-type {
+        color: #33f;
+      }
+      & > span:last-of-type {
+        color: #33f;
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+node-modules/**/*
+dist/**/*
+build/**/*
+scripts/**/*
+.eslintrc.js
+lint-staged.config.js
+babel.config.js
+webpack.config.js
+*.css
+*.less
+*.svg
+*.png
+*.jpg
+*.jpeg

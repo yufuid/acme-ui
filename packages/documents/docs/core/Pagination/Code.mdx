@@ -1,0 +1,98 @@
+import { Playground, Props } from "~controls";
+import { Pagination } from "@acme-ui/core";
+
+## 基本分页
+
+<Playground>
+  <Pagination/>
+  <br/>
+  <Pagination total={50}/>
+</Playground>
+
+## 更多分页
+
+<Playground>
+  <Pagination total={100} showPageSize/>
+</Playground>
+
+## 分页条数
+改变每页显示的条目数。
+<Playground>
+  <Pagination
+    total={250}
+    showPageSize
+  />
+</Playground>
+
+## 快速跳转页面
+快速跳转到某一页。
+<Playground>
+  <Pagination
+    total={250}
+    showPageSize
+    showTotal
+    showJump/>
+</Playground>
+
+## 总条数
+展示总条数。
+<Playground>
+  <Pagination
+    total={250}
+    showPageSize
+    showTotal/>
+</Playground>
+
+## 迷你版本
+用在表格内或更轻量的场景。
+<Playground>
+  <Pagination
+    total={50}
+    type='mini'/>
+  <br/>
+  <Pagination
+    total={250}
+    showPageSize
+    type='mini'/>
+  <br/>
+  <Pagination
+    total={250}
+    showPageSize
+    showTotal
+    showJump
+    type='mini'/>
+</Playground>
+
+## 简洁版本
+简单的翻页，页数≤15时。
+<Playground>
+  <Pagination total={100} defaultCurrent={1} defaultPageSize={10} type='simple'/>
+</Playground>
+
+## 受控组件
+<Playground>
+  {
+    () => {
+      const [page, setPage] = React.useState(1);
+      const [pageSize, setPageSize] = React.useState(5);
+      const total = 200;
+      const changePage = (val) => {
+        setPage(val)
+      }
+      return (
+        <Pagination
+          pageSize={pageSize}
+          total={total}
+          current={page}
+          pageSizeOptions={[5, 10, 15, 20, 25, 30]}
+          showPageSize
+          onPageSizeChange={setPageSize}
+          onChange={changePage}
+        />
+      )
+    }
+  }
+</Playground>
+
+## API
+<Props of={Pagination} />
