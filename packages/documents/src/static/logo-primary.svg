@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="76px" height="19px" viewBox="0 0 76 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>编组</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="acme-组件button" transform="translate(-24.000000, -23.000000)" fill="#3333FF">
+            <g id="编组" transform="translate(24.000000, 23.000000)">
+                <text id="ACME" font-family="Futura-Medium, Futura" font-size="18" font-weight="400" line-spacing="18">
+                    <tspan x="24" y="19">ACME</tspan>
+                </text>
+                <path d="M10,5.32907052e-15 C15.5228475,5.32907052e-15 20,4.4771525 20,10 C20,13.7010047 17.9894491,16.9324201 15.0009861,18.6616075 L10,10 L4.99901391,18.6616075 C2.01055086,16.9324201 0,13.7010047 0,10 C0,4.4771525 4.4771525,5.32907052e-15 10,5.32907052e-15 Z" id="路径"></path>
+            </g>
+        </g>
+    </g>
+</svg>
