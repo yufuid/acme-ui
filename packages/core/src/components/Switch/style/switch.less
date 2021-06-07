@@ -1,0 +1,170 @@
+@import '../../../styles/index';
+
+@switchPrefix: ~'@{acme-prefix}-switch';
+
+@spacing-one: @spacing-xs / 2;
+
+.@{switchPrefix} {
+  margin: @spacing-sm;
+}
+
+.@{switchPrefix}-input {
+  display: none;
+}
+
+.@{switchPrefix}-default {
+  display: inline-block;
+  width: @spacing-xxl + @spacing-xs;
+  height: @spacing-lg - @spacing-xs;
+
+  .@{switchPrefix}-btn {
+    width: @spacing-md + @spacing-xs * 2;
+    height: @spacing-md + @spacing-xs * 2;
+  }
+
+  .@{switchPrefix}-content {
+    &:hover {
+      .@{switchPrefix}-btn {
+        box-shadow: 0 0 1px 5px rgba(204, 204, 204, .3);
+      }
+    }
+    &:focus {
+      .@{switchPrefix}-btn {
+        box-shadow: 0 0 1px 5px rgba(204, 204, 204, .4);
+      }
+    }
+    &:active {
+      .@{switchPrefix}-btn {
+        box-shadow: 0 0 1px 5px rgba(204, 204, 204, .5);
+      }
+    }
+  }
+
+  .@{switchPrefix}-input {
+    &:checked+.@{switchPrefix}-content {
+      background-color: @bg-color-selected;
+      .@{switchPrefix}-btn {
+        left: 21px;
+      }
+      &:hover {
+        .@{switchPrefix}-btn {
+          box-shadow: 0 0 1px 5px rgba(51, 51, 255, .1);
+        }
+      }
+      &:active {
+        .@{switchPrefix}-btn {
+          box-shadow: 0 0 1px 5px rgba(51, 51, 255, .2);
+        }
+      }
+    }
+  }
+}
+
+.@{switchPrefix}-small {
+  display: inline-block;
+  width: @spacing-xl + @spacing-xs;
+  height: @spacing-md + @spacing-xs;
+
+  .@{switchPrefix}-loading {
+    width: @spacing-normal + @spacing-2;
+    height: @spacing-normal + @spacing-2;
+  }
+
+  .@{switchPrefix}-content {
+    &:hover {
+      .@{switchPrefix}-btn {
+        box-shadow: 0 0 1px 4px rgba(204, 204, 204, .3);
+      }
+    }
+    &:active {
+      .@{switchPrefix}-btn {
+        box-shadow: 0 0 1px 4px rgba(204, 204, 204, .4);
+      }
+    }
+  }
+
+  .@{switchPrefix}-input {
+    &:checked+.@{switchPrefix}-content {
+      background-color: @bg-color-selected;
+      .@{switchPrefix}-btn {
+        left: 17px;
+      }
+      &:hover {
+        .@{switchPrefix}-btn {
+          box-shadow: 0 0 1px 4px rgba(51, 51, 255, .1);
+        }
+      }
+      &:active {
+        .@{switchPrefix}-btn {
+          box-shadow: 0 0 1px 4px rgba(51, 51, 255, .2);
+        }
+      }
+    }
+  }
+
+  .@{switchPrefix}-btn {
+    width: @spacing-md;
+    height: @spacing-md;
+  }
+
+}
+
+.@{switchPrefix}-disabled {
+  .@{switchPrefix}-content {
+    opacity: .5;
+    cursor: not-allowed;
+    &:hover, &:active {
+      .@{switchPrefix}-btn {
+        box-shadow: none;
+      }
+    }
+  }
+  .@{switchPrefix}-input {
+    &:checked+.@{switchPrefix}-content {
+      &:hover, &:active {
+        .@{switchPrefix}-btn {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}
+
+.@{switchPrefix}-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: @border-radius-normal * 4;
+  background-color: @bg-color-unselected;
+  cursor: pointer;
+}
+
+.@{switchPrefix}-btn {
+  position: absolute;
+  display: flex;
+  background-color: @color-white;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  top: 50%;
+  left: @spacing-one;
+  transition: all ease-in-out .2s;
+  align-items: center;
+  justify-content: center;
+}
+
+.@{switchPrefix}-loading {
+  animation: around linear 1s infinite;
+}
+
+@keyframes around {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+

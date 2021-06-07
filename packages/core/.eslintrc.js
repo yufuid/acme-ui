@@ -84,6 +84,11 @@ module.exports = {
         },
       },
     ],
+    "jsx-a11y/label-has-associated-control": ["error", {
+      "required": {
+        "some": ["nesting", "id"]
+      }
+    }],
     ...(process.env.ESLINT_ENV === 'commit' ? commitRules : {}),
   },
   env: {
