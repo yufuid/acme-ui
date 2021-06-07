@@ -2,6 +2,8 @@
  * 组件 MDX 文件路由及 Title 配置
  * */
 import React from "react";
+import ButtonCode from './Button/Code.mdx';
+import ButtonDesign from "./Button/Design.mdx";
 import PaginationCode from './Pagination/Code.mdx';
 import PaginationDesign from "./Pagination/Design.mdx";
 
@@ -22,9 +24,16 @@ export type TMDXHub = {
 
 const MdxHub: TMDXHub[] = [
   {
+    tagName: 'Button',
+    name: '按钮',
+    description: '使用按钮，用户只需单击一下，即可采取行动并做出选择。',
+    designMdx: ButtonDesign,
+    codeMdx: ButtonCode
+  },
+  {
     tagName: 'Pagination',
-    name: '分页器',
-    description: '分页器组件',
+    name: '分页',
+    description: '当数据量过多时，使用分页分解数据。',
     designMdx: PaginationDesign,
     codeMdx: PaginationCode
   },
