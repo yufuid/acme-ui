@@ -419,14 +419,12 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
   private renderDefault = (type: PaginationType.MINI | PaginationType.DEFAULT): React.ReactNode => {
     const { showPageSize, showTotal, showJump } = this.props;
     return (
-      <>
-        <ul className={classes.pageContent}>
-          {showTotal ? this.renderTotal(type) : null}
-          {this.renderContent(type)}
-          {showPageSize ? this.renderSizeOptions() : null}
-          {showJump ? this.renderJumpBtn() : null}
-        </ul>
-      </>
+      <ul className={classes.pageContent}>
+        {showTotal ? this.renderTotal(type) : null}
+        {this.renderContent(type)}
+        {showPageSize ? this.renderSizeOptions() : null}
+        {showJump ? this.renderJumpBtn() : null}
+      </ul>
     );
   };
 
