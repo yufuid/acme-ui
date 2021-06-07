@@ -1,5 +1,5 @@
 import React from 'react';
-import { get, isFunction, isNumber } from 'lodash-es';
+import { get, isFunction, isNumber, omit } from 'lodash-es';
 import { getPages, IPageItem, PageItemType } from './util/Pagination';
 import Arrow from './Arrow';
 import DoubleArrow from './DoubleArrow';
@@ -416,10 +416,13 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     );
   };
 
-  private renderDefault = (type: PaginationType.MINI | PaginationType.DEFAULT): React.ReactNode => {
+  private renderDefault = (
+    type: PaginationType.MINI | PaginationType.DEFAULT,
+    otherProps: Record<string, any>,
+  ): React.ReactNode => {
     const { showPageSize, showTotal, showJump } = this.props;
     return (
-      <div className={classes.root}>
+      <div className={classes.root} {...otherProps}>
         <ul className={classes.pageContent}>
           {showTotal ? this.renderTotal(type) : null}
           {this.renderContent(type)}
@@ -430,10 +433,10 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     );
   };
 
-  private renderSimple = (): React.ReactNode => {
+  private renderSimple = (otherProps: Record<string, any>): React.ReactNode => {
     const { totalPage, currPage } = this.state;
     return (
-      <div className={classes.root}>
+      <div className={classes.root} {...otherProps}>
         <div className={classes.pageItem}>{this.renderLeftArrow(PaginationType.SIMPLE)}</div>
         <span className={classes.simple.container}>
           <span className={`${classes.simple.text} ${classes.simple.active}`}>{currPage}</span>/
@@ -446,13 +449,28 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
 
   private renderPagination = (): React.ReactNode => {
     const { type } = this.props;
+    const otherProps = omit(this.props, [
+      'className',
+      'type',
+      'total',
+      'showTotal',
+      'current',
+      'defaultCurrent',
+      'pageSize',
+      'defaultPageSize',
+      'pageSizeOptions',
+      'onChange',
+      'showPageSize',
+      'onPageSizeChange',
+      'showJump',
+    ]);
     switch (type) {
       case 'default':
-        return this.renderDefault(PaginationType.DEFAULT);
+        return this.renderDefault(PaginationType.DEFAULT, otherProps);
       case 'mini':
-        return this.renderDefault(PaginationType.MINI);
+        return this.renderDefault(PaginationType.MINI, otherProps);
       case 'simple':
-        return this.renderSimple();
+        return this.renderSimple(otherProps);
       default:
         return null;
     }
