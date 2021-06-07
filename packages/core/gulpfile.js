@@ -4,12 +4,12 @@
 const fs = require('fs');
 const path = require('path');
 const { src, dest, series, parallel } = require('gulp');
-const less = require('gulp-less');
 const postcss = require('gulp-postcss');
 const concat = require('gulp-concat');
 const autoprefixer = require('autoprefixer');
 const syntax = require('postcss-less');
 const url = require('postcss-url');
+const less = require('./scripts/gulp-less');
 
 const dirMap = {esm: 'es'};
 const BABEL_ENV = process.env.BABEL_ENV || 'cjs';
@@ -84,7 +84,7 @@ function completeStyle(cb) {
 }
 
 // 执行工作流
-exports.default = !Array.isArray(componentDirs) || componentDirs.length === 0 
+exports.default = !Array.isArray(componentDirs) || componentDirs.length === 0
   ? function (cb) { cb(); }
   : series(
     parallel(...componentDirs.map((name) => extractStyle(name))),
