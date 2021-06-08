@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { mountTestSuite } from 'tests/shared';
 import Switch, { classes, SwitchSize } from '../Switch';
 
@@ -12,7 +12,7 @@ describe('✨️ Switch correctly', () => {
     expect(container.firstChild).toHaveClass(classes.size(SwitchSize.DEFAULT));
   });
   test('render small switch', () => {
-    const { container } = render(<Switch />);
+    const { container } = render(<Switch size={SwitchSize.SMALL} />);
     expect(container.firstChild).toHaveClass(classes.root);
     expect(container.firstChild).toHaveClass(classes.size(SwitchSize.SMALL));
   });
@@ -33,5 +33,14 @@ describe('✨️ Switch correctly', () => {
       expect(loading.length).toEqual(1);
     }
   });
-  test('switch change correctly', () => {});
+  test('switch change correctly', () => {
+    const { container } = render(<Switch loading />);
+    const root = container.firstChild;
+    expect(root).not.toBeNull();
+    if (root) {
+      const input = container.getElementsByTagName('input')[0];
+      fireEvent.change(input, { target: { checked: true } });
+      expect(input.checked).toEqual(true);
+    }
+  });
 });
