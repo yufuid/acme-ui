@@ -1,8 +1,6 @@
 import {Playground, Props} from "~controls";
 import { Switch } from "@acme-ui/core";
 
-# Switch 开关
-
 ## 演示
 该演示使您可以预览下拉菜单的不同类型，以及不同类型的不同状态。
 <Playground
@@ -64,9 +62,10 @@ import { Switch } from "@acme-ui/core";
             const [loading, setLoading] = React.useState(false);
             const onChange = (check, e) => {
                 setLoading(true)
-                setTimeout(() => {
+                const timer = setTimeout(() => {
                     setChecked(check);
-                    setLoading(false)
+                    setLoading(false);
+                    clearTimeout(timer);
                 }, 1000)
             }
             return <Switch checked={checked} onChange={onChange} loading={loading} />

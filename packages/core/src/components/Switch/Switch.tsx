@@ -1,14 +1,15 @@
 import React, { ChangeEvent, ForwardedRef } from 'react';
-import './style/switch.less';
 import { isFunction, omit, get, set } from 'lodash-es';
 import { uniteClassNames } from '../../utils/tools';
-import { PrimaryLoadingSvg } from '../Button/LoadingIcon';
+import { PrimaryLoadingSvg } from '../Icon/LoadingIcon';
+
+import './style/switch.less';
 
 const classNamePrefix = 'acme-switch';
 
 export const classes = {
   root: classNamePrefix,
-  size: (size: SwitchProps['size']) => `${classNamePrefix}-${size}`,
+  size: (size: SwitchProps['size']): string => `${classNamePrefix}-${size}`,
   input: `${classNamePrefix}-input`,
   content: `${classNamePrefix}-content`,
   btn: `${classNamePrefix}-btn`,
@@ -29,7 +30,7 @@ export interface SwitchProps {
    */
   className?: string;
   /**
-   * Switch 大小 'default' | 'small'
+   * Switch 大小
    * @default SwitchSize.DEFAULT
    */
   size?: TSwitchSize;
@@ -80,7 +81,10 @@ const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
     const inputCheckedProps = {
       defaultChecked,
     };
-    if (checked) set(inputCheckedProps, 'checked', checked);
+    if (checked) {
+      set(inputCheckedProps, 'checked', checked);
+      delete inputCheckedProps.defaultChecked;
+    }
     const otherProps = omit(props, [
       'className',
       'inputRef',
@@ -92,10 +96,10 @@ const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
       'checked',
     ]);
 
-    const checkboxChange = (e: ChangeEvent<HTMLInputElement>) => {
-      const isCheck = get(e, 'target.checked');
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+      const isChecked = get(e, 'target.checked');
       if (isFunction(onChange)) {
-        onChange(isCheck, e);
+        onChange(isChecked, e);
       } else {
         console.warn('switch props onChange is not a function');
       }
@@ -116,15 +120,15 @@ const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
           className={classes.input}
           type="checkbox"
           ref={inputRef}
-          onChange={checkboxChange}
+          onChange={handleInputChange}
           disabled={loading || disabled}
           {...inputCheckedProps}
         />
-        <div className={classes.content}>
-          <div className={classes.btn}>
+        <span className={classes.content}>
+          <span className={classes.btn}>
             {loading ? <PrimaryLoadingSvg className={classes.loading} /> : null}
-          </div>
-        </div>
+          </span>
+        </span>
       </label>
     );
   },

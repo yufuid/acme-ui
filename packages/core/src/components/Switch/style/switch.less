@@ -23,35 +23,35 @@
   .@{switchPrefix}-content {
     &:hover {
       .@{switchPrefix}-btn {
-        box-shadow: 0 0 1px 5px rgba(204, 204, 204, .3);
+        box-shadow: 0 0 1px 5px rgba(204, 204, 204, 0.3);
       }
     }
     &:focus {
       .@{switchPrefix}-btn {
-        box-shadow: 0 0 1px 5px rgba(204, 204, 204, .4);
+        box-shadow: 0 0 1px 5px rgba(204, 204, 204, 0.4);
       }
     }
     &:active {
       .@{switchPrefix}-btn {
-        box-shadow: 0 0 1px 5px rgba(204, 204, 204, .5);
+        box-shadow: 0 0 1px 5px rgba(204, 204, 204, 0.5);
       }
     }
   }
 
   .@{switchPrefix}-input {
-    &:checked+.@{switchPrefix}-content {
+    &:checked + .@{switchPrefix}-content {
       background-color: @bg-color-selected;
       .@{switchPrefix}-btn {
         left: 21px;
       }
       &:hover {
         .@{switchPrefix}-btn {
-          box-shadow: 0 0 1px 5px rgba(51, 51, 255, .1);
+          box-shadow: 0 0 1px 5px rgba(51, 51, 255, 0.1);
         }
       }
       &:active {
         .@{switchPrefix}-btn {
-          box-shadow: 0 0 1px 5px rgba(51, 51, 255, .2);
+          box-shadow: 0 0 1px 5px rgba(51, 51, 255, 0.2);
         }
       }
     }
@@ -71,30 +71,30 @@
   .@{switchPrefix}-content {
     &:hover {
       .@{switchPrefix}-btn {
-        box-shadow: 0 0 1px 4px rgba(204, 204, 204, .3);
+        box-shadow: 0 0 1px 4px rgba(204, 204, 204, 0.3);
       }
     }
     &:active {
       .@{switchPrefix}-btn {
-        box-shadow: 0 0 1px 4px rgba(204, 204, 204, .4);
+        box-shadow: 0 0 1px 4px rgba(204, 204, 204, 0.4);
       }
     }
   }
 
   .@{switchPrefix}-input {
-    &:checked+.@{switchPrefix}-content {
+    &:checked + .@{switchPrefix}-content {
       background-color: @bg-color-selected;
       .@{switchPrefix}-btn {
         left: 17px;
       }
       &:hover {
         .@{switchPrefix}-btn {
-          box-shadow: 0 0 1px 4px rgba(51, 51, 255, .1);
+          box-shadow: 0 0 1px 4px rgba(51, 51, 255, 0.1);
         }
       }
       &:active {
         .@{switchPrefix}-btn {
-          box-shadow: 0 0 1px 4px rgba(51, 51, 255, .2);
+          box-shadow: 0 0 1px 4px rgba(51, 51, 255, 0.2);
         }
       }
     }
@@ -104,22 +104,23 @@
     width: @spacing-md;
     height: @spacing-md;
   }
-
 }
 
 .@{switchPrefix}-disabled {
   .@{switchPrefix}-content {
-    opacity: .5;
+    opacity: 0.5;
     cursor: not-allowed;
-    &:hover, &:active {
+    &:hover,
+    &:active {
       .@{switchPrefix}-btn {
         box-shadow: none;
       }
     }
   }
   .@{switchPrefix}-input {
-    &:checked+.@{switchPrefix}-content {
-      &:hover, &:active {
+    &:checked + .@{switchPrefix}-content {
+      &:hover,
+      &:active {
         .@{switchPrefix}-btn {
           box-shadow: none;
         }
@@ -130,6 +131,7 @@
 
 .@{switchPrefix}-content {
   position: relative;
+  display: inline-block;
   width: 100%;
   height: 100%;
   border-radius: @border-radius-normal * 4;
@@ -139,13 +141,13 @@
 
 .@{switchPrefix}-btn {
   position: absolute;
+  top: 50%;
+  left: 1px;
   display: flex;
   background-color: @color-white;
   border-radius: 50%;
   transform: translateY(-50%);
-  top: 50%;
-  left: 1px;
-  transition: all ease-in-out .2s;
+  transition: all ease-in-out 0.2s;
   align-items: center;
   justify-content: center;
 }
@@ -156,13 +158,15 @@
 
 @keyframes around {
   0% {
+    -webkit-transform: rotate(0);
     transform: rotate(0);
   }
   50% {
+    -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
   }
   100% {
+    -webkit-transform: rotate(180deg);
     transform: rotate(360deg);
   }
 }
-
