@@ -10,6 +10,8 @@ import SwitchCode from './Switch/Code.mdx';
 import SwitchDesign from './Switch/Design.mdx';
 import FormLabelCode from './FormLabel/Code.mdx';
 import FormLabelDesign from './FormLabel/Design.mdx';
+import FormGroupCode from './FormGroup/Code.mdx';
+import FormGroupDesign from './FormGroup/Design.mdx';
 
 export type TMDXHub = {
   /** 标签名 */
@@ -54,6 +56,13 @@ const MdxHub: TMDXHub[] = [
     description: '',
     designMdx: FormLabelDesign,
     codeMdx: FormLabelCode,
+  },
+  {
+    tagName: 'Form Group',
+    name: '表单组',
+    description: '',
+    designMdx: FormGroupDesign,
+    codeMdx: FormGroupCode,
   },
 ];
 
