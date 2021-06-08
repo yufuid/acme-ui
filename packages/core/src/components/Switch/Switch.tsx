@@ -12,7 +12,6 @@ export const classes = {
   input: `${classNamePrefix}-input`,
   content: `${classNamePrefix}-content`,
   btn: `${classNamePrefix}-btn`,
-  inner: `${classNamePrefix}-inner`,
   disabled: `${classNamePrefix}-disabled`,
   loading: `${classNamePrefix}-loading`,
 };
@@ -125,7 +124,6 @@ const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
           <div className={classes.btn}>
             {loading ? <PrimaryLoadingSvg className={classes.loading} /> : null}
           </div>
-          <div className={classes.inner} />
         </div>
       </label>
     );
