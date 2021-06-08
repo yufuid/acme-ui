@@ -8,6 +8,8 @@ import PaginationCode from './Pagination/Code.mdx';
 import PaginationDesign from './Pagination/Design.mdx';
 import SwitchCode from './Switch/Code.mdx';
 import SwitchDesign from './Switch/Design.mdx';
+import RadioCode from './Radio/Code.mdx';
+import RadioDesign from './Radio/Design.mdx';
 
 export type TMDXHub = {
   /** 标签名 */
@@ -45,6 +47,13 @@ const MdxHub: TMDXHub[] = [
     description: '在两种状态间切换时用到的开关选择器。',
     designMdx: SwitchDesign,
     codeMdx: SwitchCode,
+  },
+  {
+    tagName: 'Radio',
+    name: '单选框',
+    description: '单选按钮允许用户从一组中选择一个选项。',
+    designMdx: RadioDesign,
+    codeMdx: RadioCode,
   },
 ];
 
