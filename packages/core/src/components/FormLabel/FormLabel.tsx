@@ -42,8 +42,8 @@ export interface FormLabelProps {
    */
   error?: boolean;
   /**
-   * 是否处于错误状态
-   * @default false
+   * 所在位置
+   * @default right
    */
   labelPlacement?: TFormLabelPlacement;
   /**
