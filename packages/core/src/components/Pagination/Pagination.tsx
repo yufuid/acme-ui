@@ -1,5 +1,5 @@
 import React from 'react';
-import { get, isFunction, isNumber } from 'lodash-es';
+import { get, isFunction, isNumber, omit } from 'lodash-es';
 import { getPages, IPageItem, PageItemType } from './util/Pagination';
 import Arrow from './Arrow';
 import DoubleArrow from './DoubleArrow';
@@ -140,6 +140,7 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     showPageSize: false,
     showTotal: false,
     showJump: false,
+    className: '',
   };
 
   constructor(props: PaginationProps) {
@@ -419,28 +420,26 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
   private renderDefault = (type: PaginationType.MINI | PaginationType.DEFAULT): React.ReactNode => {
     const { showPageSize, showTotal, showJump } = this.props;
     return (
-      <div className={classes.root}>
-        <ul className={classes.pageContent}>
-          {showTotal ? this.renderTotal(type) : null}
-          {this.renderContent(type)}
-          {showPageSize ? this.renderSizeOptions() : null}
-          {showJump ? this.renderJumpBtn() : null}
-        </ul>
-      </div>
+      <ul className={classes.pageContent}>
+        {showTotal ? this.renderTotal(type) : null}
+        {this.renderContent(type)}
+        {showPageSize ? this.renderSizeOptions() : null}
+        {showJump ? this.renderJumpBtn() : null}
+      </ul>
     );
   };
 
   private renderSimple = (): React.ReactNode => {
     const { totalPage, currPage } = this.state;
     return (
-      <div className={classes.root}>
+      <>
         <div className={classes.pageItem}>{this.renderLeftArrow(PaginationType.SIMPLE)}</div>
         <span className={classes.simple.container}>
           <span className={`${classes.simple.text} ${classes.simple.active}`}>{currPage}</span>/
           <span className={classes.simple.text}>{totalPage}</span>
         </span>
         <div className={classes.pageItem}>{this.renderRightArrow(PaginationType.SIMPLE)}</div>
-      </div>
+      </>
     );
   };
 
@@ -459,7 +458,27 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
   };
 
   public render(): React.ReactNode {
-    return this.renderPagination();
+    const { className } = this.props;
+    const otherProps = omit(this.props, [
+      'className',
+      'type',
+      'total',
+      'showTotal',
+      'current',
+      'defaultCurrent',
+      'pageSize',
+      'defaultPageSize',
+      'pageSizeOptions',
+      'onChange',
+      'showPageSize',
+      'onPageSizeChange',
+      'showJump',
+    ]);
+    return (
+      <div className={`${classes.root} ${className}`} {...otherProps}>
+        {this.renderPagination()}
+      </div>
+    );
   }
 }
 
