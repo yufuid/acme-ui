@@ -146,7 +146,7 @@
 .@{acmeBtnPrefix}-outlined-ghost {
   color: @color-white;
   background-color: @transparent;
-  border: @border-width-normal solid @con-border-secondary;
+  border: @border-width-normal solid @color-white;
   .other-ghost-hov();
 }
 
@@ -196,4 +196,11 @@
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+.@{acmeBtnPrefix}-start-element {
+  margin-right: @spacing-normal;
+}
+.@{acmeBtnPrefix}-end-element {
+  margin-left: @spacing-normal;
 }

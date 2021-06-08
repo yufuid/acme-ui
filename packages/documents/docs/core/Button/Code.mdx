@@ -1,18 +1,12 @@
-import { Playground, Props } from "~controls";
-import { Button } from "@acme-ui/core";
-
-<Props of={Button} />
-
-<Props of={Button.Group} />
+import { Playground, Props } from '~controls';
+import { Button } from '@acme-ui/core';
 
 ## 主要按钮
 
 (重点突出)：用于主行动点，一个操作区域只能有一个主按钮。
 
 <Playground>
-  <div
-    style={{ width: "100%", display: "flex", justifyContent: "space-between" }}
-  >
+  <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
     <Button>主要按钮</Button>
     <Button disabled>Disabled</Button>
     <Button loading>Loading</Button>
@@ -26,9 +20,9 @@ import { Button } from "@acme-ui/core";
 <Playground>
   <div
     style={{
-      width: "100%",
-      display: "flex",
-      justifyContent: "space-between",
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'space-between',
     }}
   >
     <Button mode="outlined">次要按钮</Button>
@@ -46,9 +40,7 @@ import { Button } from "@acme-ui/core";
 (低强调)：文本按钮通常用于次要的操作。
 
 <Playground>
-  <div
-    style={{ width: "100%", display: "flex", justifyContent: "space-between" }}
-  >
+  <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
     <Button mode="minimal">文字按钮</Button>
     <Button mode="minimal" disabled>
       Disabled
@@ -64,9 +56,7 @@ import { Button } from "@acme-ui/core";
 (红色警告)：删除/移动/修改权限等危险操作，一般需要二次确认。
 
 <Playground>
-  <div
-    style={{ width: "100%", display: "flex", justifyContent: "space-between" }}
-  >
+  <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
     <Button color="danger">危险按钮</Button>
     <Button color="danger" disabled>
       Disabled
@@ -84,10 +74,10 @@ import { Button } from "@acme-ui/core";
 <Playground>
   <div
     style={{
-      backgroundColor: "#333333",
-      display: "flex",
-      justifyContent: "space-between",
-      padding: "32px 40px",
+      backgroundColor: '#333333',
+      display: 'flex',
+      justifyContent: 'space-between',
+      padding: '32px 40px',
     }}
   >
     <Button mode="contained" ghost>
@@ -107,25 +97,17 @@ import { Button } from "@acme-ui/core";
 常用于多项类似操作。
 
 <Playground>
-  <div style={{display: 'flex', justifyContent: "center"}}>
-    <Button.Group style={{marginRight: '80px'}} mode="minimal">
+  <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <Button.Group style={{ marginRight: '80px' }} mode="minimal">
       <Button mode="outlined" size="large">
         1
       </Button>
-      <Button mode="outlined">
-        2
-      </Button>
+      <Button mode="outlined">2</Button>
     </Button.Group>
     <Button.Group>
-      <Button mode="contained">
-        1
-      </Button>
-      <Button mode="contained">
-        2
-      </Button>
-      <Button mode="contained">
-        3
-      </Button>
+      <Button mode="contained">1</Button>
+      <Button mode="contained">2</Button>
+      <Button mode="contained">3</Button>
     </Button.Group>
   </div>
 </Playground>
@@ -136,13 +118,13 @@ import { Button } from "@acme-ui/core";
 
 <Playground>
   <div>
-    <Button style={{ marginBottom: "16px" }} mode="contained" fullWidth>
+    <Button style={{ marginBottom: '16px' }} mode="contained" fullWidth>
       主要按钮
     </Button>
-    <Button style={{ marginBottom: "16px" }} mode="outlined" fullWidth>
+    <Button style={{ marginBottom: '16px' }} mode="outlined" fullWidth>
       次要按钮
     </Button>
-    <Button style={{ marginBottom: "16px" }} color="danger" fullWidth>
+    <Button style={{ marginBottom: '16px' }} color="danger" fullWidth>
       危险按钮
     </Button>
     <Button mode="minimal" fullWidth>
@@ -158,10 +140,10 @@ import { Button } from "@acme-ui/core";
 <Playground>
   <div
     style={{
-      width: "100%",
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
     }}
   >
     <Button size="large">大尺寸</Button>
@@ -169,3 +151,13 @@ import { Button } from "@acme-ui/core";
     <Button size="small">小尺寸</Button>
   </div>
 </Playground>
+
+## API
+
+通过设置 Button 的属性来产生不同的按钮样式，推荐顺序为 mode->color->size->loading->disabled
+
+<Props of={Button} />
+
+## Button.Group API
+
+<Props of={Button.Group} />
