@@ -1,0 +1,46 @@
+@import '../../../styles/index';
+
+@classPrefix: ~'@{acme-prefix}-form-label';
+
+.@{classPrefix} {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  color: @font-color-text;
+  .text-primary();
+}
+
+.@{classPrefix}-error {
+  color: @color-error;
+}
+
+.@{classPrefix}-control {
+  margin: 0 @spacing-normal 0 0;
+}
+
+.@{classPrefix}-required {
+  position: relative;
+  top: -@spacing-xs;
+  margin-left: @spacing-xs;
+}
+
+.@{classPrefix}-left {
+  flex-direction: row-reverse;
+  .@{classPrefix}-control {
+    margin: 0 0 0 @spacing-normal;
+  }
+}
+
+.@{classPrefix}-top {
+  flex-direction: column-reverse;
+  .@{classPrefix}-control {
+    margin: @spacing-normal 0 0 0;
+  }
+}
+
+.@{classPrefix}-bottom {
+  flex-direction: column;
+  .@{classPrefix}-control {
+    margin: 0 0 @spacing-normal 0;
+  }
+}

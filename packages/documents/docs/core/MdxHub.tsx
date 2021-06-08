@@ -8,6 +8,8 @@ import PaginationCode from './Pagination/Code.mdx';
 import PaginationDesign from './Pagination/Design.mdx';
 import SwitchCode from './Switch/Code.mdx';
 import SwitchDesign from './Switch/Design.mdx';
+import FormLabelCode from './FormLabel/Code.mdx';
+import FormLabelDesign from './FormLabel/Design.mdx';
 
 export type TMDXHub = {
   /** 标签名 */
@@ -45,6 +47,13 @@ const MdxHub: TMDXHub[] = [
     description: '在两种状态间切换时用到的开关选择器。',
     designMdx: SwitchDesign,
     codeMdx: SwitchCode,
+  },
+  {
+    tagName: 'Form Label',
+    name: '表单标题',
+    description: '',
+    designMdx: FormLabelDesign,
+    codeMdx: FormLabelCode,
   },
 ];
 
