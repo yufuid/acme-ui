@@ -1,12 +1,28 @@
----
-name: Switch
----
-
-import {Playground, Props} from "docz";
+import {Playground, Props} from "~controls";
 import { Switch } from "@acme-ui/core";
 
-
 # Switch 开关
+
+## 演示
+该演示使您可以预览下拉菜单的不同类型，以及不同类型的不同状态。
+<Playground
+    links={{
+        codeSandbox: 'https://www.baidu.com',
+        codePen: 'https://www.baidu.com',
+        stackblitz: 'https://www.baidu.com',
+    }}
+    defaultComProps={{size: 'default', loading: false, disabled: false}}
+    headWrapper={Playground.renderChecker([
+        {label: '基础用法', onClick: (p) => ({...p, size: 'default', loading: false}),highlight: (p) => (p.size === 'default') },
+        {label: '大小', onClick: (p) => ({...p, size: 'small', loading: false}),highlight: (p) => (p.size === 'small')},
+    ])}
+    asideWrapper={Playground.renderCheckbox([
+        {label: '加载中', onClick: (p) => ({...p, loading: !p.loading}),isChecked: (p) => p.loading},
+        {label: '禁用状态',  onClick: (p) => ({...p, disabled: !p.disabled}), isChecked: (p) => p.disabled}
+    ])}
+>
+    <Switch data-mark />
+</Playground>
 
 ## 基础用法
 该演示使您可以预览下拉菜单的不同类型，以及不同类型的不同状态

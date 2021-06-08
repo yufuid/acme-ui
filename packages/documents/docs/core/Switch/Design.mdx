@@ -1,15 +1,10 @@
----
-name: Switch
----
-
-import {Playground, Props} from "docz";
+import {Playground, Props} from "~controls";
 import { Switch } from "@acme-ui/core";
-
 
 # Switch 开关
 
 ## 基础用法
-该演示使您可以预览下拉菜单的不同类型，以及不同类型的不同状态
+基本用法，状态切换时会触发事件。
 <Playground>
     <Switch />
 </Playground>
@@ -25,9 +20,9 @@ import { Switch } from "@acme-ui/core";
 禁用开关
 <Playground>
     <Switch disabled />
-    <Switch defaultChecked disabled />
+    <Switch defaultChecked={true} disabled />
     <Switch size="small" disabled />
-    <Switch size="small" disabled defaultChecked />
+    <Switch size="small" disabled defaultChecked={true} />
 </Playground>
 
 ## 加载中

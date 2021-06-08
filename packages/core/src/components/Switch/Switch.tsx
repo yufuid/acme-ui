@@ -1,6 +1,6 @@
 import React, { ChangeEvent, ForwardedRef } from 'react';
 import './style/switch.less';
-import { isFunction, omit, get } from 'lodash-es';
+import { isFunction, omit, get, set } from 'lodash-es';
 import { uniteClassNames } from '../../utils/tools';
 import { PrimaryLoadingSvg } from '../Button/LoadingIcon';
 
@@ -68,7 +68,20 @@ export interface SwitchProps {
 
 const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
   (props: SwitchProps, ref: ForwardedRef<HTMLLabelElement>): React.ReactElement => {
-    const { size, className, inputRef, onChange, disabled, loading } = props;
+    const {
+      size,
+      className,
+      inputRef,
+      onChange,
+      disabled,
+      loading,
+      defaultChecked,
+      checked,
+    } = props;
+    const inputCheckedProps = {
+      defaultChecked,
+    };
+    if (checked) set(inputCheckedProps, 'checked', checked);
     const otherProps = omit(props, [
       'className',
       'inputRef',
@@ -76,12 +89,14 @@ const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
       'size',
       'loading',
       'disabled',
+      'defaultChecked',
+      'checked',
     ]);
 
     const checkboxChange = (e: ChangeEvent<HTMLInputElement>) => {
-      const checked = get(e, 'target.checked');
+      const isCheck = get(e, 'target.checked');
       if (isFunction(onChange)) {
-        onChange(checked, e);
+        onChange(isCheck, e);
       } else {
         console.warn('switch props onChange is not a function');
       }
@@ -104,6 +119,7 @@ const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
           ref={inputRef}
           onChange={checkboxChange}
           disabled={loading || disabled}
+          {...inputCheckedProps}
         />
         <div className={classes.content}>
           <div className={classes.btn}>
