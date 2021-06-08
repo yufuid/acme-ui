@@ -2,7 +2,7 @@ import React from 'react';
 import { omit } from 'lodash-es';
 import { uniteClassNames } from '../../utils/tools';
 import ButtonGroup from './ButtonGroup';
-import { WhiteLoadingSvg, PrimaryLoadingSvg } from './LoadingIcon';
+import { WhiteLoadingSvg, PrimaryLoadingSvg } from '../Icon/LoadingIcon';
 import { ButtonMode, ButtonColor, ButtonSize } from './types';
 import './style/Button.less';
 

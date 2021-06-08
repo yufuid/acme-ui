@@ -1,0 +1,59 @@
+import {Playground, Props} from "~controls";
+import { Switch } from "@acme-ui/core";
+
+# Switch 开关
+
+## 基础用法
+基本用法，状态切换时会触发事件。
+<Playground>
+    <Switch />
+</Playground>
+
+## 大小
+想用一些优雅的小开关？ 我们提供了 size 这个属性供您调整。
+<Playground>
+    <Switch defaultChecked={true} />
+    <Switch size="small" />
+</Playground>
+
+## 禁用状态
+禁用开关
+<Playground>
+    <Switch disabled />
+    <Switch defaultChecked={true} disabled />
+    <Switch size="small" disabled />
+    <Switch size="small" disabled defaultChecked={true} />
+</Playground>
+
+## 加载中
+标识开关操作仍在执行中
+<Playground>
+    <Switch loading />
+    <Switch defaultChecked loading />
+    <Switch size="small"  loading/>
+    <Switch size="small" defaultChecked loading />
+</Playground>
+
+## 受控
+
+<Playground>
+    {
+        () => {
+            const [checked, setChecked] = React.useState(false);
+            const [loading, setLoading] = React.useState(false);
+            const onChange = (check, e) => {
+                setLoading(true)
+                setTimeout(() => {
+                    setChecked(check);
+                    setLoading(false)
+                }, 1000)
+            }
+            return <Switch checked={checked} onChange={onChange} loading={loading} />
+        }
+    }
+</Playground>
+
+
+## API
+通过设置不同的属性展示不同的开关状态
+<Props of={Switch} />

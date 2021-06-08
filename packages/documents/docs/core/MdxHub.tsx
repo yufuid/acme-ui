@@ -6,6 +6,8 @@ import ButtonCode from './Button/Code.mdx';
 import ButtonDesign from './Button/Design.mdx';
 import PaginationCode from './Pagination/Code.mdx';
 import PaginationDesign from './Pagination/Design.mdx';
+import SwitchCode from './Switch/Code.mdx';
+import SwitchDesign from './Switch/Design.mdx';
 
 export type TMDXHub = {
   /** 标签名 */
@@ -36,6 +38,13 @@ const MdxHub: TMDXHub[] = [
     description: '当数据量过多时，使用分页分解数据。',
     designMdx: PaginationDesign,
     codeMdx: PaginationCode,
+  },
+  {
+    tagName: 'Switch',
+    name: '开关',
+    description: '在两种状态间切换时用到的开关选择器。',
+    designMdx: SwitchDesign,
+    codeMdx: SwitchCode,
   },
 ];
 
