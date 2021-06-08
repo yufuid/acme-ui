@@ -43,7 +43,7 @@ object-assign
    * found in the LICENSE file at https://angular.io/license
    */
 
-/** @license React v0.20.1
+/** @license React v0.20.2
  * scheduler.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
