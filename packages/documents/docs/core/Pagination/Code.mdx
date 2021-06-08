@@ -1,18 +1,45 @@
 import { Playground, Props } from "~controls";
 import { Pagination } from "@acme-ui/core";
 
-## 基本分页
+## 演示
+<Playground
+    links={{
+        codeSandbox: 'https://www.baidu.com',
+        codePen: 'https://www.baidu.com',
+        stackblitz: 'https://www.baidu.com',
+    }}
+    defaultComProps={{
+        type: 'default',
+        showTotal: false,
+        showJump: false,
+        showPageSize: false,
+        total: 50,
+    }}
+    headWrapper={Playground.renderChecker([
+        {label: '基本', onClick: (p) => ({...p, type: 'default', total: 50}), highlight: (p) => p.type === 'default' && p.total === 50},
+        {label: '更多', onClick: (p) => ({...p, type: 'default', total: 200}), highlight: (p) => p.type === 'default' && p.total === 200},
+        {label: '迷你版本', onClick: (p) => ({...p, type: 'mini', total: 50}), highlight: (p) => p.type === 'mini'},
+        {label: '简洁版本', onClick: (p) => ({...p, type: 'simple', total: 50}), highlight: (p) => p.type === 'simple'},
+    ])}
+    asideWrapper={Playground.renderCheckbox([
+        {label: '分页条数', onClick: (p) => ({...p, showPageSize: !p.showPageSize}), isChecked: (p) => p.showPageSize, isDisabled: (p) => p.type === 'simple'},
+        {label: '快速跳转', onClick: (p) => ({...p, showJump: !p.showJump}), isChecked: (p) => p.showJump, isDisabled: (p) => p.type === 'simple'},
+        {label: '总条数', onClick: (p) => ({...p, showTotal: !p.showTotal}), isChecked: (p) => p.showTotal, isDisabled: (p) => p.type === 'simple'},
+    ])}
+>
+    <Pagination data-mark/>
+</Playground>
 
+## 基本分页
+页数≤5 时
 <Playground>
-  <Pagination/>
-  <br/>
   <Pagination total={50}/>
 </Playground>
 
 ## 更多分页
-
+页数>5 时
 <Playground>
-  <Pagination total={100} showPageSize/>
+  <Pagination total={100}/>
 </Playground>
 
 ## 分页条数
@@ -51,12 +78,16 @@ import { Pagination } from "@acme-ui/core";
     type='mini'/>
   <br/>
   <Pagination
-    total={250}
+    total={500}
+    defaultPageSize={20}
+    pageSizeOptions={[20, 30, 40, 50]}
     showPageSize
     type='mini'/>
   <br/>
   <Pagination
-    total={250}
+    total={500}
+    defaultPageSize={20}
+    pageSizeOptions={[20, 30, 40, 50]}
     showPageSize
     showTotal
     showJump
@@ -69,30 +100,6 @@ import { Pagination } from "@acme-ui/core";
   <Pagination total={100} defaultCurrent={1} defaultPageSize={10} type='simple'/>
 </Playground>
 
-## 受控组件
-<Playground>
-  {
-    () => {
-      const [page, setPage] = React.useState(1);
-      const [pageSize, setPageSize] = React.useState(5);
-      const total = 200;
-      const changePage = (val) => {
-        setPage(val)
-      }
-      return (
-        <Pagination
-          pageSize={pageSize}
-          total={total}
-          current={page}
-          pageSizeOptions={[5, 10, 15, 20, 25, 30]}
-          showPageSize
-          onPageSizeChange={setPageSize}
-          onChange={changePage}
-        />
-      )
-    }
-  }
-</Playground>
-
 ## API
+通过设置 Pagination 不同的属性展示不同的样式，效果。
 <Props of={Pagination} />
