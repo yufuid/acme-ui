@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { isFunction } from 'lodash-es';
 import { uniteClassNames } from '../../utils/tools';
-import { RadioLabelPlacement, RadioSize } from './types';
 import './style/Radio.less';
-
-type RadioLabelPlacementType = `${RadioLabelPlacement}`;
-type RadioSizeType = `${RadioSize}`;
 
 export const classNamePrefix = 'acme-radio';
 
 export const classes = {
-  base: classNamePrefix,
+  root: classNamePrefix,
   inline: `${classNamePrefix}-inline`,
   disabled: `${classNamePrefix}-disabled`,
 };
 
 export interface IRadioProps {
+  /**
+   * 自定义类名
+   */
+  className?: string;
   /**
    * 是否选中
    * @default false
@@ -48,43 +48,43 @@ export interface IRadioProps {
   /**
    * 单选按钮大小，仅在Radio.Button生效
    */
-  size?: RadioSizeType;
   [key: string]: any;
 }
 
-const Radio: React.ForwardRefExoticComponent<
-  IRadioProps & React.RefAttributes<HTMLInputElement>
-> = React.forwardRef((props: IRadioProps, ref: React.ForwardedRef<HTMLInputElement>) => {
-  const { checked, inline, disabled, defaultChecked, error, onChange, ...otherProps } = props;
+const Radio: React.ForwardRefExoticComponent<IRadioProps & React.RefAttributes<HTMLInputElement>> =
+  React.forwardRef((props: IRadioProps, ref: React.ForwardedRef<HTMLInputElement>) => {
+    const { className, checked, inline, disabled, defaultChecked, error, onChange, ...otherProps } =
+      props;
 
-  const [internalChecked, setInternalChecked] = useState(defaultChecked);
+    const [internalChecked, setInternalChecked] = useState(defaultChecked);
 
-  useEffect(() => {
-    setInternalChecked(checked);
+    useEffect(() => {
+      setInternalChecked(checked);
+    }, [checked]);
+
+    const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (isFunction(onChange)) {
+        onChange(e);
+      }
+    };
+
+    return (
+      <input
+        className={uniteClassNames(
+          classes.root,
+          inline ? classes.inline : '',
+          disabled ? classes.disabled : '',
+          className,
+        )}
+        type="radio"
+        checked={!!internalChecked}
+        disabled={!!disabled}
+        onChange={handleRadioChange}
+        ref={ref}
+        {...otherProps}
+      />
+    );
   });
-
-  const onRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (isFunction(onChange)) {
-      onChange(e);
-    }
-  };
-
-  return (
-    <input
-      className={uniteClassNames(
-        classes.base,
-        inline ? classes.inline : '',
-        disabled ? classes.disabled : '',
-      )}
-      type="radio"
-      checked={!!internalChecked}
-      disabled={!!disabled}
-      onChange={onRadioChange}
-      ref={ref}
-      {...otherProps}
-    />
-  );
-});
 
 Radio.defaultProps = {
   checked: false,
@@ -93,7 +93,6 @@ Radio.defaultProps = {
   error: false,
   onChange: undefined,
   inline: false,
-  size: 'default',
 };
 
 export default Radio;

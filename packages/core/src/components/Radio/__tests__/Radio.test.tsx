@@ -5,7 +5,7 @@ import { RefTestCaseType } from 'tests/shared/refTest';
 import { mountTestSuite, refTestSuite } from 'tests/shared';
 import Radio, { classes } from '../Radio';
 
-describe('Button', () => {
+describe('Radio', () => {
   mountTestSuite(<Radio />);
 
   // 渲染不同类型的按钮
@@ -13,7 +13,7 @@ describe('Button', () => {
     test('should render a base radio', () => {
       const { getByRole } = render(<Radio role="radio" />);
       const radio = getByRole('radio');
-      expect(radio).toHaveClass(classes.base);
+      expect(radio).toHaveClass(classes.root);
     });
 
     test('should render a disabled radio', () => {
@@ -26,6 +26,7 @@ describe('Button', () => {
       const { getByRole } = render(<Radio role="radio" inline />);
       const radio = getByRole('radio');
       expect(radio).toHaveClass(classes.inline);
+      expect(radio).toHaveStyle('display: inline-flex;');
     });
   });
 
