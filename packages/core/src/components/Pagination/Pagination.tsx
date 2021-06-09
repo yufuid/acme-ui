@@ -433,12 +433,16 @@ class Pagination extends React.PureComponent<PaginationProps, PaginationState> {
     const { totalPage, currPage } = this.state;
     return (
       <>
-        <div className={classes.pageItem}>{this.renderLeftArrow(PaginationType.SIMPLE)}</div>
+        <div className={`${classes.pageItem} ${classes.simple.item}`}>
+          {this.renderLeftArrow(PaginationType.SIMPLE)}
+        </div>
         <span className={classes.simple.container}>
           <span className={`${classes.simple.text} ${classes.simple.active}`}>{currPage}</span>/
           <span className={classes.simple.text}>{totalPage}</span>
         </span>
-        <div className={classes.pageItem}>{this.renderRightArrow(PaginationType.SIMPLE)}</div>
+        <div className={`${classes.pageItem} ${classes.simple.item}`}>
+          {this.renderRightArrow(PaginationType.SIMPLE)}
+        </div>
       </>
     );
   };
