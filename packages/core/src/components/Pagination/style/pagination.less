@@ -36,7 +36,7 @@
   }
 
   /** default */
-  .@{paginationPrefix}-item-default {
+  .@{paginationPrefix}-default-item {
     width: @spacing-xl;
     height: @spacing-xl;
     line-height: @spacing-xl;
@@ -56,7 +56,7 @@
   .@{paginationPrefix}-default-total {
     margin-right: @spacing-lg;
   }
-  .@{paginationPrefix}-item-default-active {
+  .@{paginationPrefix}-default-item-active {
     color: @color-white;
     background-color: @bg-color-selected;
     &:hover {
@@ -64,14 +64,14 @@
       background-color: @bg-color-selected;
     }
   }
-  .@{paginationPrefix}-item-default-disabled {
+  .@{paginationPrefix}-default-item-disabled {
     border-color: @color-secondary;
     cursor: not-allowed;
     &:hover {
       background-color: @bg-color-white;
     }
   }
-  .@{paginationPrefix}-item-default-more {
+  .@{paginationPrefix}-default-item-more {
     position: relative;
     box-shadow: none;
     border: none;
@@ -91,8 +91,8 @@
   }
 
   /** mini */
-  .@{paginationPrefix}-item-simple,
-  .@{paginationPrefix}-item-mini {
+  .@{paginationPrefix}-simple-item,
+  .@{paginationPrefix}-mini-item {
     width: @spacing-lg;
     height: @spacing-lg;
     line-height: @spacing-lg;
@@ -107,15 +107,15 @@
       }
     }
   }
-  .@{paginationPrefix}-item-mini-active {
+  .@{paginationPrefix}-mini-item-active {
     color: @font-color-link;
     background-color: @color-light-primary;
   }
-  .@{paginationPrefix}-item-mini-more {
+  .@{paginationPrefix}-mini-item-more {
     position: relative;
   }
-  .@{paginationPrefix}-item-simple-disabled,
-  .@{paginationPrefix}-item-mini-disabled {
+  .@{paginationPrefix}-simple-item-disabled,
+  .@{paginationPrefix}-mini-item-disabled {
     color: @font-color-disabled;
     cursor: not-allowed;
     &:hover {
@@ -137,9 +137,13 @@
   }
 
   /** simple */
+  .@{paginationPrefix}-simple-item {
+    margin: 0;
+  }
   .@{paginationPrefix}-simple-container {
     display: inline-block;
     vertical-align: middle;
+    margin: 0 @spacing-md;
   }
   .@{paginationPrefix}-simple-text {
     display: inline-block;
