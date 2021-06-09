@@ -24,32 +24,32 @@ import { Switch } from "@acme-ui/core";
 
 ## 基础用法
 该演示使您可以预览下拉菜单的不同类型，以及不同类型的不同状态
-<Playground>
+<Playground >
     <Switch />
 </Playground>
 
 ## 大小
 想用一些优雅的小开关？ 我们提供了 size 这个属性供您调整。
 <Playground>
-    <Switch defaultChecked={true} />
+    <Switch defaultChecked={true} style={{marginRight: '80px'}} />
     <Switch size="small" />
 </Playground>
 
 ## 禁用状态
 禁用开关
 <Playground>
-    <Switch disabled />
-    <Switch defaultChecked disabled />
-    <Switch size="small" disabled />
+    <Switch disabled style={{marginRight: '32px'}}   />
+    <Switch defaultChecked disabled style={{marginRight: '80px'}}  />
+    <Switch size="small" disabled style={{marginRight: '32px'}} />
     <Switch size="small" disabled defaultChecked />
 </Playground>
 
 ## 加载中
 标识开关操作仍在执行中
 <Playground>
-    <Switch loading />
-    <Switch defaultChecked loading />
-    <Switch size="small"  loading/>
+    <Switch loading style={{marginRight: '32px'}}/>
+    <Switch defaultChecked loading style={{marginRight: '80px'}} />
+    <Switch size="small"  loading style={{marginRight: '32px'}}/>
     <Switch size="small" defaultChecked loading />
 </Playground>
 

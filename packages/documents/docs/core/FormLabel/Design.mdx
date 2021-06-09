@@ -1,0 +1,50 @@
+import { Playground, Props } from '~controls';
+import { Switch, FormLabel } from '@acme-ui/core';
+
+## 基础用法
+
+该演示使您可以预览不同类型的不同状态
+
+<Playground>
+  <FormLabel style={{ marginRight: '24px' }}>我是一个标题</FormLabel>
+  <FormLabel style={{ marginRight: '24px' }} required>
+    我是一个必填的标题
+  </FormLabel>
+  <FormLabel style={{ marginRight: '24px' }} error>
+    我是一个报错的标题
+  </FormLabel>
+</Playground>
+
+## 配合组件用法
+
+<Playground>
+  <FormLabel style={{ marginRight: '24px' }} control={<Switch />}>
+    开关
+  </FormLabel>
+  <FormLabel style={{ marginRight: '24px' }} control={<Switch />} required>
+    开关
+  </FormLabel>
+  <br />
+  <FormLabel style={{ marginRight: '24px' }} control={<Switch />} labelPlacement="right">
+    Right
+  </FormLabel>
+  <FormLabel style={{ marginRight: '24px' }} control={<Switch />} labelPlacement="left">
+    Left
+  </FormLabel>
+  <FormLabel style={{ marginRight: '24px' }} control={<Switch />} labelPlacement="top">
+    Top
+  </FormLabel>
+  <FormLabel style={{ marginRight: '24px' }} control={<Switch />} labelPlacement="bottom">
+    Bottom
+  </FormLabel>
+  <br />
+  <FormLabel style={{ marginRight: '24px' }} control={<Switch />} required error>
+    错误
+  </FormLabel>
+</Playground>
+
+## API
+
+通过设置不同的属性展示不同状态
+
+<Props of={FormLabel} />

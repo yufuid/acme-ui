@@ -24,6 +24,6 @@ const ButtonGroup: React.ForwardRefExoticComponent<
   );
 });
 ButtonGroup.defaultProps = {
-  size: ButtonSize.DEFAULT,
+  size: 'default',
 };
 export default ButtonGroup;

@@ -78,61 +78,65 @@ export const classes = {
   full: `${classNamePrefix}-full`,
 };
 
-const Button = React.forwardRef((props: IButtonProps, ref: any) => {
-  const {
-    children,
-    startElement,
-    endElement,
-    loading,
-    mode,
-    color,
-    size,
-    disabled,
-    ghost,
-    fullWidth,
-    className,
-  } = props;
+const Button = React.forwardRef(
+  (props: IButtonProps, ref: React.ForwardedRef<HTMLButtonElement>) => {
+    const {
+      children,
+      startElement,
+      endElement,
+      loading,
+      mode,
+      color,
+      size,
+      disabled,
+      ghost,
+      fullWidth,
+      className,
+    } = props;
 
-  const LoadingSvg = mode === ButtonMode.CONTAINED ? WhiteLoadingSvg : PrimaryLoadingSvg;
+    const LoadingSvg = mode === ButtonMode.CONTAINED ? WhiteLoadingSvg : PrimaryLoadingSvg;
 
-  const otherProps = omit(props, [
-    'className',
-    'children',
-    'mode',
-    'color',
-    'size',
-    'ghost',
-    'disabled',
-    'loading',
-    'fullWidth',
-    'startElement',
-    'endElement',
-  ]);
+    const otherProps = omit(props, [
+      'className',
+      'children',
+      'mode',
+      'color',
+      'size',
+      'ghost',
+      'disabled',
+      'loading',
+      'fullWidth',
+      'startElement',
+      'endElement',
+    ]);
 
-  return (
-    <button
-      className={uniteClassNames(
-        classes.base,
-        classes.appearance(mode, color),
-        classes.size(size),
-        ghost ? classes.ghost(mode) : '',
-        loading ? classes.loading : '',
-        disabled ? classes.disabled : '',
-        fullWidth ? classes.full : '',
-        className,
-      )}
-      ref={ref}
-      type="button"
-      disabled={disabled || loading}
-      {...otherProps}
-    >
-      {loading ? <LoadingSvg className={`${classNamePrefix}-loading-svg`} /> : null}
-      {startElement}
-      {children}
-      {endElement}
-    </button>
-  );
-}) as React.ForwardRefExoticComponent<IButtonProps & React.RefAttributes<unknown>> & {
+    return (
+      <button
+        className={uniteClassNames(
+          classes.base,
+          classes.appearance(mode, color),
+          classes.size(size),
+          ghost ? classes.ghost(mode) : '',
+          loading ? classes.loading : '',
+          disabled ? classes.disabled : '',
+          fullWidth ? classes.full : '',
+          className,
+        )}
+        ref={ref}
+        type="button"
+        disabled={disabled || loading}
+        {...otherProps}
+      >
+        {loading ? <LoadingSvg className={`${classNamePrefix}-loading-svg`} /> : null}
+        {startElement ? (
+          <div className={`${classNamePrefix}-start-element`}>{startElement}</div>
+        ) : null}
+        {children}
+        {endElement ? <div className={`${classNamePrefix}-end-element`}>{endElement}</div> : null}
+      </button>
+    );
+  },
+) as React.ForwardRefExoticComponent<IButtonProps & React.RefAttributes<HTMLButtonElement>> & {
   Group: typeof ButtonGroup;
 };
 
@@ -140,15 +144,15 @@ Button.Group = ButtonGroup;
 Button.defaultProps = {
   className: '',
   children: null,
-  mode: ButtonMode.CONTAINED,
-  color: ButtonColor.PRIMARY,
-  size: ButtonSize.DEFAULT,
+  mode: 'contained',
+  color: 'primary',
+  size: 'default',
   ghost: false,
   disabled: false,
   loading: false,
   fullWidth: false,
   startElement: null,
   endElement: null,
-  onClick: () => {},
+  onClick: undefined,
 };
 export default Button;

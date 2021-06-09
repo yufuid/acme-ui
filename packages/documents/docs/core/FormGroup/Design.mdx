@@ -1,0 +1,33 @@
+import { Playground, Props } from '~controls';
+import { Switch, FormLabel, FormGroup } from '@acme-ui/core';
+
+## 基础用法
+
+该演示使您可以预览不同类型的不同状态
+
+<Playground>
+  <FormLabel style={{ marginBottom: 24 }}>水平方向</FormLabel>
+  <FormGroup style={{ marginBottom: 40 }} layout="horizontal">
+    <FormLabel style={{ marginRight: 40 }} control={<Switch />}>
+      开关
+    </FormLabel>
+    <FormLabel control={<Switch />} required>
+      开关
+    </FormLabel>
+  </FormGroup>
+  <FormLabel style={{ marginBottom: 24 }}>垂直方向</FormLabel>
+  <FormGroup>
+    <FormLabel style={{ marginBottom: 16 }} control={<Switch />}>
+      开关
+    </FormLabel>
+    <FormLabel control={<Switch />} required>
+      开关
+    </FormLabel>
+  </FormGroup>
+</Playground>
+
+## API
+
+通过设置不同的属性展示不同状态
+
+<Props of={FormGroup} />
