@@ -58,7 +58,7 @@ export interface IRadioProps {
    */
   inline?: boolean;
   /**
-   * 单选按钮大小，仅在Radio.Button生效
+   * 同input的name属性
    */
   name?: string;
   [key: string]: any;
