@@ -3,7 +3,7 @@
  * */
 
 import React from 'react';
-import { isBoolean } from 'lodash-es';
+import isBoolean from 'lodash/isBoolean';
 import { ResetComProps, ComProps } from './CustomPreview';
 import PlaygroundLess from './Playground.less';
 

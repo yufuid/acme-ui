@@ -2,7 +2,8 @@
  * MDX 组件 Props 展示
  * */
 import React, { ComponentType } from 'react';
-import { get, isObject } from 'lodash-es';
+import get from 'lodash/get';
+import isObject from 'lodash/isObject';
 import PropItem from './PropItem';
 import { DocProp } from './utils';
 import PropsLess from './Props.less';

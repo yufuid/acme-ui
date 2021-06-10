@@ -2,7 +2,7 @@
  * MDX 解析后组件的渲染容器
  * */
 import React from 'react';
-import { get } from 'lodash-es';
+import get from 'lodash/get';
 import Anchor from '../../compositions/Anchor';
 import WrapperLess from './Wrapper.less';
 

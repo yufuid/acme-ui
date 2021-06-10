@@ -3,7 +3,8 @@
  * */
 
 import React from 'react';
-import { get, isString } from 'lodash-es';
+import get from 'lodash/get';
+import isString from 'lodash/isString';
 import Highlight, { defaultProps, Language, PrismTheme } from 'prism-react-renderer';
 import theme from './theme';
 import CodeLess from './Code.less';

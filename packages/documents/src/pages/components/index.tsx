@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Route, Switch, Redirect, RouteComponentProps } from 'react-router-dom';
-import { get } from 'lodash-es';
+import get from 'lodash/get';
 import MdxHub from '~docs/core/MdxHub';
 import Layout from './views/Layout';
 import MdxPage from './views/Mdxpage';

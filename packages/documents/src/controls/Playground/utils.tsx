@@ -1,4 +1,5 @@
-import { get, isObject } from 'lodash-es';
+import get from 'lodash/get';
+import isObject from 'lodash/isObject';
 import prettier from 'prettier/standalone';
 import parserBabel from 'prettier/parser-babel';
 import { ComProps } from './CustomPreview';
