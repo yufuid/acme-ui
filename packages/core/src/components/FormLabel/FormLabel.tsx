@@ -1,4 +1,5 @@
 import React, { ForwardedRef } from 'react';
+import { get } from 'lodash-es';
 import { uniteClassNames } from '../../utils/tools';
 import './style/formLabel.less';
 
@@ -58,7 +59,7 @@ const FormLabel = React.forwardRef<HTMLLabelElement, FormLabelProps>(
       props || {};
     const controlProps = {
       error,
-      className: uniteClassNames(classes.control, control?.props.className),
+      className: uniteClassNames(classes.control, get(control, 'props.className')),
     };
     return (
       <label

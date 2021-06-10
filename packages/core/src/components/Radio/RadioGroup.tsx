@@ -10,12 +10,33 @@ import './style/RadioGroup.less';
 type RadioSizeType = `${RadioSize}`;
 
 export interface IRadioGroupProps {
+  /**
+   * 样式类名
+   */
   className?: string;
+  /**
+   * 子元素
+   */
   children?: typeof Radio | typeof Radio[];
+  /**
+   * 当前选中的值
+   */
   value?: string | number;
+  /**
+   * 按钮组的布局方式
+   */
   layout?: FormGroupProps['layout'];
+  /**
+   * 同input的name属性
+   */
   name?: string;
+  /**
+   * Radio.Button按钮大小
+   */
   size?: RadioSizeType;
+  /**
+   * 选项变化的回调函数
+   */
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
