@@ -2,7 +2,8 @@
  * type 解析
  * */
 import capitalize from 'capitalize';
-import { has, isString } from 'lodash-es';
+import has from 'lodash/has';
+import isString from 'lodash/isString';
 
 export interface DocProp {
   required: boolean;

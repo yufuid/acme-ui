@@ -4,6 +4,8 @@ import * as ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { HashRouter } from 'react-router-dom';
 import { MDXProvider } from '@mdx-js/react';
+// eslint-disable-next-line import/no-unresolved
+import '@acme-ui/core/styles/cover/index.less';
 import './static/main.less';
 import { Wrapper, Paragraph, headings, UL, OL, Code } from './controls';
 import Root from './pages/root/routes';

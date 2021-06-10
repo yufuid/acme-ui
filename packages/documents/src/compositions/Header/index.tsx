@@ -1,7 +1,7 @@
 /**
  * 顶部导航
  * */
-import { get } from 'lodash-es';
+import get from 'lodash/get';
 import React from 'react';
 import { Link, matchPath, RouteComponentProps } from 'react-router-dom';
 import HeaderLess from './Header.less';

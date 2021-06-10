@@ -2,7 +2,7 @@
  * 布局
  * */
 
-import { get } from 'lodash-es';
+import get from 'lodash/get';
 import React from 'react';
 import { matchPath, RouteComponentProps } from 'react-router-dom';
 import { TMDXHub } from '~docs/core/MdxHub';

@@ -2,7 +2,9 @@
  * MDX 页面锚点
  * */
 import React from 'react';
-import { get, debounce, throttle } from 'lodash-es';
+import get from 'lodash/get';
+import debounce from 'lodash/debounce';
+import throttle from 'lodash/throttle';
 import AnchorLess from './Anchor.less';
 
 interface AnchorProps {
