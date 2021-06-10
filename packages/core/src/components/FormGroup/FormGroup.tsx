@@ -37,7 +37,7 @@ const FormGroup = React.forwardRef<HTMLDivElement, FormGroupProps>(
     const { className, children, layout, ...otherProps } = props || {};
     return (
       <div
-        className={uniteClassNames(classes.root, classes.layout(layout))}
+        className={uniteClassNames(classes.root, classes.layout(layout), className)}
         ref={ref}
         {...otherProps}
       >

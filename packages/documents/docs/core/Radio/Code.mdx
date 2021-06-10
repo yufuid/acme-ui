@@ -1,5 +1,5 @@
 import { Playground, Props } from '~controls';
-import { Radio } from '@acme-ui/core';
+import { Radio, FormLabel } from '@acme-ui/core';
 
 ## 基础用法
 
@@ -14,7 +14,100 @@ import { Radio } from '@acme-ui/core';
     };
     return (
       <div>
-        <Radio onChange={onChange} checked={checkedValue} />
+        <Radio onChange={onChange} checked={checkedValue} label="单选" />
+      </div>
+    );
+  }}
+</Playground>
+
+## 单选组合
+
+单选框不可用状态
+
+<Playground>
+  {() => {
+    const [horizontalValue, setHorizontalValue] = React.useState('1');
+    const onHorizontalChange = (e) => {
+      const value = e.target.value;
+      setHorizontalValue(value);
+    };
+    return (
+      <div>
+        <FormLabel style={{ marginBottom: 24 }}>水平方向</FormLabel>
+        <Radio.Group layout="horizontal" value={horizontalValue} onChange={onHorizontalChange}>
+          <Radio label="男" value="1" style={{ marginRight: '32px' }} />
+          <Radio label="女" value="0" />
+        </Radio.Group>
+        <FormLabel style={{ marginBottom: 24, marginTop: '40px' }}>垂直方向</FormLabel>
+        <Radio.Group>
+          <Radio label="男" />
+          <Radio label="女" />
+        </Radio.Group>
+      </div>
+    );
+  }}
+</Playground>
+
+## 单选组合
+
+由于选项默认可见，不宜过多，若选项过多，建议使用 Select 选择器
+
+<Playground>
+  {() => {
+    const [defaultButtonValue, setDefaultButtonValue] = React.useState('shanghai');
+    const onDefaultChange = (e) => {
+      const value = e.target.value;
+      setDefaultButtonValue(value);
+    };
+    const [smallButtonValue, setSmallButtonValue] = React.useState('shanghai');
+    const onSmallChange = (e) => {
+      const value = e.target.value;
+      setSmallButtonValue(value);
+    };
+    const [largeButtonValue, setLargeButtonValue] = React.useState('shanghai');
+    const onLargeChange = (e) => {
+      const value = e.target.value;
+      setLargeButtonValue(value);
+    };
+    return (
+      <div>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '40px' }}>
+          <FormLabel style={{ marginRight: '40px' }}>大 / H: 40px</FormLabel>
+          <Radio.Group
+            size="large"
+            layout="horizontal"
+            value={largeButtonValue}
+            onChange={onLargeChange}
+          >
+            <Radio.Button label="北京" value="beijing" />
+            <Radio.Button label="上海" value="shanghai" />
+            <Radio.Button label="广州" value="guangzhou" />
+            <Radio.Button label="深圳" value="shenzhen" />
+          </Radio.Group>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '40px' }}>
+          <FormLabel style={{ marginRight: '40px' }}>标准 / H: 36px</FormLabel>
+          <Radio.Group layout="horizontal" value={defaultButtonValue} onChange={onDefaultChange}>
+            <Radio.Button label="北京" value="beijing" />
+            <Radio.Button label="上海" value="shanghai" />
+            <Radio.Button label="广州" value="guangzhou" />
+            <Radio.Button label="深圳" value="shenzhen" />
+          </Radio.Group>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <FormLabel style={{ marginRight: '40px' }}>小 / H: 32px</FormLabel>
+          <Radio.Group
+            size="small"
+            layout="horizontal"
+            value={smallButtonValue}
+            onChange={onSmallChange}
+          >
+            <Radio.Button label="北京" value="beijing" />
+            <Radio.Button label="上海" value="shanghai" />
+            <Radio.Button label="广州" value="guangzhou" />
+            <Radio.Button label="深圳" value="shenzhen" />
+          </Radio.Group>
+        </div>
       </div>
     );
   }}
@@ -25,7 +118,7 @@ import { Radio } from '@acme-ui/core';
 单选框不可用状态
 
 <Playground>
-  <Radio label="男" inline checked disabled />
+  <Radio label="男" inline checked disabled style={{ marginRight: '32px' }} />
   <Radio label="女" inline disabled />
 </Playground>
 

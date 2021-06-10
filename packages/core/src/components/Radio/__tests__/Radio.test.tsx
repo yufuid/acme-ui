@@ -11,19 +11,19 @@ describe('Radio', () => {
   // 渲染不同类型的按钮
   describe('render a radio UI correctly', () => {
     test('should render a base radio', () => {
-      const { getByRole } = render(<Radio role="radio" />);
+      const { getByRole } = render(<Radio />);
       const radio = getByRole('radio');
       expect(radio).toHaveClass(classes.root);
     });
 
     test('should render a disabled radio', () => {
-      const { getByRole } = render(<Radio role="radio" disabled />);
+      const { getByRole } = render(<Radio disabled />);
       const radio = getByRole('radio');
       expect(radio).toHaveClass(classes.disabled);
     });
 
     test('should render a inline radio', () => {
-      const { getByRole } = render(<Radio role="radio" inline />);
+      const { getByRole } = render(<Radio inline />);
       const radio = getByRole('radio');
       expect(radio).toHaveClass(classes.inline);
       expect(radio).toHaveStyle('display: inline-flex;');
@@ -33,13 +33,13 @@ describe('Radio', () => {
   // 是否disabled
   describe('render correctly with disabled props', () => {
     test('should render a disabled radio', () => {
-      const { getByRole } = render(<Radio role="radio" disabled />);
+      const { getByRole } = render(<Radio disabled />);
       const radio = getByRole('radio');
       expect(radio).toBeDisabled();
     });
 
     test('should render a not disabled radio', () => {
-      const { getByRole } = render(<Radio role="radio" />);
+      const { getByRole } = render(<Radio />);
       const radio = getByRole('radio');
       expect(radio).not.toBeDisabled();
     });
@@ -55,7 +55,7 @@ describe('Radio', () => {
         target = e.target;
         checked = e.target.checked;
       });
-      const { getByRole } = render(<Radio role="radio" onChange={mockFn} />);
+      const { getByRole } = render(<Radio onChange={mockFn} />);
       const radio = getByRole('radio');
       userEvent.click(radio);
 
@@ -66,7 +66,7 @@ describe('Radio', () => {
     });
 
     test('on disabled radio', () => {
-      const { getByRole } = render(<Radio role="radio" onChange={clickEvent} disabled />);
+      const { getByRole } = render(<Radio onChange={clickEvent} disabled />);
       const radio = getByRole('radio');
       userEvent.click(radio);
       expect(radio).not.toHaveFocus();

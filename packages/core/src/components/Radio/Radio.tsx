@@ -1,5 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { isFunction } from 'lodash-es';
+import React, { useContext, useState, useEffect } from 'react';
+import { isFunction, get } from 'lodash-es';
+import FormLabel, { FormLabelProps } from '../FormLabel/index';
+import RadioGroup from './RadioGroup';
+import RadioButton from './RadioButton';
+import RadioGroupContext from './RadioGroupContext';
 import { uniteClassNames } from '../../utils/tools';
 import './style/Radio.less';
 
@@ -21,6 +25,14 @@ export interface IRadioProps {
    * @default false
    */
   checked?: boolean;
+  /**
+   * 单选标签
+   */
+  label?: FormLabelProps['children'];
+  /**
+   * 标签位置
+   */
+  labelPlacement?: FormLabelProps['labelPlacement'];
   /**
    * 是否选中，非受控属性
    * @default false
@@ -46,53 +58,93 @@ export interface IRadioProps {
    */
   inline?: boolean;
   /**
-   * 单选按钮大小，仅在Radio.Button生效
+   * 同input的name属性
    */
+  name?: string;
   [key: string]: any;
 }
 
-const Radio: React.ForwardRefExoticComponent<IRadioProps & React.RefAttributes<HTMLInputElement>> =
-  React.forwardRef((props: IRadioProps, ref: React.ForwardedRef<HTMLInputElement>) => {
-    const { className, checked, inline, disabled, defaultChecked, error, onChange, ...otherProps } =
-      props;
+const Radio = React.forwardRef((props: IRadioProps, ref: React.ForwardedRef<HTMLInputElement>) => {
+  const {
+    className,
+    checked,
+    label,
+    inline,
+    disabled,
+    defaultChecked,
+    error,
+    value,
+    onChange,
+    name,
+    ...otherProps
+  } = props;
 
-    const [internalChecked, setInternalChecked] = useState(defaultChecked);
+  const [internalChecked, setInternalChecked] = useState(defaultChecked);
+  useEffect(() => {
+    setInternalChecked(checked);
+  }, [checked]);
 
-    useEffect(() => {
-      setInternalChecked(checked);
-    }, [checked]);
+  let currentChecked = internalChecked;
+  let radioGroupChange: IRadioProps['onChange'] | null = null;
+  let internalName = name;
+  const radioGroup = useContext(RadioGroupContext);
 
-    const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (isFunction(onChange)) {
-        onChange(e);
+  if (radioGroup) {
+    const radioGroupValue = get(radioGroup, 'value');
+    const radioGroupName = get(radioGroup, 'name');
+    const radioGroupChangeFunc = get(radioGroup, 'onChange');
+    if (!('checked' in props) && radioGroupValue) {
+      currentChecked = radioGroupValue === value;
+    }
+    if (isFunction(radioGroupChangeFunc)) {
+      radioGroupChange = radioGroupChangeFunc;
+    }
+    if (!('name' in props) && radioGroupName) {
+      internalName = radioGroupName;
+    }
+  }
+
+  const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (isFunction(onChange)) {
+      onChange(e);
+    }
+    if (isFunction(radioGroupChange)) {
+      radioGroupChange(e);
+    }
+  };
+
+  return (
+    <FormLabel
+      control={
+        <input
+          className={uniteClassNames(
+            classes.root,
+            inline ? classes.inline : '',
+            disabled ? classes.disabled : '',
+            className,
+          )}
+          type="radio"
+          value={value}
+          checked={!!currentChecked}
+          disabled={!!disabled}
+          onChange={handleRadioChange}
+          name={internalName}
+          ref={ref}
+        />
       }
-    };
-
-    return (
-      <input
-        className={uniteClassNames(
-          classes.root,
-          inline ? classes.inline : '',
-          disabled ? classes.disabled : '',
-          className,
-        )}
-        type="radio"
-        checked={!!internalChecked}
-        disabled={!!disabled}
-        onChange={handleRadioChange}
-        ref={ref}
-        {...otherProps}
-      />
-    );
-  });
+      {...otherProps}
+    >
+      {label}
+    </FormLabel>
+  );
+}) as React.ForwardRefExoticComponent<IRadioProps & React.RefAttributes<HTMLInputElement>> & {
+  Group: typeof RadioGroup;
+  Button: typeof RadioButton;
+};
 
 Radio.defaultProps = {
-  checked: false,
-  defaultChecked: false,
-  disabled: false,
-  error: false,
+  labelPlacement: 'right',
   onChange: undefined,
-  inline: false,
 };
 
 export default Radio;
