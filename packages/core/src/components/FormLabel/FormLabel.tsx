@@ -58,7 +58,7 @@ const FormLabel = React.forwardRef<HTMLLabelElement, FormLabelProps>(
       props || {};
     const controlProps = {
       error,
-      className: classes.control,
+      className: uniteClassNames(classes.control, control?.props.className),
     };
     return (
       <label

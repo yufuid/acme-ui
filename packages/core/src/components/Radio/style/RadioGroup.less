@@ -1,0 +1,18 @@
+@import '../../../styles/index.less';
+@import './RadioButton.less';
+
+@acmeRadioGroupPrefix: ~'@{acme-prefix}-radio-group';
+
+.@{acmeRadioGroupPrefix} {
+  .@{acmeRadioButtonPrefix} {
+    border-radius: 0;
+    border-right: 0;
+    &:first-child {
+      border-radius: @border-radius-normal 0 0 @border-radius-normal;
+    }
+    &:last-child {
+      border-radius: 0 @border-radius-normal @border-radius-normal 0;
+      border-right: @border-width-normal solid @border-color-primary;
+    }
+  }
+}
