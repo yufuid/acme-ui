@@ -1,6 +1,6 @@
 /**
  * rollup 配置
- * */ 
+ * */
 import * as path from 'path';
 import * as fs from 'fs';
 import resolve from '@rollup/plugin-node-resolve';
@@ -12,20 +12,32 @@ import eslint from '@rollup/plugin-eslint';
 import postcss from 'rollup-plugin-postcss';
 import {terser} from 'rollup-plugin-terser';
 import autoprefixer from 'autoprefixer';
+import comments from 'postcss-discard-comments';
 import url from 'postcss-url';
 
 const entryFile = 'src/index.ts';
 const BABEL_ENV = process.env.BABEL_ENV || 'umd';
 const extensions = ['.js', '.ts', '.tsx'];
-const globals = {react: 'React', 'react-dom': 'ReactDOM', 'lodash': '_'};
-const externalPkg = ['react', 'react-dom', 'lodash'];
+const globals = {react: 'React', 'react-dom': 'ReactDOM'};
+const externalPkg = ['react', 'react-dom'];
 BABEL_ENV !== 'umd' && externalPkg.push('@babel/runtime');
 const external = id => externalPkg.some(e => id.indexOf(e) === 0);
 const componentDir = 'src/components';
-let componentEntryFiles = [];
+const componentEntryFiles = [];
 try {
-  const cModuleNames = fs.readdirSync(path.resolve(componentDir));  
-  componentEntryFiles = cModuleNames.map((name) => /^[A-Z]\w*/.test(name) ? `${componentDir}/${name}/index.tsx` : undefined).filter(n => !!n);
+  const cModuleNames = fs.readdirSync(path.resolve(componentDir));
+  cModuleNames.forEach((name) => {
+    if (!/^[A-Z]\w*/.test(name)) return;
+    try {
+      fs.readFileSync(`${componentDir}/${name}/index.tsx`);
+      componentEntryFiles.push(`${componentDir}/${name}/index.tsx`);
+    } catch (error) {
+      try {
+        fs.readFileSync(`${componentDir}/${name}/index.ts`);
+        componentEntryFiles.push(`${componentDir}/${name}/index.ts`);
+      } catch (e) {}
+    }
+  });
 } catch (error) {}
 
 // 通用配置
@@ -50,13 +62,17 @@ const commonPlugins = [
 ];
 
 const postcssConfig = {
-  plugins: [autoprefixer({env: BABEL_ENV}), url({ url: 'inline' })],
+  plugins: [
+    autoprefixer({env: BABEL_ENV}),
+    url({ url: 'inline' }),
+    comments({removeAll: true})
+  ],
   extract: true,
   extensions: ['.less', '.css'],
   use: {'less': {javascriptEnabled: true}}
 };
 
-const umdOutput = { 
+const umdOutput = {
   format: 'umd',
   name: 'acme',
   globals,
@@ -100,6 +116,6 @@ export default () => {
         plugins: [postcss(postcssConfig), ...commonPlugins]
       };
     default:
-      return [];      
+      return [];
   }
 };

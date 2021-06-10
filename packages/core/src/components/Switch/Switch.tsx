@@ -68,16 +68,8 @@ export interface SwitchProps {
 
 const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
   (props: SwitchProps, ref: ForwardedRef<HTMLLabelElement>): React.ReactElement => {
-    const {
-      size,
-      className,
-      inputRef,
-      onChange,
-      disabled,
-      loading,
-      defaultChecked,
-      checked,
-    } = props;
+    const { size, className, inputRef, onChange, disabled, loading, defaultChecked, checked } =
+      props;
     const inputCheckedProps = {
       defaultChecked,
     };
