@@ -140,7 +140,6 @@ const Button = React.forwardRef(
   Group: typeof ButtonGroup;
 };
 
-Button.Group = ButtonGroup;
 Button.defaultProps = {
   className: '',
   children: null,

@@ -24,7 +24,7 @@ export interface IRadioButtonProps {
   /**
    * value值
    */
-  value?: string;
+  value?: string | number;
   /**
    * 单选按钮大小
    */

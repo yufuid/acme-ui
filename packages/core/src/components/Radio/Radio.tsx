@@ -22,6 +22,10 @@ export interface IRadioProps {
    */
   className?: string;
   /**
+   * 当前值
+   */
+  value?: string | number;
+  /**
    * 是否选中
    * @default false
    */
