@@ -10,3 +10,4 @@ export { default as Switch } from './components/Switch';
 export { default as Radio } from './components/Radio';
 export { default as FormLabel } from './components/FormLabel';
 export { default as FormGroup } from './components/FormGroup';
+export { default as Input } from './components/Input';

@@ -1,0 +1,125 @@
+@import '../../../styles/index.less';
+
+@acmeInputPrefix: ~'@{acme-prefix}-input';
+
+@default-height: 36px;
+@small-height: 32px;
+@large-height: 40px;
+
+@default-width: 320px;
+
+.@{acmeInputPrefix}-root {
+  display: flex;
+  width: @default-width;
+  align-items: center;
+  padding: 0 @spacing-normal 0 @spacing-md;
+  border: @border-width-normal solid @border-color-primary;
+  border-radius: @border-radius-normal;
+}
+
+.@{acmeInputPrefix} {
+  flex: 1 1 auto;
+  padding: 0;
+  border: none;
+  &::-ms-input-placeholder {
+    color: @font-color-placeholder;
+  }
+  &::-webkit-input-placeholder {
+    color: @font-color-placeholder;
+  }
+  &::-moz-input-placeholder {
+    color: @font-color-placeholder;
+  }
+  &::-o-input-placeholder {
+    color: @font-color-placeholder;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.@{acmeInputPrefix}-start-element {
+  padding: 0 @spacing-normal 0 0;
+}
+
+.@{acmeInputPrefix}-end-element {
+  padding: @spacing-normal 0 @spacing-sm 0;
+}
+
+.@{acmeInputPrefix}-default {
+  height: @default-height;
+}
+
+.@{acmeInputPrefix}-small {
+  height: @small-height;
+}
+
+.@{acmeInputPrefix}-large {
+  height: @large-height;
+}
+
+.@{acmeInputPrefix}-limit {
+  color: @font-color-text;
+}
+
+.@{acmeInputPrefix}-success {
+  border-color: @color-success;
+}
+
+.@{acmeInputPrefix}-success-icon {
+  color: @color-success; // TODO 暂时的 等老姜把正确的svg给到，color样式要删掉
+}
+
+.@{acmeInputPrefix}-active {
+  border-color: @border-color-highlight;
+}
+
+.@{acmeInputPrefix}-error {
+  border-color: @border-color-danger !important; // error状态优先级最高
+}
+
+.@{acmeInputPrefix}-loading-icon {
+  animation: loadingRotate 1s linear infinite;
+}
+
+.@{acmeInputPrefix}-disabled {
+  cursor: not-allowed;
+  background-color: @bg-color-gray;
+  .@{acmeInputPrefix} {
+    cursor: not-allowed;
+    background-color: @bg-color-gray;
+  }
+}
+
+.@{acmeInputPrefix}-full {
+  width: 100%;
+}
+
+.@{acmeInputPrefix}-password-icon {
+  cursor: pointer;
+}
+
+.@{acmeInputPrefix}-number {
+  padding-right: 0;
+  // input::-webkit-outer-spin-button,
+  // input::-webkit-inner-spin-button {
+  //   border-radius: @border-radius-sm;
+  // }
+  // TODO 暂时好像没有NumberInput的样式
+}
+
+@keyframes loadingRotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
