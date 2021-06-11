@@ -1,5 +1,5 @@
 import React from 'react';
-import { isFunction } from 'lodash-es';
+import isFunction from 'lodash/isFunction';
 import FormGroup, { FormGroupProps } from '../FormGroup';
 import Radio from './Radio';
 import RadioGroupContext from './RadioGroupContext';

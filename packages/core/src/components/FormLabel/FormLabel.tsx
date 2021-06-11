@@ -1,5 +1,5 @@
 import React, { ForwardedRef } from 'react';
-import { get } from 'lodash-es';
+import get from 'lodash/get';
 import { uniteClassNames } from '../../utils/tools';
 import './style/formLabel.less';
 

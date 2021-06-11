@@ -33,5 +33,5 @@ module.exports = function (api) {
     ],
   ];
 
-  return { presets, plugins, ignore: [/@babel[\\|/]runtime/, /node_modules\/(?!lodash-es)/] };
+  return { presets, plugins, ignore: [/@babel[\\|/]runtime/, /node_modules\/(?!lodash)/] };
 };

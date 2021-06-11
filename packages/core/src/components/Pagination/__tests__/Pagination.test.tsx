@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
-import { get } from 'lodash-es';
+import get from 'lodash/get';
 import { mountTestSuite } from 'tests/shared';
 import Pagination, { classes } from '../Pagination';
 

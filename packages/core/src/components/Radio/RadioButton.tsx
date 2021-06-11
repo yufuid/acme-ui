@@ -1,5 +1,6 @@
 import React, { ForwardRefExoticComponent, RefAttributes, useContext } from 'react';
-import { get, isFunction } from 'lodash-es';
+import get from 'lodash/get';
+import isFunction from 'lodash/isFunction';
 import { uniteClassNames } from '../../utils/tools';
 import RadioGroupContext from './RadioGroupContext';
 import { RadioSize } from './types';

@@ -1,5 +1,8 @@
 import React, { ChangeEvent, ForwardedRef } from 'react';
-import { isFunction, omit, get, set } from 'lodash-es';
+import isFunction from 'lodash/isFunction';
+import omit from 'lodash/omit';
+import get from 'lodash/get';
+import set from 'lodash/set';
 import { uniteClassNames } from '../../utils/tools';
 import { PrimaryLoadingSvg } from '../Icon/LoadingIcon';
 

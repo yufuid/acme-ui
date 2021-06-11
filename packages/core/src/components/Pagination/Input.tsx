@@ -1,4 +1,5 @@
-import { get, isFunction } from 'lodash-es';
+import get from 'lodash/get';
+import isFunction from 'lodash/isFunction';
 import React, { ForwardedRef } from 'react';
 import './style/input.less';
 

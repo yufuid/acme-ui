@@ -1,5 +1,5 @@
 import React from 'react';
-import { omit } from 'lodash-es';
+import omit from 'lodash/omit';
 import { uniteClassNames } from '../../utils/tools';
 import ButtonGroup from './ButtonGroup';
 import { WhiteLoadingSvg, PrimaryLoadingSvg } from '../Icon/LoadingIcon';

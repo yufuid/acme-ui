@@ -1,15 +1,20 @@
-import { get, isFunction } from 'lodash-es';
+import get from 'lodash/get';
+import isFunction from 'lodash/isFunction';
 import React from 'react';
 
-export interface SelectProps {
+type SelectValue = React.SelectHTMLAttributes<HTMLSelectElement>['value'];
+
+export interface SelectProps<T extends SelectValue> {
   className?: string;
-  options: { label: string; value: any }[];
-  defaultValue?: any;
-  value?: any;
-  onChange?: (e: React.ChangeEvent<HTMLSelectElement>, value: any) => void;
+  options: { label: string; value: T }[];
+  defaultValue?: T;
+  value?: T;
+  onChange?: (e: React.ChangeEvent<HTMLSelectElement>, value: T) => void;
 }
 
-const Select: React.FC<SelectProps> = (props: SelectProps) => {
+const Select = <P extends SelectValue>(
+  props: React.PropsWithChildren<SelectProps<P>>,
+): React.ReactElement | null => {
   const { className, options, onChange, defaultValue, value } = props;
   const valueChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const val = get(e, 'target.value');
@@ -19,7 +24,7 @@ const Select: React.FC<SelectProps> = (props: SelectProps) => {
   };
   return (
     <select value={value} defaultValue={defaultValue} className={className} onChange={valueChange}>
-      {options.map((item: { label: string; value: any }, index: number) => {
+      {options.map((item: { label: string; value: SelectValue }, index: number) => {
         const key = `acme-select-${index}`;
         return (
           <option key={key} value={item.value}>
