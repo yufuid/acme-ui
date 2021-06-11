@@ -16,7 +16,7 @@ export enum FormGroupLayout {
 
 type TFormGroupLayout = `${FormGroupLayout}`;
 
-export interface FormGroupProps {
+export interface FormGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 样式
    */
