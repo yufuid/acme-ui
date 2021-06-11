@@ -60,7 +60,7 @@ class Props extends React.PureComponent<PropsProps> {
         <thead>
           <tr>
             <th>
-              参数{' '}
+              参数
               <span className={PropsLess.thRequired}>
                 (<span className={PropsLess.required}>*</span>为必填)
               </span>

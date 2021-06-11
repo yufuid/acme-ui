@@ -17,10 +17,7 @@ export interface DocProp {
     raw?: any;
     computed?: boolean;
   };
-  defaultValue?: {
-    value: string | boolean;
-    computed: boolean;
-  };
+  // defaultValue?: any;
 }
 
 const RE_OBJECTOF = /(?:React\.)?(?:PropTypes\.)?objectOf\((?:React\.)?(?:PropTypes\.)?(\w+)\)/;
