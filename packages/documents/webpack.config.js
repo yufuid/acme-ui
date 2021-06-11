@@ -127,7 +127,18 @@ module.exports = function (env) {
               loader: 'react-docgen-typescript-loader',
               options: {
                 tsconfigPath: path.resolve(__dirname, "./tsconfig.json"),
-                shouldExtractLiteralValuesFromEnum: true
+                shouldExtractLiteralValuesFromEnum: true,
+                propFilter: (prop) => {
+                  // HTML 原生标签属性都是从 @types/react 继承出来的, 通过以下操作排除打包
+                  if (prop.declarations !== undefined && prop.declarations.length > 0) {
+                    const hasPropAdditionalDescription = prop.declarations.find((declaration) => {
+                      return !declaration.fileName.includes("node_modules");
+                    });
+                    return Boolean(hasPropAdditionalDescription);
+                  }
+
+                  return true;
+                }
               }
             }
           ],
