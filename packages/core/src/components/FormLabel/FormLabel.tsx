@@ -10,6 +10,7 @@ export const classes = {
   placement: (placement: FormLabelProps['labelPlacement']): string =>
     `${classNamePrefix}-${placement}`,
   control: `${classNamePrefix}-control`,
+  content: `${classNamePrefix}-content`,
   required: `${classNamePrefix}-required`,
   error: `${classNamePrefix}-error`,
 };
@@ -23,7 +24,7 @@ export enum FormLabelPlacement {
 
 type TFormLabelPlacement = `${FormLabelPlacement}`;
 
-export interface FormLabelProps {
+export interface FormLabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
   /**
    * 样式
    */
@@ -73,7 +74,7 @@ const FormLabel = React.forwardRef<HTMLLabelElement, FormLabelProps>(
         {...otherProps}
       >
         {control ? React.cloneElement(control, controlProps) : null}
-        <span>
+        <span className={classes.content}>
           {children}
           {required ? (
             <span aria-hidden className={classes.required}>
