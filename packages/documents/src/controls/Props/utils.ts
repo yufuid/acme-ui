@@ -2,7 +2,9 @@
  * type 解析
  * */
 import capitalize from 'capitalize';
-import has from 'lodash/has';
+import get from 'lodash/get';
+import isNaN from 'lodash/isNaN';
+import isRegExp from 'lodash/isRegExp';
 import isString from 'lodash/isString';
 
 export interface DocProp {
@@ -16,7 +18,7 @@ export interface DocProp {
     computed?: boolean;
   };
   defaultValue?: {
-    value: string;
+    value: string | boolean;
     computed: boolean;
   };
 }
@@ -73,20 +75,44 @@ const getTypeStrWithoutUndefined = (docProp: Pick<DocProp, 'type' | 'required'>)
   return tempStr.replace(/\|\sundefined$/, '').replace(/^undefined\s\|/, '');
 };
 
-const getDefaultValue = (docProp: DocProp) => {
-  const { defaultValue, type } = docProp;
+const getDefaultValue = (
+  name: string,
+  docDefaultProps: Record<string, unknown>,
+): React.ReactNode => {
+  const defaultValue = get(docDefaultProps, name);
 
-  if (!defaultValue || !defaultValue.value) return null;
-  if (defaultValue.value === "''") {
-    return '[Empty string]';
+  if (defaultValue === undefined) return null;
+
+  if (defaultValue === null) return 'null';
+
+  switch (typeof defaultValue) {
+    case 'string':
+      return defaultValue === '' ? '[Empty string]' : defaultValue;
+    case 'number':
+      return isNaN(defaultValue) ? 'NaN' : defaultValue;
+    case 'boolean':
+      return defaultValue.toString();
+    case 'function':
+      return defaultValue.toString();
+    case 'object': {
+      if (isRegExp(defaultValue)) return defaultValue.toString();
+      let result = '';
+      try {
+        result = JSON.stringify(
+          defaultValue,
+          (key, value) => {
+            return typeof value === 'function' || isRegExp(value) ? value.toString() : value;
+          },
+          2,
+        );
+      } catch (e) {
+        result = '';
+      }
+      return result;
+    }
+    default:
+      return defaultValue as React.ReactNode;
   }
-  if (type && type.name === 'string') {
-    return defaultValue.value.replace(/\'/g, '"');
-  }
-  if (typeof defaultValue.value === 'object' && has(defaultValue, 'value.toString')) {
-    return (defaultValue.value as { toString: () => string }).toString();
-  }
-  return defaultValue.value;
 };
 
 export { getTypeStr, getDefaultValue, getTypeStrWithoutUndefined };
