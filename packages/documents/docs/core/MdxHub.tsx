@@ -14,6 +14,8 @@ import FormLabelCode from './FormLabel/Code.mdx';
 import FormLabelDesign from './FormLabel/Design.mdx';
 import FormGroupCode from './FormGroup/Code.mdx';
 import FormGroupDesign from './FormGroup/Design.mdx';
+import CheckboxCode from './Checkbox/Code.mdx';
+import CheckboxDesign from './Checkbox/Design.mdx';
 
 export type TMDXHub = {
   /** 标签名 */
@@ -72,6 +74,13 @@ const MdxHub: TMDXHub[] = [
     description: '',
     designMdx: FormGroupDesign,
     codeMdx: FormGroupCode,
+  },
+  {
+    tagName: 'Checkbox',
+    name: '复选框',
+    description: '复选框允许用户从一组中选择一个或多个项目。复选框可以打开或关闭一个选项。',
+    designMdx: CheckboxDesign,
+    codeMdx: CheckboxCode,
   },
 ];
 
