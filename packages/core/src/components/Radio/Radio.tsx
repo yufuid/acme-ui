@@ -63,6 +63,9 @@ export interface IRadioProps {
    * 同input的name属性
    */
   name?: string;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 }
 
 const Radio = React.forwardRef((props: IRadioProps, ref: React.ForwardedRef<HTMLInputElement>) => {
