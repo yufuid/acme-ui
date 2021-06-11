@@ -1,5 +1,5 @@
 import React from 'react';
-import { omit } from 'lodash-es';
+import omit from 'lodash/omit';
 import { uniteClassNames } from '../../utils/tools';
 import ButtonGroup from './ButtonGroup';
 import { WhiteLoadingSvg, PrimaryLoadingSvg } from '../Icon/LoadingIcon';
@@ -140,7 +140,6 @@ const Button = React.forwardRef(
   Group: typeof ButtonGroup;
 };
 
-Button.Group = ButtonGroup;
 Button.defaultProps = {
   className: '',
   children: null,

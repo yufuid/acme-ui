@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { isFunction, get } from 'lodash-es';
+import isFunction from 'lodash/isFunction';
+import get from 'lodash/get';
 import FormLabel, { FormLabelProps } from '../FormLabel/index';
 import RadioGroup from './RadioGroup';
 import RadioButton from './RadioButton';
@@ -20,6 +21,10 @@ export interface IRadioProps {
    * 自定义类名
    */
   className?: string;
+  /**
+   * 当前值
+   */
+  value?: string | number;
   /**
    * 是否选中
    * @default false
@@ -61,6 +66,7 @@ export interface IRadioProps {
    * 同input的name属性
    */
   name?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
 

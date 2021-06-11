@@ -1,4 +1,6 @@
-import { toArray, isString, isArray } from 'lodash-es';
+import toArray from 'lodash/toArray';
+import isString from 'lodash/isString';
+import isArray from 'lodash/isArray';
 
 export const uniteClassNames = (...args: (string | undefined)[]): string => {
   const classNames = toArray(args).filter((className) => {

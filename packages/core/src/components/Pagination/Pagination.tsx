@@ -1,5 +1,8 @@
 import React from 'react';
-import { get, isFunction, isNumber, omit } from 'lodash-es';
+import get from 'lodash/get';
+import isFunction from 'lodash/isFunction';
+import isNumber from 'lodash/isNumber';
+import omit from 'lodash/omit';
 import { getPages, IPageItem, PageItemType } from './util/Pagination';
 import Arrow from './Arrow';
 import DoubleArrow from './DoubleArrow';

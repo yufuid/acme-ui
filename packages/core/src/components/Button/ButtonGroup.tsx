@@ -11,13 +11,13 @@ export interface IButtonGroupProps {
 }
 
 const ButtonGroup: React.ForwardRefExoticComponent<
-  IButtonGroupProps & React.RefAttributes<unknown>
-> = React.forwardRef((props: IButtonGroupProps, ref: any) => {
+  IButtonGroupProps & React.RefAttributes<HTMLDivElement>
+> = React.forwardRef((props: IButtonGroupProps, ref: React.ForwardedRef<HTMLDivElement>) => {
   const { children, className = '', size, ...otherProps } = props;
   return (
     <div className={`${classNamePrefix}-group ${className}`} ref={ref} {...otherProps}>
-      {React.Children.map(children, (child: any) => {
-        const newChild = React.cloneElement(child, { size });
+      {React.Children.map(children, (child) => {
+        const newChild = React.cloneElement(child as never, { size });
         return newChild;
       })}
     </div>

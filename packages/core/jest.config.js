@@ -1,4 +1,4 @@
-const esModules = ['lodash-es'].join('|');
+const esModules = ['lodash'].join('|');
 
 module.exports = {
   /**
