@@ -97,6 +97,7 @@ const classNamePrefix = 'acme-input';
 
 export const classes = {
   root: `${classNamePrefix}-root`,
+  input: `${classNamePrefix}`,
   active: `${classNamePrefix}-active`,
   size: (size: IInputProps['size']) => `${classNamePrefix}-${size}`,
   error: `${classNamePrefix}-error`,
@@ -104,6 +105,7 @@ export const classes = {
   disabled: `${classNamePrefix}-disabled`,
   full: `${classNamePrefix}-full`,
   number: `${classNamePrefix}-number`,
+  loading: `${classNamePrefix}-loading-icon`,
 };
 
 const Input = React.forwardRef((props: IInputProps, ref: React.ForwardedRef<HTMLInputElement>) => {
@@ -177,10 +179,11 @@ const Input = React.forwardRef((props: IInputProps, ref: React.ForwardedRef<HTML
         className,
       )}
       style={style}
+      data-testid="input-root"
     >
       {startElement ? <div className={`${className}-start-element`}>{startElement}</div> : null}
       <input
-        className={uniteClassNames(`${classNamePrefix}`, classes.size(size))}
+        className={uniteClassNames(classes.input, classes.size(size))}
         ref={ref}
         placeholder={placeholder}
         onChange={handleInputChange}
@@ -190,6 +193,7 @@ const Input = React.forwardRef((props: IInputProps, ref: React.ForwardedRef<HTML
         value={value}
         type={type === 'password' ? passwordType : type}
         {...otherProps}
+        data-testid="input"
       />
       {limit ? (
         <div className={`${classNamePrefix}-limit`}>{`${currentValue}/${limit}`}</div>
