@@ -8,6 +8,11 @@
 
 @default-width: 320px;
 
+.@{acmeInputPrefix}-clear-icon {
+  display: none;
+  cursor: pointer;
+}
+
 .@{acmeInputPrefix}-root {
   display: flex;
   width: @default-width;
@@ -15,6 +20,19 @@
   padding: 0 @spacing-normal 0 @spacing-md;
   border: @border-width-normal solid @border-color-primary;
   border-radius: @border-radius-normal;
+  //  当disabled、active、success、error状态时 不使用当前的hover状态
+  &:not(.@{acmeInputPrefix}-disabled):not(.@{acmeInputPrefix}-active):not(.@{acmeInputPrefix}-success):not(.@{acmeInputPrefix}-error):hover {
+    border-color: @border-color-secondary;
+  }
+  &:not(.@{acmeInputPrefix}-disabled):hover {
+    .@{acmeInputPrefix}-clear-appear {
+      display: inline-block;
+    }
+  }
+  &:active,
+  &:focus {
+    border-color: @border-color-primary;
+  }
 }
 
 .@{acmeInputPrefix} {
@@ -63,20 +81,22 @@
   color: @font-color-text;
 }
 
-.@{acmeInputPrefix}-success {
-  border-color: @color-success;
-}
-
-.@{acmeInputPrefix}-success-icon {
-  color: @color-success; // TODO 暂时的 等老姜把正确的svg给到，color样式要删掉
-}
-
 .@{acmeInputPrefix}-active {
   border-color: @border-color-highlight;
 }
 
+.@{acmeInputPrefix}-success {
+  border-color: @color-success;
+  &:hover {
+    border-color: @color-success-7;
+  }
+}
+
 .@{acmeInputPrefix}-error {
-  border-color: @border-color-danger !important; // error状态优先级最高
+  border-color: @border-color-danger;
+  &:hover {
+    border-color: @color-error-7;
+  }
 }
 
 .@{acmeInputPrefix}-loading-icon {

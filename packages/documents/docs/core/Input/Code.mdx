@@ -26,6 +26,24 @@ import { Input, FormLabel, Button } from '@acme-ui/core';
   </div>
 </Playground>
 
+## 可清空
+
+显示清除按钮
+
+<Playground>
+  {() => {
+    return <Input placeholder="请输入内容" clear />;
+  }}
+</Playground>
+
+## 图标
+
+输入后缀增加 icon
+
+<Playground>
+  <Input placeholder="请输入内容" endElement="+" />
+</Playground>
+
 ## 密码类型输入框
 
 密码输入区，默认为隐藏；
@@ -34,26 +52,12 @@ import { Input, FormLabel, Button } from '@acme-ui/core';
   <Input placeholder="请输入内容" type="password" />
 </Playground>
 
-## 数字类型输入框
-
-<Playground>
-  <Input placeholder="请输入内容" type="number" />
-</Playground>
-
 ## 输入限制长度
 
 最大长度 hasLimitHint 会展现限制数字；
 
 <Playground>
   <Input placeholder="请输入内容" limit={10} />
-</Playground>
-
-## 禁用状态
-
-为 Input 设置 disabled 状态。
-
-<Playground>
-  <Input placeholder="请输入内容" disabled />
 </Playground>
 
 ## 与父元素同宽
@@ -113,7 +117,17 @@ import { Input, FormLabel, Button } from '@acme-ui/core';
   }}
 </Playground>
 
+## 禁用状态
+
+为 Input 设置 disabled 状态。
+
+<Playground>
+  <Input placeholder="请输入内容" disabled />
+</Playground>
+
 ## 状态
+
+为 Input 设置 error、success、loading 状态
 
 <Playground>
   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
