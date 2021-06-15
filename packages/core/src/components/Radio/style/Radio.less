@@ -2,13 +2,34 @@
 
 @acmeRadioPrefix: ~'@{acme-prefix}-radio';
 
-.@{acmeRadioPrefix} {
+.@{acmeRadioPrefix}-root {
+  cursor: pointer;
   display: flex;
   align-items: center;
+}
+
+.@{acmeRadioPrefix} {
+  cursor: inherit;
   width: 16px;
   height: 16px;
   margin-top: 0;
   margin-right: @spacing-normal;
+  appearance: none;
+  border: @border-width-normal solid @border-color-secondary;
+  border-radius: 50%;
+  &:checked,
+  &:hover {
+    border-color: @border-color-highlight;
+  }
+  &:checked::before {
+    content: ' ';
+    display: block;
+    width: 8px;
+    height: 8px;
+    margin: 3px auto;
+    border-radius: 50%;
+    background-color: @bg-color-selected;
+  }
 }
 
 .@{acmeRadioPrefix}-inline {
@@ -16,7 +37,15 @@
 }
 
 .@{acmeRadioPrefix}-disabled {
-  .@{acmeRadioPrefix}-label {
-    color: @font-color-disabled;
+  cursor: not-allowed;
+  color: @font-color-disabled;
+  .@{acmeRadioPrefix} {
+    &:checked,
+    &:hover {
+      border-color: @border-color-secondary;
+    }
+    &:checked::before {
+      background-color: @bg-color-unselected;
+    }
   }
 }
