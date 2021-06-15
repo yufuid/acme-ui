@@ -24,3 +24,6 @@ export type { FormGroupProps } from './components/FormGroup';
 
 export { default as Checkbox } from './components/Checkbox';
 export type { CheckboxProps } from './components/Checkbox';
+
+export { default as Tag } from './components/Tag';
+export type { TagProps } from './components/Tag';

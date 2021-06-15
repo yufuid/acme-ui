@@ -1,0 +1,32 @@
+import {Playground, Props} from "../../../src/controls";
+import {Tag} from "@acme-ui/core";
+
+## 基础用法
+简单的展示。
+
+<Playground>
+    <Tag color='#000000' backgroundColor='#EEEEEE' style={{margin: '4px'}}>浅灰色</Tag>
+    <Tag color='#000000' backgroundColor='#DDDDDD' style={{margin: '4px'}}>灰色的</Tag>
+    <Tag color='#000000' backgroundColor='#DDE1E5' style={{margin: '4px'}}>灰色的</Tag>
+    <Tag color='#000000' backgroundColor='#E5E0DF' style={{margin: '4px'}}>灰色的</Tag>
+</Playground>
+
+## 可移除标签
+简单的展示
+<Playground>
+    <Tag color='#000000' backgroundColor='#EEEEEE' style={{margin: '4px'}} closable>浅灰色</Tag>
+    <Tag color='#000000' backgroundColor='#DDDDDD' style={{margin: '4px'}} closable>灰色的</Tag>
+    <Tag color='#000000' backgroundColor='#DDE1E5' style={{margin: '4px'}} closable>灰色的</Tag>
+    <Tag color='#000000' backgroundColor='#E5E0DF' style={{margin: '4px'}} closable>灰色的</Tag>
+    <br/>
+    <Tag color='#B0373C' backgroundColor='#FFD6D9' style={{margin: '4px'}} closable>红色的</Tag>
+</Playground>
+
+## 小圆角标签
+简单的展示
+<Playground>
+    <Tag mode='rect' color='#B0373C' backgroundColor='#FFD6D9' style={{margin: '4px'}} closable>红色的</Tag>
+</Playground>
+
+## API
+<Props of={Tag} />
