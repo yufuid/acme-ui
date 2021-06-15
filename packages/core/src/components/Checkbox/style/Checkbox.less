@@ -73,7 +73,7 @@
 
 .@{checkboxPrefix}-input:checked + .@{checkboxPrefix}-default {
   background-color: @bg-color-selected;
-  border: 1px solid @border-color-highlight;
+  border: @border-width-normal solid @border-color-highlight;
   &:hover {
     &::before {
       box-shadow: 0 0 1px 14px rgba(51, 51, 255, 0.08);
@@ -106,7 +106,7 @@
 
 .@{checkboxPrefix}-indeterminate {
   background-color: @bg-color-selected;
-  border: 1px solid @border-color-highlight;
+  border: @border-width-normal solid @border-color-highlight;
   &:hover {
     &::before {
       box-shadow: 0 0 1px 14px rgba(51, 51, 255, 0.08);
