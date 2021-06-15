@@ -101,7 +101,7 @@ jobs:
       - name: Build 🔧
         run: |
           cd packages/documents
-          yarn docz:build --dest ../../docs
+          yarn build
 
       - name: Deploy 🚀
         uses: peaceiris/actions-gh-pages@v3
