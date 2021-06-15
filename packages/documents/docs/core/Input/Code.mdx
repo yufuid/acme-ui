@@ -32,7 +32,10 @@ import { Input, FormLabel, Button } from '@acme-ui/core';
 
 <Playground>
   {() => {
-    return <Input placeholder="请输入内容" clear />;
+    const onClear = () => {
+      console.log('input is clear, do something...');
+    };
+    return <Input placeholder="请输入内容" clear onClear={onClear} />;
   }}
 </Playground>
 

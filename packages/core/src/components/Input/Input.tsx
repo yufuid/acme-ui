@@ -73,6 +73,10 @@ export interface IInputProps {
    */
   onChange?: (e?: React.ChangeEvent<HTMLInputElement>) => void;
   /**
+   * 输入框清空的回调
+   */
+  onClear?: () => void;
+  /**
    * 输入框字数限制
    */
   limit?: number;
@@ -134,6 +138,7 @@ const Input: React.ForwardRefExoticComponent<IInputProps & React.RefAttributes<H
       style,
       loading,
       clear,
+      onClear,
       startElement,
       endElement,
       ...otherProps
@@ -184,7 +189,10 @@ const Input: React.ForwardRefExoticComponent<IInputProps & React.RefAttributes<H
     const handleInputClear = () => {
       setCurrentValue('');
       if (isFunction(onChange)) {
-        isFunction(onChange());
+        onChange();
+      }
+      if (isFunction(onClear)) {
+        onClear();
       }
     };
 
