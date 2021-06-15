@@ -41,7 +41,7 @@ export interface CheckboxProps {
   /**
    * checkbox 状态改变
    */
-  onChange?: (checked: boolean, e: ChangeEvent) => void;
+  onChange?: (e: ChangeEvent) => void;
   /**
    * label内容
    */
@@ -114,7 +114,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         setCurrChecked(isChecked);
       }
       if (isFunction(onChange)) {
-        onChange(isChecked, e);
+        onChange(e);
       }
       if (isFunction(groupChange)) {
         checkboxGroup?.onChange(value as string);
