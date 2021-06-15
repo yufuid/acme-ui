@@ -20,4 +20,4 @@ export { default as FormLabel } from './components/FormLabel';
 export type { FormLabelProps } from './components/FormLabel';
 
 export { default as FormGroup } from './components/FormGroup';
-export type { FormGroupProps } from './components/FormGroup';
+export { default as Checkbox } from './components/Checkbox';
