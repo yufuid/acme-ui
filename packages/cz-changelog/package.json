@@ -1,6 +1,6 @@
 {
   "name": "@acme-ui/cz-changelog",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.0",
   "private": true,
   "description": "Commititizen adapters for the Lerna project",
   "author": "Yufu FE Team",
@@ -34,5 +34,6 @@
   },
   "peerDependencies": {
     "lerna": ">=3.0.0"
-  }
+  },
+  "devDependencies": {}
 }
