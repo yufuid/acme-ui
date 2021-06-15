@@ -20,7 +20,7 @@ const BABEL_ENV = process.env.BABEL_ENV || 'umd';
 const extensions = ['.js', '.ts', '.tsx'];
 const globals = {react: 'React', 'react-dom': 'ReactDOM'};
 const externalPkg = ['react', 'react-dom'];
-BABEL_ENV !== 'umd' && externalPkg.push('@babel/runtime');
+BABEL_ENV !== 'umd' && externalPkg.push('@babel/runtime', 'lodash');
 const external = id => externalPkg.some(e => id.indexOf(e) === 0);
 const componentDir = 'src/components';
 const componentEntryFiles = [];
