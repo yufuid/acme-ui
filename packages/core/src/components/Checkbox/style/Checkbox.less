@@ -8,7 +8,13 @@
 
 .@{checkboxPrefix} {
   display: inline-block;
-  font-size: 0;
+  cursor: pointer;
+}
+
+.@{checkboxPrefix}-content {
+  display: inline-block;
+  cursor: pointer;
+  line-height: 1;
 }
 
 .@{checkboxPrefix}-default {
@@ -17,6 +23,7 @@
   width: 12px;
   height: 12px;
   margin: 0;
+  vertical-align: bottom;
   cursor: pointer;
   background-color: @bg-color-white;
   border: @border-width-normal solid @border-color-secondary;
@@ -98,12 +105,12 @@
 }
 
 .@{checkboxPrefix}-indeterminate {
-  background: @bg-color-selected;
+  background-color: @bg-color-selected;
   border: 1px solid @border-color-highlight;
   &:hover {
     &::before {
       box-shadow: 0 0 1px 14px rgba(51, 51, 255, 0.08);
-      background: @bg-color-selected;
+      background-color: @bg-color-selected;
     }
   }
   &::after {
@@ -122,6 +129,12 @@
       display: none;
     }
   }
+  &:active {
+    background-color: @color-white;
+    &::before {
+      display: none;
+    }
+  }
 }
 
 .@{checkboxPrefix}-disabled .@{checkboxPrefix}-indeterminate,
@@ -129,13 +142,4 @@
   background-color: @bg-color-unselected;
   border-color: @border-color-secondary;
   cursor: not-allowed;
-}
-
-.@{checkboxPrefix}-label {
-  cursor: pointer;
-}
-
-.@{checkboxPrefix}-label-disabled {
-  cursor: not-allowed;
-  color: @font-color-disabled;
 }

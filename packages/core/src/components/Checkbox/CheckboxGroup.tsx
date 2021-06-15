@@ -5,22 +5,24 @@ import FormGroup from '../FormGroup';
 import Checkbox from './Checkbox';
 import { FormGroupProps } from '../FormGroup/FormGroup';
 
-export interface CheckboxGroupProps {
+type TValue = string | number;
+
+export interface CheckboxGroupProps<T = TValue> {
   className?: string;
   children?: typeof Checkbox | typeof Checkbox[];
   /**
    * 初次选中的值
    */
-  defaultValues?: string[];
+  defaultValues?: T[];
   /**
    * 选中的值
    */
-  values?: string[];
+  values?: T[];
   /**
    * values 发生改变
    * @param values
    */
-  onChange?: (values: string[]) => void;
+  onChange?: (values: T[]) => void;
   /**
    * 是否禁用
    */
@@ -36,13 +38,13 @@ export interface CheckboxGroupProps {
 }
 
 export interface CheckboxGroupContext {
-  values: string[];
+  values: TValue[];
   name?: string;
   disabled: boolean | undefined;
   onChange: (value: string) => void;
 }
 
-export const GroupContext = React.createContext<CheckboxGroupContext | null>(null);
+export const CheckGroupContext = React.createContext<CheckboxGroupContext | null>(null);
 
 const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(
   (props: CheckboxGroupProps, ref: ForwardedRef<HTMLDivElement>) => {
@@ -54,7 +56,7 @@ const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(
       if (values) setCurrValues(values);
     }, [values]);
 
-    const handleChange = (value: string) => {
+    const handleChange = (value: string | number) => {
       const intervalValues = [...currValues];
       const valueIndex = indexOf(currValues, value);
       if (valueIndex === -1) {
@@ -79,7 +81,7 @@ const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(
 
     return (
       <FormGroup ref={ref} className={className} {...otherProps}>
-        <GroupContext.Provider value={context}>{children}</GroupContext.Provider>
+        <CheckGroupContext.Provider value={context}>{children}</CheckGroupContext.Provider>
       </FormGroup>
     );
   },

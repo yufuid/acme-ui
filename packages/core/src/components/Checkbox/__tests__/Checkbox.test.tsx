@@ -1,49 +1,35 @@
 import React from 'react';
 import { mountTestSuite, refTestSuite } from 'tests/shared';
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Checkbox, { classes } from '../Checkbox';
 import { RefTestCaseType } from '../../../../tests/shared/refTest';
 
-const getCheckbox = (container: Element) => {
-  const doms = container.getElementsByTagName('span');
-  if (doms.length) {
-    return doms[0];
-  }
-  return null;
-};
+const testId = 'checkbox-test-id';
 
 describe('checkbox', () => {
   mountTestSuite(<Checkbox />);
 
   describe('render a checkbox correctly', () => {
     test('render default checkbox', () => {
-      const { container } = render(<Checkbox />);
-      const checkbox = getCheckbox(container);
+      const { getByTestId } = render(<Checkbox data-testid={testId} />);
+      const checkbox = getByTestId(testId);
       expect(checkbox).not.toBeNull();
       expect(checkbox).toHaveClass(classes.root);
       expect(checkbox).toContainHTML('input');
     });
     test('render disabled checkbox', () => {
-      const { container } = render(<Checkbox disabled />);
-      const checkbox = getCheckbox(container);
+      const { getByTestId } = render(<Checkbox data-testid={testId} disabled />);
+      const checkbox = getByTestId(testId);
       expect(checkbox).not.toBeNull();
-      if (checkbox) {
-        expect(checkbox).toHaveClass(classes.disabled);
-        const checkboxInput = checkbox.firstChild;
-        expect(checkboxInput).toBeDisabled();
-      }
+      expect(checkbox).toHaveClass(classes.disabled);
+      expect(checkbox.querySelector('input')).toBeDisabled();
     });
     test('render indeterminate checkbox', () => {
-      const { container } = render(<Checkbox indeterminate />);
-      const checkbox = getCheckbox(container);
+      const { getByTestId } = render(<Checkbox data-testid={testId} indeterminate />);
+      const checkbox = getByTestId(testId);
       expect(checkbox).not.toBeNull();
-      if (checkbox) {
-        const checkboxInput = checkbox.firstChild;
-        expect(checkboxInput).not.toBeDisabled();
-        const indeterminateDom = checkbox.lastChild;
-        expect(indeterminateDom).toHaveClass(classes.indeterminate);
-      }
+      expect(checkbox.querySelector(`.${classes.indeterminate}`)).not.toBeNull();
     });
   });
 
@@ -55,21 +41,20 @@ describe('checkbox', () => {
         target = e.target;
         checked = isChecked;
       });
-      const { container } = render(<Checkbox onChange={mockFn} />);
-      const checkboxInput = container.getElementsByTagName('input')[0];
-      userEvent.click(checkboxInput);
+      const { getByTestId } = render(<Checkbox data-testid={testId} onChange={mockFn} />);
+      const checkbox = getByTestId(testId);
+      userEvent.click(checkbox);
       expect(target).toEqual(expect.any(HTMLInputElement));
       expect(checked).toEqual(true);
-      expect(checkboxInput).toHaveFocus();
-      expect(checkboxInput).toBeChecked();
+      expect(checkbox.querySelector('input')).toBeChecked();
     });
     test('on disabled checkbox', () => {
       const mockFn = jest.fn(() => {});
-      const { container } = render(<Checkbox disabled onChange={mockFn} />);
-      fireEvent.click(container);
-      const checkboxInput = container.getElementsByTagName('input')[0];
-      expect(checkboxInput).not.toHaveFocus();
-      expect(checkboxInput).not.toBeChecked();
+      const { getByTestId } = render(<Checkbox data-testid={testId} disabled onChange={mockFn} />);
+      const checkbox = getByTestId(testId);
+      userEvent.click(checkbox);
+      expect(checkbox.querySelector('input')).not.toHaveFocus();
+      expect(checkbox.querySelector('input')).not.toBeChecked();
       expect(mockFn).not.toBeCalled();
     });
   });

@@ -5,7 +5,7 @@ import isFunction from 'lodash/isFunction';
 import indexOf from 'lodash/indexOf';
 import { uniteClassNames } from '../../utils/tools';
 import FormLabel from '../FormLabel';
-import CheckboxGroup, { GroupContext } from './CheckboxGroup';
+import CheckboxGroup, { CheckGroupContext } from './CheckboxGroup';
 import { FormLabelProps } from '../FormLabel/FormLabel';
 import './style/Checkbox.less';
 
@@ -21,7 +21,7 @@ export interface CheckboxProps {
   /**
    * checkbox 值
    */
-  value?: string;
+  value?: string | number;
   /**
    * 禁用状态
    */
@@ -53,7 +53,7 @@ export interface CheckboxProps {
   /**
    * 是否处于错误状态
    */
-  error?: FormLabelProps['error'];
+  error?: boolean;
   /**
    * 所在位置
    */
@@ -68,8 +68,7 @@ export const classes = {
   input: `${classNamePrefix}-input`,
   default: `${classNamePrefix}-default`,
   disabled: `${classNamePrefix}-disabled`,
-  label: `${classNamePrefix}-label`,
-  labelDisabled: `${classNamePrefix}-label-disabled`,
+  content: `${classNamePrefix}-content`,
 };
 
 const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
@@ -86,7 +85,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       ...labelProps
     } = props;
 
-    const checkboxGroup = useContext(GroupContext);
+    const checkboxGroup = useContext(CheckGroupContext);
 
     const [currChecked, setCurrChecked] = useState(defaultChecked);
 
@@ -124,15 +123,9 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
 
     return (
       <FormLabel
-        className={uniteClassNames(classes.label, inputProps.disabled ? classes.labelDisabled : '')}
+        className={uniteClassNames(classes.root, disabled ? classes.disabled : '', className)}
         control={
-          <span
-            className={uniteClassNames(
-              classes.root,
-              inputProps.disabled ? classes.disabled : '',
-              className,
-            )}
-          >
+          <span className={classes.content}>
             <input
               className={classes.input}
               onChange={handleInputChange}
