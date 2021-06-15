@@ -1,0 +1,79 @@
+import {Playground, Props} from "~controls";
+import {Checkbox, FormGroup, FormLabel} from "@acme-ui/core";
+
+# Checkbox 复选框
+
+## 演示
+该演示使您可以预览下拉菜单的不同类型，以及不同类型的不同状态。
+
+## 基础用法
+单独使用可以表示两种状态之间的切换，写在标签中的内容为 checkbox 按钮后的介绍。
+<Playground>
+    <Checkbox>备选项</Checkbox>
+</Playground>
+
+## 选项组
+适用于多个勾选框绑定到同一个数组的情景，通过是否勾选来表示这一组选项中选中的项。
+
+<Playground>
+    <div>
+        <FormLabel style={{margin: '20px 0'}}>水平方向</FormLabel>
+        <Checkbox.Group layout='horizontal'>
+            <Checkbox value='a' style={{marginRight: '30px'}}>选项A</Checkbox>
+            <Checkbox value='b' style={{marginRight: '30px'}}>选项B</Checkbox>
+            <Checkbox value='c'>选项C</Checkbox>
+        </Checkbox.Group>
+        <FormLabel style={{margin: '20px 0'}}>垂直方向</FormLabel>
+        <Checkbox.Group layout='vertical'>
+            <Checkbox value='a' style={{marginBottom: '10px'}}>选项A</Checkbox>
+            <Checkbox value='b' style={{marginBottom: '10px'}}>选项B</Checkbox>
+            <Checkbox value='c'>选项C</Checkbox>
+        </Checkbox.Group>
+    </div>
+</Playground>
+
+## 全选 （包含子集）
+复选框可以与其他复选框具有父子关系。
+<Playground>
+    {() => {
+        const options = ['A', 'B', 'C'];
+        const [horizontalValues, setHorizontalValues] = React.useState([]);
+        const [horizontalIndeterminate, setHorizontalIndeterminate] = React.useState(false);
+        const [horizontalCheckedAll, setHorizontalCheckedAll] = React.useState(false);
+        const horizontalGroupChange = (values) => {
+            setHorizontalValues(values);
+            setHorizontalIndeterminate(values.length > 0 && values.length < 3);
+            setHorizontalCheckedAll(values.length === 3);
+        };
+        const horizontalAllChange = (e) => {
+            const checked = e.target.checked;
+            setHorizontalCheckedAll(checked);
+            setHorizontalIndeterminate(false);
+            setHorizontalValues(checked ? options : []);
+        };
+        return (
+            <div>
+            <Checkbox style={{margin: '10px 0'}} indeterminate={horizontalIndeterminate} checked={horizontalCheckedAll} onChange={horizontalAllChange}>全选</Checkbox>
+            <Checkbox.Group values={horizontalValues} onChange={horizontalGroupChange} layout='horizontal' style={{marginLeft: '20px'}}>
+                {
+                    options.map(item => <Checkbox key={item} value={item} style={{marginRight: '30px'}}>选项{item}</Checkbox>)
+                }
+            </Checkbox.Group>
+        </div>);
+    }}
+</Playground>
+
+## 不可用
+多选框不可用状态。
+<Playground>
+    <FormGroup layout='horizontal'>
+        <Checkbox disabled  style={{marginRight: '30px'}}>备选A</Checkbox>
+        <Checkbox disabled checked style={{marginRight: '30px'}}>备选B</Checkbox>
+        <Checkbox disabled indeterminate>全选</Checkbox>
+    </FormGroup>
+</Playground>
+
+
+## API
+通过设置不同的属性展示不同的开关状态
+<Props of={Checkbox} />

@@ -11,8 +11,10 @@ import './style/Radio.less';
 export const classNamePrefix = 'acme-radio';
 
 export const classes = {
-  root: classNamePrefix,
+  root: `${classNamePrefix}-root`,
+  radio: classNamePrefix,
   inline: `${classNamePrefix}-inline`,
+  error: `${classNamePrefix}-error`,
   disabled: `${classNamePrefix}-disabled`,
 };
 
@@ -27,7 +29,6 @@ export interface IRadioProps {
   value?: string | number;
   /**
    * 是否选中
-   * @default false
    */
   checked?: boolean;
   /**
@@ -40,17 +41,14 @@ export interface IRadioProps {
   labelPlacement?: FormLabelProps['labelPlacement'];
   /**
    * 是否选中，非受控属性
-   * @default false
    */
   defaultChecked?: boolean;
   /**
    * 是否禁用
-   * @default false
    */
   disabled?: boolean;
   /**
    * 错误样式展示，一般在表单中用
-   * @default false
    */
   error?: boolean;
   /**
@@ -59,13 +57,13 @@ export interface IRadioProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /**
    * 当前Radio是否为行内元素
-   * @default false
    */
   inline?: boolean;
   /**
    * 同input的name属性
    */
   name?: string;
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
@@ -97,14 +95,16 @@ const Radio = React.forwardRef((props: IRadioProps, ref: React.ForwardedRef<HTML
 
   if (radioGroup) {
     const radioGroupValue = get(radioGroup, 'value');
-    const radioGroupName = get(radioGroup, 'name');
-    const radioGroupChangeFunc = get(radioGroup, 'onChange');
     if (!('checked' in props) && radioGroupValue) {
       currentChecked = radioGroupValue === value;
     }
+
+    const radioGroupChangeFunc = get(radioGroup, 'onChange');
     if (isFunction(radioGroupChangeFunc)) {
       radioGroupChange = radioGroupChangeFunc;
     }
+
+    const radioGroupName = get(radioGroup, 'name');
     if (!('name' in props) && radioGroupName) {
       internalName = radioGroupName;
     }
@@ -121,14 +121,16 @@ const Radio = React.forwardRef((props: IRadioProps, ref: React.ForwardedRef<HTML
 
   return (
     <FormLabel
+      className={uniteClassNames(
+        classes.root,
+        inline ? classes.inline : '',
+        error ? classes.error : '',
+        disabled ? classes.disabled : '',
+        className,
+      )}
       control={
         <input
-          className={uniteClassNames(
-            classes.root,
-            inline ? classes.inline : '',
-            disabled ? classes.disabled : '',
-            className,
-          )}
+          className={classes.radio}
           type="radio"
           value={value}
           checked={!!currentChecked}

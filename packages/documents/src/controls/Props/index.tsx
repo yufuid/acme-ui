@@ -32,31 +32,47 @@ class Props extends React.PureComponent<PropsProps> {
 
     if (ReactMemoSymbol && get(of, '$$typeof') === ReactMemoSymbol) {
       if (!isObject(memoProps) && !isObject(commonProps)) return [];
-      if (isObject(memoProps)) return Object.values(memoProps);
-      return Object.values(commonProps);
+      return isObject(memoProps) ? Object.values(memoProps) : Object.values(commonProps);
     }
 
-    if (!isObject(commonProps)) return [];
-    return Object.values(commonProps);
+    return isObject(commonProps) ? Object.values(commonProps) : [];
+  }
+
+  getDocDefaultProps() {
+    const { of } = this.props;
+    const commonDef = get(of, 'defaultProps');
+    const memoDef = get(of, 'type.defaultProps');
+
+    if (ReactMemoSymbol && get(of, '$$typeof') === ReactMemoSymbol) {
+      if (!isObject(memoDef) && !isObject(commonDef)) return {};
+      return isObject(memoDef) ? memoDef : commonDef;
+    }
+
+    return isObject(commonDef) ? commonDef : {};
   }
 
   render(): React.ReactNode {
     const docProps = this.getDocProps();
+    const docDefaultProps = this.getDocDefaultProps();
 
     return (
       <table className={PropsLess.table}>
         <thead>
           <tr>
-            <th>参数</th>
+            <th>
+              参数
+              <span className={PropsLess.thRequired}>
+                (<span className={PropsLess.required}>*</span>为必填)
+              </span>
+            </th>
             <th>说明</th>
             <th>类型</th>
             <th>默认值</th>
-            {/* <th>是否必填</th> */}
           </tr>
         </thead>
         <tbody>
           {docProps.map((docProp) => {
-            return <PropItem {...docProp} key={docProp.name} />;
+            return <PropItem {...docProp} key={docProp.name} docDefaultProps={docDefaultProps} />;
           })}
         </tbody>
       </table>

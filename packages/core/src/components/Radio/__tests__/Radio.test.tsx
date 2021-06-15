@@ -5,26 +5,28 @@ import { RefTestCaseType } from 'tests/shared/refTest';
 import { mountTestSuite, refTestSuite } from 'tests/shared';
 import Radio, { classes } from '../Radio';
 
+const testId = 'radio-test-id';
+
 describe('Radio', () => {
-  mountTestSuite(<Radio />);
+  mountTestSuite(<Radio data-testid={testId} />);
 
   // 渲染不同类型的按钮
   describe('render a radio UI correctly', () => {
     test('should render a base radio', () => {
-      const { getByRole } = render(<Radio />);
-      const radio = getByRole('radio');
+      const { getByTestId } = render(<Radio data-testid={testId} />);
+      const radio = getByTestId(testId);
       expect(radio).toHaveClass(classes.root);
     });
 
     test('should render a disabled radio', () => {
-      const { getByRole } = render(<Radio disabled />);
-      const radio = getByRole('radio');
+      const { getByTestId } = render(<Radio data-testid={testId} disabled />);
+      const radio = getByTestId(testId);
       expect(radio).toHaveClass(classes.disabled);
     });
 
     test('should render a inline radio', () => {
-      const { getByRole } = render(<Radio inline />);
-      const radio = getByRole('radio');
+      const { getByTestId } = render(<Radio data-testid={testId} inline />);
+      const radio = getByTestId(testId);
       expect(radio).toHaveClass(classes.inline);
       expect(radio).toHaveStyle('display: inline-flex;');
     });
@@ -33,13 +35,13 @@ describe('Radio', () => {
   // 是否disabled
   describe('render correctly with disabled props', () => {
     test('should render a disabled radio', () => {
-      const { getByRole } = render(<Radio disabled />);
+      const { getByRole } = render(<Radio data-testid={testId} disabled />);
       const radio = getByRole('radio');
       expect(radio).toBeDisabled();
     });
 
     test('should render a not disabled radio', () => {
-      const { getByRole } = render(<Radio />);
+      const { getByRole } = render(<Radio data-testid={testId} />);
       const radio = getByRole('radio');
       expect(radio).not.toBeDisabled();
     });
@@ -55,7 +57,7 @@ describe('Radio', () => {
         target = e.target;
         checked = e.target.checked;
       });
-      const { getByRole } = render(<Radio onChange={mockFn} />);
+      const { getByRole } = render(<Radio data-testid={testId} onChange={mockFn} />);
       const radio = getByRole('radio');
       userEvent.click(radio);
 
@@ -66,7 +68,7 @@ describe('Radio', () => {
     });
 
     test('on disabled radio', () => {
-      const { getByRole } = render(<Radio onChange={clickEvent} disabled />);
+      const { getByRole } = render(<Radio data-testid={testId} onChange={clickEvent} disabled />);
       const radio = getByRole('radio');
       userEvent.click(radio);
       expect(radio).not.toHaveFocus();
@@ -79,7 +81,7 @@ describe('Radio', () => {
       const elementRef = React.createRef<HTMLInputElement>();
       const mockFn = jest.fn(() => {});
 
-      render(<Radio ref={elementRef} onChange={mockFn} />);
+      render(<Radio data-testid={testId} ref={elementRef} onChange={mockFn} />);
 
       expect(elementRef.current).toBeInTheDocument();
 
@@ -96,7 +98,7 @@ describe('Radio', () => {
         elementRef = ref;
       };
 
-      render(<Radio ref={radioRefCallback} />);
+      render(<Radio data-testid={testId} ref={radioRefCallback} />);
 
       expect(elementRef).toBeInTheDocument();
 
@@ -107,7 +109,7 @@ describe('Radio', () => {
       const Test = () => {
         elementRef = React.useRef<HTMLInputElement>(null);
 
-        return <Radio ref={elementRef} />;
+        return <Radio data-testid={testId} ref={elementRef} />;
       };
 
       await waitFor(() => {
