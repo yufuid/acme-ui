@@ -13,14 +13,14 @@ describe('Input', () => {
     // 正常状态
     test('render a base input', () => {
       const { getByTestId } = render(<Input />);
-      const inputRoot = getByTestId('input-root');
+      const inputRoot = getByTestId('acme-input-root');
       expect(inputRoot).toHaveClass(classes.root);
     });
     // 禁用状态
     test('render a disabled input', () => {
-      const { getByTestId } = render(<Input disabled />);
-      const inputRoot = getByTestId('input-root');
-      const input = getByTestId('input');
+      const { getByTestId } = render(<Input disabled data-testid="acme-input" />);
+      const inputRoot = getByTestId('acme-input-root');
+      const input = getByTestId('acme-input');
       expect(inputRoot).toHaveClass(classes.disabled);
       expect(input).toBeDisabled();
     });
@@ -28,29 +28,29 @@ describe('Input', () => {
     // 成功状态
     test('render a success status input', () => {
       const { getByTestId } = render(<Input success />);
-      const inputRoot = getByTestId('input-root');
+      const inputRoot = getByTestId('acme-input-root');
       expect(inputRoot).toHaveClass(classes.success);
     });
 
     // 错误态
     test('render a error status input', () => {
       const { getByTestId } = render(<Input error />);
-      const inputRoot = getByTestId('input-root');
+      const inputRoot = getByTestId('acme-input-root');
       expect(inputRoot).toHaveClass(classes.error);
     });
 
     // loading状态
     test('should render a startIcon button', () => {
       const { getByTestId } = render(<Input loading />);
-      const inputRoot = getByTestId('input-root');
-      const endIcon = inputRoot.getElementsByClassName(classes.loading)[0];
+      const inputRoot = getByTestId('acme-input-root');
+      const endIcon = inputRoot.getElementsByClassName(classes.loadingIcon)[0];
       expect(endIcon).toBeInTheDocument();
     });
 
     // 与父元素同宽
     test('render a fullWidth input', () => {
       const { getByTestId } = render(<Input fullWidth />);
-      const inputRoot = getByTestId('input-root');
+      const inputRoot = getByTestId('acme-input-root');
       expect(inputRoot).toHaveClass(classes.full);
     });
   });
@@ -58,8 +58,8 @@ describe('Input', () => {
   // 输入事件测试
   describe('', () => {
     test('on default button', async () => {
-      const { getByTestId } = render(<Input />);
-      const input = getByTestId('input');
+      const { getByTestId } = render(<Input data-testid="acme-input" />);
+      const input = getByTestId('acme-input');
       userEvent.type(input, 'hello world');
       expect(input).toHaveValue('hello world');
     });

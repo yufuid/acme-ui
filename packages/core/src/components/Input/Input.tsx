@@ -114,7 +114,8 @@ export const classes = {
   disabled: `${classNamePrefix}-disabled`,
   full: `${classNamePrefix}-full`,
   number: `${classNamePrefix}-number`,
-  loading: `${classNamePrefix}-loading-icon`,
+  loading: `${classNamePrefix}-loading`,
+  loadingIcon: `${classNamePrefix}-loading-icon`,
   clear: `${classNamePrefix}-clear-icon`,
 };
 
@@ -203,15 +204,18 @@ const Input: React.ForwardRefExoticComponent<IInputProps & React.RefAttributes<H
           isFocus ? classes.active : '',
           success ? classes.success : '',
           error || limitError ? classes.error : '',
+          loading ? classes.loading : '',
           disabled ? classes.disabled : '',
           fullWidth ? classes.full : '',
           type === 'number' ? classes.number : '',
           className,
         )}
         style={style}
-        data-testid="input-root"
+        data-testid="acme-input-root"
       >
-        {startElement ? <div className={`${className}-start-element`}>{startElement}</div> : null}
+        {startElement ? (
+          <div className={`${classNamePrefix}-start-element`}>{startElement}</div>
+        ) : null}
         <input
           className={uniteClassNames(classes.input, classes.size(size))}
           placeholder={placeholder}
@@ -222,7 +226,6 @@ const Input: React.ForwardRefExoticComponent<IInputProps & React.RefAttributes<H
           value={currentValue}
           type={type === 'password' ? passwordType : type}
           {...otherProps}
-          data-testid="input"
           ref={ref}
         />
         {clear ? (
@@ -235,16 +238,21 @@ const Input: React.ForwardRefExoticComponent<IInputProps & React.RefAttributes<H
           />
         ) : null}
         {limit ? (
-          <div className={`${classNamePrefix}-limit`}>{`${currentValueLen}/${limit}`}</div>
+          <div
+            className={uniteClassNames(
+              `${classNamePrefix}-limit`,
+              limitError ? `${classNamePrefix}-limit-error` : '',
+            )}
+          >{`${currentValueLen}/${limit}`}</div>
         ) : null}
         {success ? <SuccessSvg /> : null}
-        {loading ? <PrimaryLoadingSvg className={classes.loading} /> : null}
+        {loading ? <PrimaryLoadingSvg className={classes.loadingIcon} /> : null}
         {type === 'password' ? (
-          <div className={`${classNamePrefix}-password-icon`} onClick={handlePasswordVisible}>
+          <span className={`${classNamePrefix}-password-icon`} onClick={handlePasswordVisible}>
             {isPassword ? <PasswordOpenEyeSvg /> : <PasswordCloseEyeSvg />}
-          </div>
+          </span>
         ) : null}
-        {endElement ? <div className={`${className}-end-element`}>{endElement}</div> : null}
+        {endElement ? <div className={`${classNamePrefix}-end-element`}>{endElement}</div> : null}
       </div>
     );
   });
