@@ -37,9 +37,9 @@ describe('checkbox', () => {
     test('on default checkbox', () => {
       let target = null;
       let checked = false;
-      const mockFn = jest.fn((isChecked, e) => {
+      const mockFn = jest.fn((e) => {
         target = e.target;
-        checked = isChecked;
+        checked = target.checked;
       });
       const { getByTestId } = render(<Checkbox data-testid={testId} onChange={mockFn} />);
       const checkbox = getByTestId(testId);
