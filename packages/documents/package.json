@@ -1,6 +1,6 @@
 {
   "name": "@acme-ui/documents",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.0",
   "private": true,
   "description": "Acme UI Documents",
   "author": "Yufu FE Team",
@@ -96,8 +96,8 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "@acme-ui/core": "^0.0.0",
-    "@acme-ui/icons": "^0.0.0",
+    "@acme-ui/core": "^0.0.1-alpha.0",
+    "@acme-ui/icons": "^0.0.1-alpha.0",
     "@babel/runtime": "^7.12.0",
     "@hot-loader/react-dom": "^17.0.1",
     "@mdx-js/react": "^1.6.22",

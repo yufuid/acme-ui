@@ -2,7 +2,7 @@
   "packages": [
     "packages/*"
   ],
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.0",
   "npmClient": "yarn",
   "useWorkspaces": true,
   "command": {
@@ -22,9 +22,17 @@
       "changelogPreset": {
         "name": "@acme-ui/conventional-changelog",
         "scopeSequence": [
-          { "scope": "@acme-ui/core" },
-          { "scope": "@acme-ui/icons" },
-          { "scope": "@acme-ui/documents", "alias": "📖 Documentation", "mixin": true }
+          {
+            "scope": "@acme-ui/core"
+          },
+          {
+            "scope": "@acme-ui/icons"
+          },
+          {
+            "scope": "@acme-ui/documents",
+            "alias": "📖 Documentation",
+            "mixin": true
+          }
         ]
       }
     }
