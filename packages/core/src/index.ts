@@ -22,5 +22,8 @@ export type { FormLabelProps } from './components/FormLabel';
 export { default as FormGroup } from './components/FormGroup';
 export type { FormGroupProps } from './components/FormGroup';
 
+export { default as Input } from './components/Input';
+export type { IInputProps } from './components/Input';
+
 export { default as Checkbox } from './components/Checkbox';
 export type { CheckboxProps } from './components/Checkbox';

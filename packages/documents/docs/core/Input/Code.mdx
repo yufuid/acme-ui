@@ -1,0 +1,145 @@
+import { Playground, Props } from '~controls';
+import { Input, FormLabel, Button } from '@acme-ui/core';
+
+## 基础用法
+
+<Playground>
+  <Input placeholder="请输入内容" />
+</Playground>
+
+## 尺寸
+
+三种不同大小的尺寸
+
+<Playground>
+  <div style={{ display: 'flex', alignItems: 'center', marginBottom: '40px' }}>
+    <FormLabel style={{ width: '100px' }}>大/H： 40px</FormLabel>
+    <Input placeholder="请输入内容" size="large" />
+  </div>
+  <div style={{ display: 'flex', alignItems: 'center', marginBottom: '40px' }}>
+    <FormLabel style={{ width: '100px' }}>标准/H：36px</FormLabel>
+    <Input placeholder="请输入内容" />
+  </div>
+  <div style={{ display: 'flex', alignItems: 'center' }}>
+    <FormLabel style={{ width: '100px' }}>小/H：32px</FormLabel>
+    <Input placeholder="请输入内容" size="small" />
+  </div>
+</Playground>
+
+## 可清空
+
+显示清除按钮
+
+<Playground>
+  {() => {
+    const onClear = () => {
+      console.log('input is clear, do something...');
+    };
+    return <Input placeholder="请输入内容" clear onClear={onClear} />;
+  }}
+</Playground>
+
+## 图标
+
+输入后缀增加 icon
+
+<Playground>
+  <Input placeholder="请输入内容" endElement="+" />
+</Playground>
+
+## 密码类型输入框
+
+密码输入区，默认为隐藏；
+
+<Playground>
+  <Input placeholder="请输入内容" type="password" />
+</Playground>
+
+## 输入限制长度
+
+最大长度 hasLimitHint 会展现限制数字；
+
+<Playground>
+  <Input placeholder="请输入内容" limit={10} />
+</Playground>
+
+## 与父元素同宽
+
+<Playground>
+  <Input placeholder="请输入内容" fullWidth />
+</Playground>
+
+## 位置聚焦
+
+聚焦额外配置属性
+
+<Playground>
+  {() => {
+    const inputRef = React.createRef();
+    const jumpToStart = () => {
+      inputRef.selectionStart = 0;
+      inputRef.current.focus();
+      inputRef.current.setSelectionRange(0, 0);
+    };
+    const jumpToEnd = () => {
+      const valueLen = inputRef.current.value.length;
+      inputRef.current.focus();
+      inputRef.current.setSelectionRange(valueLen, valueLen);
+    };
+    const selectAll = () => {
+      inputRef.current.select();
+    };
+    return (
+      <div>
+        <Input
+          ref={inputRef}
+          placeholder="请输入内容"
+          style={{ width: '400px' }}
+          value="这是一个输入框"
+        />
+        <div
+          style={{
+            width: '400px',
+            marginTop: '24px',
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Button mode="outlined" size="small" onClick={jumpToStart}>
+            开始位置
+          </Button>
+          <Button mode="outlined" size="small" onClick={selectAll}>
+            聚焦并全选
+          </Button>
+          <Button mode="outlined" size="small" onClick={jumpToEnd}>
+            结束位置
+          </Button>
+        </div>
+      </div>
+    );
+  }}
+</Playground>
+
+## 禁用状态
+
+为 Input 设置 disabled 状态。
+
+<Playground>
+  <Input placeholder="请输入内容" disabled />
+</Playground>
+
+## 状态
+
+为 Input 设置 error、success、loading 状态
+
+<Playground>
+  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <Input placeholder="请输入内容" success style={{ width: '25%' }} />
+    <Input placeholder="请输入内容" error style={{ width: '25%' }} />
+    <Input placeholder="请输入内容" loading style={{ width: '25%' }} />
+  </div>
+</Playground>
+
+## API
+
+<Props of={Input} />

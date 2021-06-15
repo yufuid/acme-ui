@@ -14,6 +14,8 @@ import FormLabelCode from './FormLabel/Code.mdx';
 import FormLabelDesign from './FormLabel/Design.mdx';
 import FormGroupCode from './FormGroup/Code.mdx';
 import FormGroupDesign from './FormGroup/Design.mdx';
+import InputCode from './Input/Code.mdx';
+import InputDesign from './Input/Design.mdx';
 import CheckboxCode from './Checkbox/Code.mdx';
 import CheckboxDesign from './Checkbox/Design.mdx';
 
@@ -74,6 +76,13 @@ const MdxHub: TMDXHub[] = [
     description: '',
     designMdx: FormGroupDesign,
     codeMdx: FormGroupCode,
+  },
+  {
+    tagName: 'Input',
+    name: '输入框',
+    description: '',
+    designMdx: InputDesign,
+    codeMdx: InputCode,
   },
   {
     tagName: 'Checkbox',
