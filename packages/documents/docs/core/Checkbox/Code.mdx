@@ -45,7 +45,8 @@ import {Checkbox, FormGroup, FormLabel} from "@acme-ui/core";
             setHorizontalIndeterminate(values.length > 0 && values.length < 3);
             setHorizontalCheckedAll(values.length === 3);
         };
-        const horizontalAllChange = (checked, e) => {
+        const horizontalAllChange = (e) => {
+            const checked = e.target.checked;
             setHorizontalCheckedAll(checked);
             setHorizontalIndeterminate(false);
             setHorizontalValues(checked ? options : []);
