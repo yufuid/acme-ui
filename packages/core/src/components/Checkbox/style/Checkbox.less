@@ -17,6 +17,11 @@
   line-height: 1;
 }
 
+.@{checkboxPrefix}-disabled {
+  color: @font-color-disabled;
+  cursor: not-allowed;
+}
+
 .@{checkboxPrefix}-default {
   position: relative;
   display: inline-block;
@@ -142,4 +147,8 @@
   background-color: @bg-color-unselected;
   border-color: @border-color-secondary;
   cursor: not-allowed;
+
+  &:active {
+    background-color: @bg-color-unselected;
+  }
 }

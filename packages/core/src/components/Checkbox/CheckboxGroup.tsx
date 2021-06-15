@@ -2,10 +2,10 @@ import React, { ForwardedRef, useEffect } from 'react';
 import indexOf from 'lodash/indexOf';
 import isFunction from 'lodash/isFunction';
 import FormGroup from '../FormGroup';
-import Checkbox from './Checkbox';
+import Checkbox, { CheckboxProps } from './Checkbox';
 import { FormGroupProps } from '../FormGroup/FormGroup';
 
-type TValue = string | number;
+type TValue = Required<CheckboxProps>['value'];
 
 export interface CheckboxGroupProps<T = TValue> {
   className?: string;
