@@ -38,11 +38,16 @@ export interface TagProps extends React.HTMLAttributes<HTMLSpanElement> {
    * 关闭事件
    */
   onClose?: (e: React.MouseEvent) => void;
+  /**
+   * 组件样式
+   */
+  className?: string;
 }
 
 const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
   (props: TagProps, ref: ForwardedRef<HTMLSpanElement>) => {
-    const { color, backgroundColor, mode, closable, style, children, ...resetProps } = props;
+    const { color, backgroundColor, mode, closable, style, children, className, ...resetProps } =
+      props;
 
     const [visible, setVisible] = useState(false);
 
@@ -70,6 +75,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
           classes.root,
           classes.appearance(mode),
           visible ? classes.visible : '',
+          className,
         )}
         style={{
           color,
