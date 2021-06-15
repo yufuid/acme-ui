@@ -129,11 +129,7 @@
 
 .@{checkboxPrefix}-disabled .@{checkboxPrefix}-default {
   cursor: not-allowed;
-  &:hover {
-    &::before {
-      display: none;
-    }
-  }
+  &:hover,
   &:active {
     background-color: @color-white;
     &::before {
@@ -148,6 +144,7 @@
   border-color: @border-color-secondary;
   cursor: not-allowed;
 
+  &:hover,
   &:active {
     background-color: @bg-color-unselected;
   }
