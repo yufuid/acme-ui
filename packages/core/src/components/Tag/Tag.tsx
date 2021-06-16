@@ -11,7 +11,7 @@ const classNamePrefix = 'acme-tag';
 export const classes = {
   root: `${classNamePrefix}`,
   appearance: (mode: TagProps['mode']) => `${classNamePrefix}-${mode}`,
-  closeIcon: `${classNamePrefix}-closeIcon`,
+  closeIcon: `${classNamePrefix}-close-icon`,
   visible: `${classNamePrefix}-visible`,
 };
 
