@@ -1,7 +1,6 @@
-import React, { ChangeEvent, ForwardedRef } from 'react';
+import * as React from 'react';
 import isFunction from 'lodash/isFunction';
 import omit from 'lodash/omit';
-import get from 'lodash/get';
 import set from 'lodash/set';
 import { uniteClassNames } from '../../utils/tools';
 import { PrimaryLoadingSvg } from '../Icon/LoadingIcon';
@@ -34,7 +33,6 @@ export interface SwitchProps {
   className?: string;
   /**
    * Switch 大小
-   * @default SwitchSize.DEFAULT
    */
   size?: TSwitchSize;
   /**
@@ -43,22 +41,18 @@ export interface SwitchProps {
   checked?: boolean;
   /**
    * 默认选中状态
-   * @default true
    */
   defaultChecked?: boolean;
   /**
    * 是否禁用
-   * @default false
    */
   disabled?: boolean;
   /**
    * 真实的input元素
-   * @default null
    */
   inputRef?: React.Ref<HTMLInputElement>;
   /**
    * 是否处于加载状态
-   * @default false
    */
   loading?: boolean;
   /**
@@ -66,11 +60,11 @@ export interface SwitchProps {
    * @param checked
    * @param event
    */
-  onChange?: (checked: boolean, event: ChangeEvent) => void;
+  onChange?: (event: React.ChangeEvent) => void;
 }
 
 const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
-  (props: SwitchProps, ref: ForwardedRef<HTMLLabelElement>): React.ReactElement => {
+  (props: SwitchProps, ref: React.ForwardedRef<HTMLLabelElement>): React.ReactElement => {
     const { size, className, inputRef, onChange, disabled, loading, defaultChecked, checked } =
       props;
     const inputCheckedProps = {
@@ -91,10 +85,9 @@ const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
       'checked',
     ]);
 
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-      const isChecked = get(e, 'target.checked');
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (isFunction(onChange)) {
-        onChange(isChecked, e);
+        onChange(e);
       } else {
         console.warn('switch props onChange is not a function');
       }

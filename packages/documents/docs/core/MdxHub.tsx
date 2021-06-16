@@ -14,10 +14,14 @@ import FormLabelCode from './FormLabel/Code.mdx';
 import FormLabelDesign from './FormLabel/Design.mdx';
 import FormGroupCode from './FormGroup/Code.mdx';
 import FormGroupDesign from './FormGroup/Design.mdx';
+import InputCode from './Input/Code.mdx';
+import InputDesign from './Input/Design.mdx';
 import CheckboxCode from './Checkbox/Code.mdx';
 import CheckboxDesign from './Checkbox/Design.mdx';
 import FormDescriptionCode from './FormDescription/Code.mdx';
 import FormDescriptionDesign from './FormDescription/Design.mdx';
+import TagCode from './Tag/Code.mdx';
+import TagDesign from './Tag/Design.mdx';
 
 export type TMDXHub = {
   /** 标签名 */
@@ -78,6 +82,13 @@ const MdxHub: TMDXHub[] = [
     codeMdx: FormGroupCode,
   },
   {
+    tagName: 'Input',
+    name: '输入框',
+    description: '',
+    designMdx: InputDesign,
+    codeMdx: InputCode,
+  },
+  {
     tagName: 'Checkbox',
     name: '复选框',
     description: '复选框允许用户从一组中选择一个或多个项目。复选框可以打开或关闭一个选项。',
@@ -90,6 +101,13 @@ const MdxHub: TMDXHub[] = [
     description: '',
     designMdx: FormDescriptionDesign,
     codeMdx: FormDescriptionCode,
+  },
+  {
+    tagName: 'Tag',
+    name: '标签',
+    description: '标签用于进行标记和分类。',
+    designMdx: TagDesign,
+    codeMdx: TagCode,
   },
 ];
 

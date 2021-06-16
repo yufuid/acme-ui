@@ -1,0 +1,32 @@
+@import '../../../styles/index';
+
+@tagPrefix: ~'@{acme-prefix}-tag';
+
+.@{tagPrefix} {
+  display: inline-block;
+  padding: @spacing-sm @spacing-normal;
+  transition: all ease-out 0.2s;
+  .text-secondary();
+
+  line-height: unset;
+}
+
+.@{tagPrefix}-visible {
+  display: none;
+}
+
+.@{tagPrefix}-default {
+  border-radius: @spacing-normal + @spacing-sm;
+}
+
+.@{tagPrefix}-rect {
+  border-radius: @spacing-xs;
+}
+
+.@{tagPrefix}-close-icon {
+  display: inline-block;
+  cursor: pointer;
+  margin-left: @spacing-sm;
+  vertical-align: middle;
+  font-size: 0;
+}
