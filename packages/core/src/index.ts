@@ -28,5 +28,8 @@ export type { IInputProps } from './components/Input';
 export { default as Checkbox } from './components/Checkbox';
 export type { CheckboxProps } from './components/Checkbox';
 
+export { default as FormDescription } from './components/FormDescription';
+export type { FormDescriptionProps } from './components/FormDescription';
+
 export { default as Tag } from './components/Tag';
 export type { TagProps } from './components/Tag';

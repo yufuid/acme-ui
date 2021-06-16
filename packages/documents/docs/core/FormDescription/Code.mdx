@@ -1,0 +1,23 @@
+import { Playground, Props } from '~controls';
+import { Switch, FormLabel, FormDescription } from '@acme-ui/core';
+
+## 基础用法
+
+该演示使您可以预览不同类型的不同状态
+
+<Playground>
+  <FormLabel style={{ marginBottom: 8 }} required>
+    水平方向
+  </FormLabel>
+  <FormDescription>这是解释什么叫普通的水平方向</FormDescription>
+  <FormDescription error>这是解释什么叫错误的水平方向</FormDescription>
+  <FormDescription error disabled>
+    这是解释什么叫禁用的水平方向
+  </FormDescription>
+</Playground>
+
+## API
+
+通过设置不同的属性展示不同状态
+
+<Props of={FormDescription} />
