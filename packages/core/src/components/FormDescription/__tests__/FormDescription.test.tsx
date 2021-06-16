@@ -6,7 +6,7 @@ import FormDescription, { classes } from '../FormDescription';
 
 const testId = 'test-form-description';
 
-describe('FormLabel', () => {
+describe('FormDescription', () => {
   mountTestSuite(<FormDescription data-testid={testId}>description</FormDescription>);
 
   describe('render correctly with default props', () => {

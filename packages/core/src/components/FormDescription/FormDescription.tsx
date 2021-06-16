@@ -1,4 +1,4 @@
-import React, { ForwardedRef } from 'react';
+import * as React from 'react';
 import { uniteClassNames } from '../../utils/tools';
 import './style/formDescription.less';
 
@@ -30,7 +30,7 @@ export interface FormDescriptionProps extends React.HTMLAttributes<HTMLParagraph
 }
 
 const FormGroup = React.forwardRef<HTMLParagraphElement, FormDescriptionProps>(
-  (props: FormDescriptionProps, ref: ForwardedRef<HTMLParagraphElement>) => {
+  (props: FormDescriptionProps, ref: React.ForwardedRef<HTMLParagraphElement>) => {
     const { className, children, error, disabled, ...otherProps } = props || {};
     return (
       <p
